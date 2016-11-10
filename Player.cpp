@@ -3,7 +3,7 @@
 
 
 Player::Player()
-	: name{ "NOT ENTERED" }, work{ Work::NONE }, totalMatches{ 0 }, totalOversBowled{ 0 }, totalRuns {0}, totalWickets{ 0 }
+	: name{ "NOT ENTERED" }, work{ Work::NONE }, totalMatches{ 0 }, totalOversBowled{ 0 }, totalRuns{ 0 }, totalWickets{ 0 }
 {
 	setBowlingSkills();
 	setBattingSkills();
@@ -33,13 +33,21 @@ Player::Player(const Player& p)
 
 void Player::setBattingSkills()
 {
+	if (totalMatches == 0) {
+		battingSkills = 0;
+		return;
+	}
 	double x = (double)totalRuns / totalMatches;
 	battingSkills = 10 * x / (x + 25);
 
 }
 void Player::setBowlingSkills()
 {
-	double x = (double)totalWickets*4 / totalOversBowled;
+	if (totalOversBowled == 0) {
+		bowlingSkills = 0;
+		return;
+	}
+	double x = (double)totalWickets * 4 / totalOversBowled;
 	bowlingSkills = 10 * x / (x + 0.75);
 
 }
@@ -91,7 +99,7 @@ void Player::read(ifstream& ifs)
 
 	// ifs >> ch1;
 	ifs >> name >> totalMatches >> totalOversBowled >> totalRuns >> totalWickets;
-		// ifs>> ch2;
+	// ifs>> ch2;
 
 	if (!ifs)
 		throw runtime_error("Error reading from File");

@@ -60,9 +60,9 @@ try {
 			break;
 
 		case 3:
+			write("Details.txt", teams);
 			cout << "\nEND OF PROGRAM\n";
-			wait();
-			exit(0);
+			return 0;
 
 		default:
 			cout << "Wrong choice!!\n";
@@ -149,7 +149,7 @@ void init_teams()
 
 void displayTeam(Team& team)
 {
-	cout << endl << "TEAM: " << team.name;
+	cout << endl << "TEAM: " << team.name<<endl;
 	cout << endl << setw(15) << "Player Name" << setw(20) << "Batting Skills" << setw(20) << "Bowling Skills";
 	for (const Player& p : team.players) {
 		cout << endl << setw(15) << p.name << setw(20) << p.getBattingSkills() << setw(20) << p.getBowlingSkills();
@@ -163,19 +163,20 @@ int displayMenu()
 	cout << "\n1. Database";
 	cout << "\n2. Play";
 	cout << "\n3. Exit";
-	cout << "\nEnter the choice:\n";
+	cout << "\n\nEnter the choice:\n";
 	cin >> choice;
 	return choice;
 }
 void addPlayer()
 {
 	system("cls");
-	cout << "\n\nTEAMS";
+	cout << "\t\tADDING PLAYERS";
+	cout << "\n\n\tTEAMS\n";
 	for (const Team &t : teams) {
 		cout << endl << t.name;
 	}
 
-	cout << "\nEnter team of player:\n";
+	cout << "\n\nEnter team of player:\n";
 	string tname;
 	cin >> tname;
 
@@ -229,27 +230,30 @@ void addPlayer()
 }
 void modifyPlayer()
 {
+	system("cls");
 	string tName;
-	cout << "\n\nTEAMS";
+	cout << "\t\tMODIFYING PLAYERS";
+	cout << "\n\n\tTEAMS\n";
 	for (const Team& t : teams)
 		cout << endl << t.name;
 
-	cout << "\nEnter the team of player:\n";
+	cout << "\n\nEnter the team of player:\n";
 	cin >> tName;
 
 	bool teamFound = false;
 	for (Team& team : teams) {
 		if (team.name == tName) {
+			system("cls");
 			displayTeam(team);
 			string pName;
-			cout << "\nEnter the player name:\n";
+			cout << "\n\nEnter the player name:\n";
 			cin >> pName;
 
 			bool pFound = false;
 			for (Player& p : team.players) {
 				if (p.name == pName) {
 
-					cout << "\nEnter new details:";
+					cout << "\nEnter new details:\n";
 					cout << "\nEnter the total runs made by player:\n";
 					int pTRuns;
 					cin >> pTRuns;
@@ -291,19 +295,22 @@ void modifyPlayer()
 void deletePlayer()
 {
 	string tName;
-	cout << "\n\nTEAMS";
+	system("cls");
+	cout << "\t\tDELETING A PLAYER";
+	cout << "\n\n\tTEAMS\n";
 	for (const Team& t : teams)
 		cout << endl << t.name;
 
-	cout << "\nEnter the team of player:\n";
+	cout << "\n\nEnter the team of player:\n";
 	cin >> tName;
 
 	bool teamFound = false;
 	for (Team& team : teams) {
 		if (team.name == tName) {
+			system("cls");
 			displayTeam(team);
 			string pName;
-			cout << "\nEnter the player name:\n";
+			cout << "\n\nEnter the player name:\n";
 			cin >> pName;
 
 			bool pFound = false;
@@ -333,11 +340,13 @@ void deletePlayer()
 void deleteTeam()
 {
 	string tName;
-	cout << "\n\nTEAMS";
+	system("cls");
+	cout << "\t\tDELETING A TEAM";
+	cout << "\n\n\tTEAMS\n";
 	for (const Team& t : teams)
 		cout << endl << t.name;
 
-	cout << "\nEnter the team of player:\n";
+	cout << "\n\nEnter the team of player:\n";
 	cin >> tName;
 
 	bool teamFound = false;
@@ -403,6 +412,7 @@ void database()
 
 		case 5:
 			teams.clear();
+			cout << "\n\nDeleted teams successfully!!";
 			break;
 
 		case 6:
@@ -410,7 +420,7 @@ void database()
 			break;
 
 		case 7:
-			break;
+			return;
 
 		default:
 			cout << "\nWrong choice!!";
@@ -430,8 +440,17 @@ void play()
 		throw runtime_error("Not enough teams to play!!");
 	}
 
+	system("cls");
+	cout << "\t\tPLAY";
+	cout << "\n\n\tTEAMS\n";
+
+	for (const Team &t : teams) {
+		cout << endl << t.name;
+	}
+
+
 	int pos1 = -1;
-	cout << "Enter name of first team:\n";
+	cout << "\n\nEnter name of first team:\n";
 	string firstTeam;
 	cin >> firstTeam;
 
@@ -448,7 +467,7 @@ void play()
 
 
 	int pos2 = -1;
-	cout << "Enter name of second team:\n";
+	cout << "\nEnter name of second team:\n";
 	string secondTeam;
 	cin >> secondTeam;
 
@@ -466,7 +485,6 @@ void play()
 	match(teams[pos1], teams[pos2]);
 
 }
-
 int innings(Team& battingTeam, Team& bowlingTeam)
 {
 	init_play();
@@ -481,11 +499,15 @@ int innings(Team& battingTeam, Team& bowlingTeam)
 	Player batsman = battingTeam.getNextBatsman(batsmanPlayed);
 	Player bowler = bowlingTeam.getNextBowler(oversBowled);
 
+	system("cls");
+	cout << "\n\nOver: 1\n";
 	while (leftWickets > 0 && leftBalls > 0) {
 
 		if (leftBalls != noOfBalls && leftBalls%ballsPerOver == 0) {
 			cout << "\nEnd of Over!!\nRuns till now: " << totalRuns << endl;
 			bowler = bowlingTeam.getNextBowler(oversBowled);
+			system("cls");
+			cout << "\n\nOver: " << (noOfBalls - leftBalls) / ballsPerOver + 1<<endl;
 		}
 
 		Result result;
@@ -566,13 +588,13 @@ int innings(Team& battingTeam, Team& bowlingTeam)
 int match(Team& t1, Team& t2)
 {
 	system("cls");
-	cout << "\n\nINNINGS 1:\n";
+	cout << "INNINGS 1:\n";
 	int runst1 = innings(t1, t2);
 	cout << "\nRuns made by first team: " << runst1;
 
 	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 	system("cls");
-	cout << "\n\nINNINGS 2:\n";
+	cout << "INNINGS 2:\n";
 	int runst2 = innings(t2, t1);
 	cout << "\nRuns made by second team: " << runst2;
 
