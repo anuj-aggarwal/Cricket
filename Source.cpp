@@ -19,9 +19,12 @@ using namespace std;
 
 void wait(string ch);
 void wait();
-void init();
+void init_teams();
+void init_play();
 int displayMenu();
 void database();
+
+void play();
 int innings(Team&, Team&);
 int match(Team&, Team&);
 
@@ -39,70 +42,36 @@ vector<Team> teams;
 
 int main()
 try {
-	init();
-	int choice;
-	choice = displayMenu();
+	init_teams();
+	char ch;
 
-	switch (choice) {
+	do {
+		int choice;
+		choice = displayMenu();
 
-	case 1:
-		database();
-		break;
+		switch (choice) {
 
-	case 2:
-	{
-		if (teams.size() < 2) {
-			throw runtime_error("Not enough teams to play!!");
+		case 1:
+			database();
+			break;
+
+		case 2:
+			play();
+			break;
+
+		case 3:
+			cout << "\nEND OF PROGRAM\n";
+			wait();
+			exit(0);
+
+		default:
+			cout << "Wrong choice!!\n";
+			break;
 		}
 
-		int pos1 = -1;
-		cout << "Enter name of first team:\n";
-		string firstTeam;
-		cin >> firstTeam;
-
-		for (int i = 0; i < teams.size(); ++i) {
-			if (firstTeam == teams[i].name) {
-				pos1 = i;
-				break;
-			}
-		}
-		if (pos1 == -1) {
-			throw runtime_error("Team not found: " + firstTeam);
-		}
-
-
-
-		int pos2 = -1;
-		cout << "Enter name of second team:\n";
-		string secondTeam;
-		cin >> secondTeam;
-
-		for (int i = 0; i < teams.size(); ++i) {
-			if (secondTeam == teams[i].name) {
-				pos2 = i;
-				break;
-			}
-		}
-		if (pos2 == -1) {
-			throw runtime_error("Team not found: " + secondTeam);
-		}
-
-
-		match(teams[pos1], teams[pos2]);
-
-		break;
-	}
-
-	case 3:
-		cout << "\nEND OF PROGRAM\n";
-		wait();
-		exit(0);
-
-	default:
-		cout << "Wrong choice!!\n";
-		wait();
-		exit(1);
-	}
+		cout << "\nDo you want to go to MAIN MENU(y/n)?:\n";
+		cin >> ch;
+	} while (ch == 'y' || ch == 'Y');
 
 
 	//Team t("FIRST", vector<Player>{ Player("a", 5,5, 0, 0), Player("b", 5,5, 100, 3) }, Work::BAT);
@@ -153,7 +122,7 @@ void wait()
 	cin >> ch;
 
 }
-void init()
+void init_play()
 {
 	leftWickets = noOfWickets;
 	leftBalls = noOfBalls;
@@ -164,6 +133,9 @@ void init()
 	time(&time1);
 	srand((unsigned int)time1);
 
+}
+void init_teams()
+{
 	// make a file to store all data if it not already exists
 	ifstream fin(fileName);
 	if (!fin) {
@@ -185,8 +157,9 @@ void displayTeam(Team& team)
 }
 int displayMenu()
 {
+	system("cls");
 	int choice;
-	cout << "\nMENU\n";
+	cout << "MENU\n";
 	cout << "\n1. Database";
 	cout << "\n2. Play";
 	cout << "\n3. Exit";
@@ -196,6 +169,7 @@ int displayMenu()
 }
 void addPlayer()
 {
+	system("cls");
 	cout << "\n\nTEAMS";
 	for (const Team &t : teams) {
 		cout << endl << t.name;
@@ -217,7 +191,6 @@ void addPlayer()
 			for (const Player& p : t.players)
 				if (p.name == pName) {
 					cout << "\n\nPlayer already present!!";
-					addPlayer();
 					return;
 				}
 
@@ -238,7 +211,6 @@ void addPlayer()
 				throw runtime_error("Unable to read input");
 
 			t.addPlayer(*(new Player(pName, pTMatches, pTOvers, pTRuns, pTWickets)));
-			database();
 			found = true;
 			break;
 		}
@@ -248,20 +220,9 @@ void addPlayer()
 		cout << "\nTeam not found!!";
 		cout << "\nDo you want to create a new team named " << tname << " (y/n)?\n";
 		cin >> create;
-		switch (create) {
-		case 'y':
-		case 'Y':
-		{
+		if (create == 'y' || create == 'Y') {
 			teams.push_back(*(new Team(tname)));
 			addPlayer();
-			break;
-		}
-		case 'n':
-		case 'N':
-			database();
-			break;
-		default:
-			break;
 		}
 	}
 
@@ -307,7 +268,7 @@ void modifyPlayer()
 
 					p = Player(p.name, pTMatches, pTOvers, pTRuns, pTWickets);
 
-					database();
+
 					pFound = true;
 					break;
 				}
@@ -315,7 +276,6 @@ void modifyPlayer()
 
 			if (!pFound) {
 				cout << "\nPlayer not found!!";
-				database();
 			}
 
 			teamFound = true;
@@ -325,10 +285,9 @@ void modifyPlayer()
 
 	if (!teamFound) {
 		cout << "\nTeam not found!!";
-		database();
 	}
 
-}  
+}
 void deletePlayer()
 {
 	string tName;
@@ -352,7 +311,6 @@ void deletePlayer()
 				if (p.name == pName) {
 
 					team.players.erase(find(team.players.begin(), team.players.end(), p));
-					database();
 					pFound = true;
 					break;
 				}
@@ -360,7 +318,6 @@ void deletePlayer()
 
 			if (!pFound) {
 				cout << "\nPlayer not found!!";
-				database();
 			}
 
 			teamFound = true;
@@ -370,7 +327,6 @@ void deletePlayer()
 
 	if (!teamFound) {
 		cout << "\nTeam not found!!";
-		database();
 	}
 
 }
@@ -396,13 +352,14 @@ void deleteTeam()
 
 	if (!teamFound) {
 		cout << "\nTeam not found!!";
-		database();
 	}
 
 }
 void display()
 {
-	
+	system("cls");
+
+	cout << "\t\tALL PLAYERS RECORD\n\n";
 	for (Team& t : teams) {
 		displayTeam(t);
 		cout << endl;
@@ -411,59 +368,108 @@ void display()
 
 void database()
 {
-	int choice;
-	system("cls");
-	cout << "\nDATABASE MENU";
-	cout << "\n1. Add Player";
-	cout << "\n2. Modify Player";
-	cout << "\n3. Delete Player";
-	cout << "\n4. Display all Players";
-	cout << "\n5. Reset all Players";
-	cout << "\n6. Delete a team";
-	cout << "\n7. Go back to MAIN MENU";
-	cout << "\nEnter your choice:\n";
-	cin >> choice;
+	char ch = 'n';
 
-	switch (choice) {
-	case 1:
-		addPlayer();
-		break;
+	do {
+		int choice;
+		system("cls");
+		cout << "\nDATABASE MENU";
+		cout << "\n1. Add Player";
+		cout << "\n2. Modify Player";
+		cout << "\n3. Delete Player";
+		cout << "\n4. Display all Players";
+		cout << "\n5. Reset all Players";
+		cout << "\n6. Delete a team";
+		cout << "\n7. Go back to MAIN MENU";
+		cout << "\nEnter your choice:\n";
+		cin >> choice;
 
-	case 2:
-		modifyPlayer();
-		break;
+		switch (choice) {
+		case 1:
+			addPlayer();
+			break;
 
-	case 3:
-		deletePlayer();
-		break;
+		case 2:
+			modifyPlayer();
+			break;
 
-	case 4:
-		display();
-		break;
+		case 3:
+			deletePlayer();
+			break;
 
-	case 5:
-		teams.clear();
-		break;
+		case 4:
+			display();
+			break;
 
-	case 6:
-		deleteTeam();
-		break;
+		case 5:
+			teams.clear();
+			break;
 
-	case 7:
-		break;
+		case 6:
+			deleteTeam();
+			break;
 
-	default:
-		cout << "\nWrong choice!!";
-		break;
-	}
+		case 7:
+			break;
+
+		default:
+			cout << "\nWrong choice!!";
+			break;
+		}
+
+		cout << "\n\n\nDo you want to go to Database Menu(y/n)?\n";
+		cin >> ch;
+
+	} while (ch == 'y' || ch == 'Y');
 }
 
 
+void play()
+{
+	if (teams.size() < 2) {
+		throw runtime_error("Not enough teams to play!!");
+	}
+
+	int pos1 = -1;
+	cout << "Enter name of first team:\n";
+	string firstTeam;
+	cin >> firstTeam;
+
+	for (int i = 0; i < teams.size(); ++i) {
+		if (firstTeam == teams[i].name) {
+			pos1 = i;
+			break;
+		}
+	}
+	if (pos1 == -1) {
+		throw runtime_error("Team not found: " + firstTeam);
+	}
+
+
+
+	int pos2 = -1;
+	cout << "Enter name of second team:\n";
+	string secondTeam;
+	cin >> secondTeam;
+
+	for (int i = 0; i < teams.size(); ++i) {
+		if (secondTeam == teams[i].name) {
+			pos2 = i;
+			break;
+		}
+	}
+	if (pos2 == -1) {
+		throw runtime_error("Team not found: " + secondTeam);
+	}
+
+
+	match(teams[pos1], teams[pos2]);
+
+}
 
 int innings(Team& battingTeam, Team& bowlingTeam)
 {
-	init();
-
+	init_play();
 	int totalRuns = 0;
 	int totalFours = 0;
 	int totalSixes = 0;
