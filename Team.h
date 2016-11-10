@@ -15,6 +15,7 @@ class Team
 public:
 	Team();
 	Team(string, vector<Player>, Work);
+	Team(string);
 	~Team();
 
 	string name;
@@ -39,6 +40,8 @@ public:
 
 
 	Team& operator=(const Team&);
+	bool operator==(const Team&);
+	bool operator!=(const Team&);
 
 
 private:
@@ -48,4 +51,6 @@ private:
 
 	bool canBowl(Player&);
 };
+
+
 

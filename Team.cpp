@@ -21,6 +21,10 @@ Team::Team(string nm, vector<Player> newPlayers, Work w)
 		oversBowled.insert(pair<Player, int>(p, 0));
 	}
 }
+Team::Team(string nm)
+	: name{ nm }, work{ Work::NONE }
+{
+}
 
 Team::~Team()
 {
@@ -200,4 +204,11 @@ Team& Team::operator=(const Team& t)
 	work = t.work;
 
 	return *this;
+}
+
+bool Team::operator==(const Team& t) {
+	return (name == t.name);
+}
+bool Team::operator!=(const Team& t) {
+	return !(name == t.name);
 }
