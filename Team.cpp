@@ -79,7 +79,7 @@ Player& Team::getNextBowler(unordered_map<Player, int> & playersBowled)
 		cout << "\nEnter the name of next bowler:\n";
 		displayBowler();
 
-		cin>>bowler;
+		cin >> bowler;
 
 		for (Player& p : players)
 			if (p.name == bowler) {
@@ -94,7 +94,7 @@ Player& Team::getNextBowler(unordered_map<Player, int> & playersBowled)
 					return p;
 				}
 			}
-		if(!flag)
+		if (!flag)
 			cout << "\nPlayer not found!!\n";
 	}
 
@@ -174,7 +174,7 @@ void Team::read(ifstream& ifs)
 		throw runtime_error("Error reading from File");
 	vector<Player> temp;
 	ifs >> name;
-	
+
 	while (true) {
 		char ch;
 		ifs >> ch;
@@ -191,7 +191,7 @@ void Team::read(ifstream& ifs)
 			break;
 		}
 	}
-	
+
 	players = temp;
 }
 

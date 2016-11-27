@@ -20,10 +20,10 @@ public:
 
 	string name;
 	vector<Player> players;
-	
+
 	Work work;
 
-	
+
 	void addPlayer(Player&);
 	Player& getNextBatsman(vector<Player> &);
 	Player& getNextBowler(unordered_map<Player, int> &);

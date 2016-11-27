@@ -34,7 +34,7 @@ vector<Team> read(string);
 const int noOfWickets = 1;
 const int noOfBalls = 30;
 const int ballsPerOver = 6;
-const string fileName = "Details.txt";
+const string fileName = "C:/Users/Anuj/Desktop/Anuj/Cricket/Cricket/Details.txt";
 
 int leftWickets;
 int leftBalls;
@@ -60,7 +60,7 @@ try {
 			break;
 
 		case 3:
-			write("Details.txt", teams);
+			write(fileName, teams);
 			cout << "\nEND OF PROGRAM\n";
 			return 0;
 
@@ -86,7 +86,7 @@ try {
 
 	///*cout << innings(t, t1);*/
 
-	write("Details.txt", teams);
+	write(fileName, teams);
 	wait();
 	return 0;
 }
@@ -149,7 +149,7 @@ void init_teams()
 
 void displayTeam(Team& team)
 {
-	cout << endl << "TEAM: " << team.name<<endl;
+	cout << endl << "TEAM: " << team.name << endl;
 	cout << endl << setw(15) << "Player Name" << setw(20) << "Batting Skills" << setw(20) << "Bowling Skills";
 	for (const Player& p : team.players) {
 		cout << endl << setw(15) << p.name << setw(20) << p.getBattingSkills() << setw(20) << p.getBowlingSkills();
@@ -507,7 +507,7 @@ int innings(Team& battingTeam, Team& bowlingTeam)
 			cout << "\nEnd of Over!!\nRuns till now: " << totalRuns << endl;
 			bowler = bowlingTeam.getNextBowler(oversBowled);
 			system("cls");
-			cout << "\n\nOver: " << (noOfBalls - leftBalls) / ballsPerOver + 1<<endl;
+			cout << "\n\nOver: " << (noOfBalls - leftBalls) / ballsPerOver + 1 << endl;
 		}
 
 		Result result;

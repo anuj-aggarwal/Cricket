@@ -31,7 +31,7 @@ void Ball::setResult()
 	//time(&t);
 	//srand((unsigned int)t);
 	//
-	
+
 
 	double s1 = batsman.getBattingSkills();
 	double s2 = bowler.getBowlingSkills();
@@ -51,7 +51,7 @@ void Ball::setResult()
 	double one = (perc + 40 - 4 * x) / 100 * (notOut - six - four - three - two);
 	double zero = 100 - out - runOut - six - four - three - two - one;
 
-	
+
 
 	int randnum = rand() % 100;
 	if (randnum < zero)
