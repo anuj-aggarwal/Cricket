@@ -105,7 +105,7 @@ void Player::read(ifstream& ifs)
 		throw runtime_error("Error reading from File");
 
 	// if (ch1 != '(' || ch2 != ')')
-		// throw runtime_error("Error reading from File");
+	// throw runtime_error("Error reading from File");
 
 	setBattingSkills();
 	setBowlingSkills();

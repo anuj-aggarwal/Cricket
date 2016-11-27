@@ -34,7 +34,7 @@ vector<Team> read(string);
 const int noOfWickets = 1;
 const int noOfBalls = 30;
 const int ballsPerOver = 6;
-const string fileName = "C:/Users/Anuj/Desktop/Anuj/Cricket/Cricket/Details.txt";
+const string fileName = "../Cricket/Details.txt";
 
 int leftWickets;
 int leftBalls;
@@ -646,10 +646,10 @@ vector<Team> read(string fileName)
 		teams.push_back(t);
 	}
 	/*
-		int i = 0;
-		while (fin.read((char*)&teams[i], sizeof(teams[i]))) {
-			i++;
-		}*/
+	int i = 0;
+	while (fin.read((char*)&teams[i], sizeof(teams[i]))) {
+	i++;
+	}*/
 
 	fin.close();
 	return teams;
