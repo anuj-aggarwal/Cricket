@@ -5,7 +5,6 @@
 #include <ctime>
 #include <iomanip>
 
-#include "Player.h"
 #include "Team.h"
 #include "Result.h"
 #include "Ball.h"
