@@ -2,36 +2,47 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <time.h>
+#include <time.h>	// for time(0)
 #include <cstdlib>
 #include <chrono>
-#include <thread>
-#include <iomanip>
+#include <thread>	// for this_thread
+#include <iomanip>	// for setw(0)
 
 
+// User- Defined Header Files
 #include "Player.h"
 #include "Team.h"
 #include "Work.h"
 #include "Result.h"
 #include "Ball.h"
 
+
 using namespace std;
 
+// To avoid screen to close
 void wait(string ch);
 void wait();
+
+// Initialize Game Parameters and Player Records
 void init_teams();
 void init_play();
+
+
 int displayMenu();
-void database();
-
+void database();	// To go to Database Menu
 void play();
-int innings(Team&, Team&);
-int match(Team&, Team&);
 
+int innings(Team&, Team&);	// To simulate one innings
+int match(Team&, Team&);	// To simulate one match i.e. two innings
+
+
+// Write and read all records to/from fileName
 void write(string, vector<Team>&);
 vector<Team> read(string);
 
-const int noOfWickets = 1;
+
+// Game Parameters
+const int noOfWickets = 2;
 const int noOfBalls = 30;
 const int ballsPerOver = 6;
 const string fileName = "../Cricket/Details.txt";
@@ -40,17 +51,20 @@ int leftWickets;
 int leftBalls;
 vector<Team> teams;
 
+
+
 int main()
 try {
-	init_teams();
+	init_teams();	// Load all data from file
+	
+	
 	char ch;
-
 	do {
+
 		int choice;
 		choice = displayMenu();
 
 		switch (choice) {
-
 		case 1:
 			database();
 			break;
@@ -86,7 +100,7 @@ try {
 
 	///*cout << innings(t, t1);*/
 
-	write(fileName, teams);
+	write(fileName, teams);	// Write all data to file at end
 	wait();
 	return 0;
 }
@@ -122,6 +136,8 @@ void wait()
 	cin >> ch;
 
 }
+
+
 void init_play()
 {
 	leftWickets = noOfWickets;
@@ -140,6 +156,7 @@ void init_teams()
 	ifstream fin(fileName);
 	if (!fin) {
 		ofstream fout(fileName);
+		fout.close();
 	}
 
 	teams = read(fileName);
@@ -159,7 +176,7 @@ int displayMenu()
 {
 	system("cls");
 	int choice;
-	cout << "MENU\n";
+	cout << "MENU					Made By~ Anuj Aggarwal(2016UCO1518)\n";
 	cout << "\n1. Database";
 	cout << "\n2. Play";
 	cout << "\n3. Exit";
@@ -592,13 +609,13 @@ int match(Team& t1, Team& t2)
 	int runst1 = innings(t1, t2);
 	cout << "\nRuns made by first team: " << runst1;
 
-	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+	this_thread::sleep_for(std::chrono::milliseconds(2000));
 	system("cls");
 	cout << "INNINGS 2:\n";
 	int runst2 = innings(t2, t1);
 	cout << "\nRuns made by second team: " << runst2;
 
-	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+	this_thread::sleep_for(chrono::milliseconds(2000));
 
 	system("cls");
 	if (runst1 > runst2) {
