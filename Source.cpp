@@ -18,6 +18,7 @@ void init_play();
 int displayMenu();
 void database();
 
+bool Toss(string&, string&);
 void play();
 int innings(Team&, Team&);
 int match(Team&, Team&);
@@ -428,6 +429,70 @@ void database()
 }
 
 
+
+bool toss(string name1, string name2)
+{
+	system("cls");
+	cout << "\t\tTOSS";
+	_sleep(2000);
+
+	int input;
+	int outcome = rand() % 2;
+	if (outcome == 0) {
+		cout << "\n\nHEADS!!\n";
+		cout << name1 << " Won the Toss!!\n\n";
+
+		_sleep(2000);
+
+		cout << name1 << ": You want Batting or Bowling(1/2)?";
+		cin >> input;
+		while (input != 1 && input != 2) {
+			cout << "\nSorry, wrong input!! Please try again.....\n";
+			cout << name1 << ": You want Batting or Bowling(1/2)?";
+			cin >> input;
+		}
+
+		if (input == 1) {
+			cout << "\n\n" << name1 << " won the toss and chose to BAT first.....";
+			cout << "\nStarting the game.....";
+			_sleep(2000);
+			return true;
+		}
+		else {
+			cout << "\n\n" << name1 << " won the toss and chose to BOWL first.....";
+			cout << "\nStarting the game.....";
+			_sleep(2000);
+			return false;
+		}
+	}
+	else {
+		cout << "\n\nTAILS!!\n";
+		cout << name2 << " Won the Toss!!\n\n";
+
+		_sleep(2000);
+
+		cout << name2 << ": You want Batting or Bowling(1/2)?";
+		cin >> input;
+		while (input != 1 && input != 2) {
+			cout << "\nSorry, wrong input!! Please try again.....\n";
+			cout << name2 << ": You want Batting or Bowling(1/2)?";
+			cin >> input;
+		}
+
+		if (input == 1) {
+			cout << "\n\n" << name2 << " won the toss and chose to BAT first.....";
+			cout << "\nStarting the game.....";
+			_sleep(2000);
+			return false;
+		}
+		else {
+			cout << "\n\n" << name2 << " won the toss and chose to BOWL first.....";
+			cout << "\nStarting the game.....";
+			_sleep(2000);
+			return true;
+		}
+	}
+}
 void play()
 {
 	if (teams.size() < 2) {
@@ -479,13 +544,18 @@ void play()
 		throw runtime_error("Team not found: " + secondTeam);
 	}
 
+	init_play();
 
-	match(teams[pos1], teams[pos2]);
-
+	if (toss(firstTeam, secondTeam)) {
+		match(teams[pos1], teams[pos2]);
+	}
+	else
+		match(teams[pos2], teams[pos1]);
 }
 int innings(Team& battingTeam, Team& bowlingTeam)
 {
 	init_play();
+
 	int totalRuns = 0;
 	int totalFours = 0;
 	int totalSixes = 0;
