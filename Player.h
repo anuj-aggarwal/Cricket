@@ -1,8 +1,6 @@
 #pragma once
 #include <string>
 
-#include "Work.h"
-
 using namespace std;
 
 class Player
@@ -14,7 +12,6 @@ public:
 	Player(const Player&);
 
 	string name;
-	Work work;
 
 	double getBattingSkills() const;
 	double getBowlingSkills() const;

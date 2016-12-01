@@ -14,14 +14,13 @@ class Team
 
 public:
 	Team();
-	Team(string, vector<Player>, Work);
+	Team(string, vector<Player>);
 	Team(string);
 	~Team();
 
 	string name;
 	vector<Player> players;
 
-	Work work;
 
 
 	void addPlayer(Player&);

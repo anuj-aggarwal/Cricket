@@ -3,7 +3,7 @@
 
 
 Player::Player()
-	: name{ "NOT ENTERED" }, work{ Work::NONE }, totalMatches{ 0 }, totalOversBowled{ 0 }, totalRuns{ 0 }, totalWickets{ 0 }
+	: name{ "NOT ENTERED" }, totalMatches{ 0 }, totalOversBowled{ 0 }, totalRuns{ 0 }, totalWickets{ 0 }
 {
 	setBowlingSkills();
 	setBattingSkills();
@@ -21,7 +21,6 @@ Player::Player(string nm, int matches, int overs, int runs, int wickets)
 Player::Player(const Player& p)
 {
 	name = p.name;
-	work = p.work;
 	battingSkills = p.battingSkills;
 	bowlingSkills = p.bowlingSkills;
 	totalMatches = p.totalMatches;
@@ -116,7 +115,6 @@ void Player::read(ifstream& ifs)
 Player& Player::operator=(const Player& p)
 {
 	name = p.name;
-	work = p.work;
 	totalMatches = p.totalMatches;
 	totalOversBowled = p.totalOversBowled;
 	totalRuns = p.totalRuns;

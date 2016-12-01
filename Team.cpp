@@ -10,19 +10,19 @@ using std::setw;
 
 
 Team::Team()
-	:name{ "INDIVIDUALS" }, work{ Work::NONE }
+	:name{ "INDIVIDUALS" }
 {
 }
 
-Team::Team(string nm, vector<Player> newPlayers, Work w)
-	: name{ nm }, players{ newPlayers }, work{ w }
+Team::Team(string nm, vector<Player> newPlayers)
+	: name{ nm }, players{ newPlayers }
 {
 	for (Player& p : newPlayers) {
 		oversBowled.insert(pair<Player, int>(p, 0));
 	}
 }
 Team::Team(string nm)
-	: name{ nm }, work{ Work::NONE }
+	: name{ nm }
 {
 }
 
@@ -62,7 +62,7 @@ Player& Team::getNextBatsman(vector<Player> & batsmanPlayed)
 					cout << '\n' << batsman << " already out!!\n";
 					continue;
 				}
-				p.work = Work::BAT;
+				
 				batsmanPlayed.push_back(p);
 				return p;
 			}
@@ -88,7 +88,6 @@ Player& Team::getNextBowler(unordered_map<Player, int> & playersBowled)
 					flag = true;
 				}
 				else {
-					p.work = Work::BOWL;
 					oversBowled[p]++;
 					playersBowled = oversBowled;
 					return p;
@@ -127,7 +126,6 @@ void Team::displayBowler()	// IN PROGRESS
 void Team::reset()
 {
 	out.clear();
-	work = Work::NONE;
 
 	for (Player& p : players)
 		oversBowled[p] = 0;
@@ -201,7 +199,6 @@ Team& Team::operator=(const Team& t)
 {
 	name = t.name;
 	players = t.players;
-	work = t.work;
 
 	return *this;
 }

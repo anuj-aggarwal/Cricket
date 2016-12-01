@@ -3,13 +3,10 @@
 #include <string>
 #include <vector>
 #include <ctime>
-#include <cstdlib>
 #include <iomanip>
-
 
 #include "Player.h"
 #include "Team.h"
-#include "Work.h"
 #include "Result.h"
 #include "Ball.h"
 
