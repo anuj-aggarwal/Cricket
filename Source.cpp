@@ -85,7 +85,7 @@ try {
 	return 0;
 }
 catch (exception& e) {
-	cerr << e.what() << endl;
+	cerr << endl << e.what() << endl;
 	wait("~");
 	return 1;
 }
@@ -450,6 +450,8 @@ void play()
 
 	for (int i = 0; i < teams.size(); ++i) {
 		if (firstTeam == teams[i].name) {
+			if (!teams[i].canPlay(noOfWickets))
+				throw runtime_error(teams[i].name + " has only " + to_string(teams[i].players.size()) + " players!!\nMinimum players required to play : " + to_string(noOfWickets));
 			pos1 = i;
 			break;
 		}
@@ -467,6 +469,8 @@ void play()
 
 	for (int i = 0; i < teams.size(); ++i) {
 		if (secondTeam == teams[i].name) {
+			if (!teams[i].canPlay(noOfWickets))
+				throw runtime_error(teams[i].name + " has only " + to_string(teams[i].players.size()) + " players!!\nMinimum players required to play : " + to_string(noOfWickets));
 			pos2 = i;
 			break;
 		}

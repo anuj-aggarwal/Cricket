@@ -62,7 +62,7 @@ Player& Team::getNextBatsman(vector<Player> & batsmanPlayed)
 					cout << '\n' << batsman << " already out!!\n";
 					continue;
 				}
-				
+
 				batsmanPlayed.push_back(p);
 				return p;
 			}
@@ -138,6 +138,10 @@ void Team::playerOut(Player& p)
 	out.push_back(p);
 }
 
+bool Team::canPlay(int noOfWickets)
+{
+	return players.size() >= noOfWickets;
+}
 
 void Team::updateBatsmen(const vector<Player> & batsmanPlayed)
 {
