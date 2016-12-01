@@ -2,10 +2,8 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <time.h>
+#include <ctime>
 #include <cstdlib>
-#include <chrono>
-#include <thread>
 #include <iomanip>
 
 
@@ -517,7 +515,7 @@ int innings(Team& battingTeam, Team& bowlingTeam)
 
 
 		cout << "\nBowl " << noOfBalls - leftBalls << ": ";
-		std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+		_sleep(2000);
 		switch (result) {
 
 		case Result::ZERO:
@@ -592,13 +590,13 @@ int match(Team& t1, Team& t2)
 	int runst1 = innings(t1, t2);
 	cout << "\nRuns made by first team: " << runst1;
 
-	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+	_sleep(2000);
 	system("cls");
 	cout << "INNINGS 2:\n";
 	int runst2 = innings(t2, t1);
 	cout << "\nRuns made by second team: " << runst2;
 
-	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+	_sleep(2000);
 
 	system("cls");
 	if (runst1 > runst2) {
