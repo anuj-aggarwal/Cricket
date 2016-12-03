@@ -69,6 +69,10 @@ try {
 
 		cout << "\nDo you want to go to MAIN MENU(y/n)?:\n";
 		cin >> ch;
+
+		if (!cin)
+			throw runtime_error("End of Input received!!\n");
+
 	} while (ch == 'y' || ch == 'Y');
 
 
@@ -104,6 +108,7 @@ catch (...) {
 
 void wait(string ch)
 {
+	cin.clear();
 	cout << "\nPress " << ch << " to continue: ";
 	string c;
 	cin >> c;
@@ -114,7 +119,7 @@ void wait(string ch)
 }
 void wait()
 {
-
+	cin.clear();
 	cout << "\nPress any key to continue: ";
 	string ch;
 	cin >> ch;
@@ -210,6 +215,9 @@ void addPlayer()
 	string tname;
 	cin >> tname;
 
+	if (!cin)
+		throw runtime_error("End of Input received!!\n");
+
 	bool found = false;
 
 	for (Team& t : teams)
@@ -218,6 +226,9 @@ void addPlayer()
 			cout << "\nEnter the name of player to add:\n";
 			string pName;
 			cin >> pName;
+
+			if (!cin)
+				throw runtime_error("End of Input received!!\n");
 
 			for (const Player& p : t.players)
 				if (p.name == pName) {
@@ -245,6 +256,10 @@ void addPlayer()
 		cout << "\nTeam not found!!";
 		cout << "\nDo you want to create a new team named " << tname << " (y/n)?\n";
 		cin >> create;
+
+		if (!cin)
+			throw runtime_error("End of Input received!!\n");
+
 		if (create == 'y' || create == 'Y') {
 			teams.push_back(*(new Team(tname)));
 			addPlayer();
@@ -264,6 +279,9 @@ void modifyPlayer()
 	cout << "\n\nEnter the team of player:\n";
 	cin >> tName;
 
+	if (!cin)
+		throw runtime_error("End of Input received!!\n");
+
 	bool teamFound = false;
 	for (Team& team : teams) {
 		if (team.name == tName) {
@@ -272,6 +290,9 @@ void modifyPlayer()
 			string pName;
 			cout << "\n\nEnter the player name:\n";
 			cin >> pName;
+
+			if (!cin)
+				throw runtime_error("End of Input received!!\n");
 
 			bool pFound = false;
 			for (Player& p : team.players) {
@@ -321,6 +342,9 @@ void deletePlayer()
 	cout << "\n\nEnter the team of player:\n";
 	cin >> tName;
 
+	if (!cin)
+		throw runtime_error("End of Input received!!\n");
+
 	bool teamFound = false;
 	for (Team& team : teams) {
 		if (team.name == tName) {
@@ -329,6 +353,9 @@ void deletePlayer()
 			string pName;
 			cout << "\n\nEnter the player name:\n";
 			cin >> pName;
+
+			if (!cin)
+				throw runtime_error("End of Input received!!\n");
 
 			bool pFound = false;
 			for (Player& p : team.players) {
@@ -365,6 +392,9 @@ void deleteTeam()
 
 	cout << "\n\nEnter the team of player:\n";
 	cin >> tName;
+
+	if (!cin)
+		throw runtime_error("End of Input received!!\n");
 
 	bool teamFound = false;
 	for (Team& team : teams) {
@@ -445,6 +475,9 @@ void database()
 
 		cout << "\n\n\nDo you want to go to Database Menu(y/n)?\n";
 		cin >> ch;
+
+		if (!cin)
+			throw runtime_error("End of Input received!!\n");
 
 	} while (ch == 'y' || ch == 'Y');
 }
@@ -530,6 +563,9 @@ void play()
 	string firstTeam;
 	cin >> firstTeam;
 
+	if (!cin)
+		throw runtime_error("End of Input received!!\n");
+
 	for (int i = 0; i < teams.size(); ++i) {
 		if (firstTeam == teams[i].name) {
 			if (!teams[i].canPlay(noOfWickets))
@@ -548,6 +584,9 @@ void play()
 	cout << "\nEnter name of second team:\n";
 	string secondTeam;
 	cin >> secondTeam;
+
+	if (!cin)
+		throw runtime_error("End of Input received!!\n");
 
 	for (int i = 0; i < teams.size(); ++i) {
 		if (secondTeam == teams[i].name) {

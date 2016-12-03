@@ -56,6 +56,9 @@ Player& Team::getNextBatsman(vector<Player> & batsmanPlayed)
 
 		cin >> batsman;
 
+		if (!cin)
+			throw runtime_error("End of Input received!!\n");
+
 		for (Player& p : players)
 			if (p.name == batsman) {
 				if (find(out.begin(), out.end(), p) != out.end()) {
@@ -80,6 +83,9 @@ Player& Team::getNextBowler(unordered_map<Player, int> & playersBowled)
 		displayBowler();
 
 		cin >> bowler;
+
+		if (!cin)
+			throw runtime_error("End of Input received!!\n");
 
 		for (Player& p : players)
 			if (p.name == bowler) {
