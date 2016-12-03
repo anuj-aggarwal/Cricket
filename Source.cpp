@@ -362,6 +362,7 @@ void deletePlayer()
 				if (p.name == pName) {
 
 					team.players.erase(find(team.players.begin(), team.players.end(), p));
+					cout << "\nSuccessfully deleted Player: " << pName;
 					pFound = true;
 					break;
 				}
@@ -390,7 +391,7 @@ void deleteTeam()
 	for (const Team& t : teams)
 		cout << endl << t.name;
 
-	cout << "\n\nEnter the team of player:\n";
+	cout << "\n\nEnter the team name:\n";
 	cin >> tName;
 
 	if (!cin)
@@ -400,7 +401,7 @@ void deleteTeam()
 	for (Team& team : teams) {
 		if (team.name == tName) {
 			teams.erase(find(teams.begin(), teams.end(), team));
-
+			cout << "\nSuccessfully deleted Team: " << tName;
 			teamFound = true;
 			break;
 		}
