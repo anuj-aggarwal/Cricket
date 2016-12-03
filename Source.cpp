@@ -567,50 +567,62 @@ void play()
 
 
 	int pos1 = -1;
-	cout << "\n\nEnter name of first team:\n";
-	string firstTeam;
-	cin >> firstTeam;
 
-	if (!cin)
-		throw runtime_error("End of Input received!!\n");
+	while (pos1 == -1) {
+		cout << "\n\nEnter name of first team:\n";
+		string firstTeam;
+		cin >> firstTeam;
 
-	for (int i = 0; i < teams.size(); ++i) {
-		if (firstTeam == teams[i].name) {
-			if (!teams[i].canPlay(noOfWickets, ceil(static_cast<double>(noOfBalls) / ballsPerOver)))
-				throw runtime_error(teams[i].name + " has only " + to_string(teams[i].players.size()) + " players!!\nMinimum players required to play : " + to_string(noOfWickets));
-			pos1 = i;
-			break;
+		if (!cin)
+			throw runtime_error("End of Input received!!\n");
+
+		for (int i = 0; i < teams.size(); ++i) {
+			if (firstTeam == teams[i].name) {
+				if (!teams[i].canPlay(noOfWickets, ceil(static_cast<double>(noOfBalls) / ballsPerOver)))
+					throw runtime_error(teams[i].name + " has only " + to_string(teams[i].players.size()) + " players!!\nMinimum players required to play : " + to_string(noOfWickets));
+				pos1 = i;
+				break;
+			}
+		}
+		if (pos1 == -1) {
+			cout << "\nTeam not found: " << firstTeam << "!! Please try again.....\n";
 		}
 	}
-	if (pos1 == -1) {
-		throw runtime_error("Team not found: " + firstTeam);
-	}
-
 
 
 	int pos2 = -1;
-	cout << "\nEnter name of second team:\n";
-	string secondTeam;
-	cin >> secondTeam;
 
-	if (!cin)
-		throw runtime_error("End of Input received!!\n");
+	while (pos2 == -1) {
+		cout << "\nEnter name of second team:\n";
+		string secondTeam;
+		cin >> secondTeam;
 
-	for (int i = 0; i < teams.size(); ++i) {
-		if (secondTeam == teams[i].name) {
-			if (!teams[i].canPlay(noOfWickets, ceil(static_cast<double>(noOfBalls) / ballsPerOver)))
-				throw runtime_error(teams[i].name + " has only " + to_string(teams[i].players.size()) + " players!!\nMinimum players required to play : " + to_string(noOfWickets));
-			pos2 = i;
-			break;
+		if (!cin)
+			throw runtime_error("End of Input received!!\n");
+
+		for (int i = 0; i < teams.size(); ++i) {
+			if (secondTeam == teams[i].name) {
+				if (!teams[i].canPlay(noOfWickets, ceil(static_cast<double>(noOfBalls) / ballsPerOver)))
+					throw runtime_error(teams[i].name + " has only " + to_string(teams[i].players.size()) + " players!!\nMinimum players required to play : " + to_string(noOfWickets));
+				pos2 = i;
+				break;
+			}
+		}
+		
+		if (pos2 == -1) {
+			cout << "\nTeam not found: " << secondTeam << "!! Please try again.....\n";
+		}
+
+		if (pos2 == pos1) {
+			cout << "\nTeam: " << teams[pos2].name << " already playing!! Please try again.....\n";
+			pos2 = -1;
 		}
 	}
-	if (pos2 == -1) {
-		throw runtime_error("Team not found: " + secondTeam);
-	}
+
 
 	init_play();
 
-	if (toss(firstTeam, secondTeam)) {
+	if (toss(teams[pos1].name, teams[pos2].name)) {
 		match(teams[pos1], teams[pos2]);
 	}
 	else
