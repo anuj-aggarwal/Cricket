@@ -437,7 +437,7 @@ void database()
 		cout << "\n5. Reset all Players";
 		cout << "\n6. Delete a team";
 		cout << "\n7. Go back to MAIN MENU";
-		choice= getNum("Enter your choice:\n");
+		choice = getNum("Enter your choice:\n");
 
 		switch (choice) {
 		case 1:
@@ -545,7 +545,15 @@ bool toss(string name1, string name2)
 }
 void play()
 {
-	if (teams.size() < 2) {
+	// Find eligible teams
+	int eligibleTeams = 0;
+
+	for (Team t : teams) {
+		if (t.canPlay(noOfWickets, ceil(static_cast<double>(noOfBalls) / ballsPerOver)))
+			++eligibleTeams;
+	}
+
+	if (eligibleTeams < 2) {
 		throw runtime_error("Not enough teams to play!!");
 	}
 
@@ -568,7 +576,7 @@ void play()
 
 	for (int i = 0; i < teams.size(); ++i) {
 		if (firstTeam == teams[i].name) {
-			if (!teams[i].canPlay(noOfWickets))
+			if (!teams[i].canPlay(noOfWickets, ceil(static_cast<double>(noOfBalls) / ballsPerOver)))
 				throw runtime_error(teams[i].name + " has only " + to_string(teams[i].players.size()) + " players!!\nMinimum players required to play : " + to_string(noOfWickets));
 			pos1 = i;
 			break;
@@ -590,7 +598,7 @@ void play()
 
 	for (int i = 0; i < teams.size(); ++i) {
 		if (secondTeam == teams[i].name) {
-			if (!teams[i].canPlay(noOfWickets))
+			if (!teams[i].canPlay(noOfWickets, ceil(static_cast<double>(noOfBalls) / ballsPerOver)))
 				throw runtime_error(teams[i].name + " has only " + to_string(teams[i].players.size()) + " players!!\nMinimum players required to play : " + to_string(noOfWickets));
 			pos2 = i;
 			break;

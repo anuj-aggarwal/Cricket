@@ -30,7 +30,7 @@ public:
 	void displayBatsman();
 	void displayBowler();
 	void playerOut(Player&);
-	bool canPlay(int);
+	bool canPlay(int, int);
 
 	void updateBatsmen(const vector<Player> &);
 	void updateBowlers(unordered_map<Player, int> &);

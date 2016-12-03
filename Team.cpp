@@ -144,9 +144,9 @@ void Team::playerOut(Player& p)
 	out.push_back(p);
 }
 
-bool Team::canPlay(int noOfWickets)
+bool Team::canPlay(int noOfWickets, int noOfOvers)
 {
-	return players.size() >= noOfWickets;
+	return (players.size() >= noOfWickets && (players.size()*maxOvers) >= noOfOvers);
 }
 
 void Team::updateBatsmen(const vector<Player> & batsmanPlayed)
