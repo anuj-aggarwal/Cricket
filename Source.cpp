@@ -13,6 +13,9 @@ using namespace std;
 
 void wait(string ch);
 void wait();
+int getNum(string);
+int getPositiveNum(string);
+
 void init_teams();
 void init_play();
 int displayMenu();
@@ -117,6 +120,38 @@ void wait()
 	cin >> ch;
 
 }
+int getNum(string prompt)
+{
+	cout << endl << prompt;
+	int n;
+	cin >> n;
+
+	while (!cin) {
+		if (cin.eof())
+			throw runtime_error("End of Input received!!\n");
+		cin.clear();
+		string ch;
+		cout << "\nOOps, a number is required!!Please try again.....\n";
+		getline(cin, ch);
+		cout << endl << prompt;
+		cin >> n;
+
+	}
+
+	return n;
+}
+int getPositiveNum(string prompt)
+{
+	int n;
+	n = getNum(prompt);
+	while (n < 0) {
+		cout << "\nSorry, positive number expected(>=0)!!Please try again.....\n";
+		n = getNum(prompt);
+	}
+	return n;
+}
+
+
 void init_play()
 {
 	leftWickets = noOfWickets;
@@ -142,6 +177,7 @@ void init_teams()
 
 
 
+
 void displayTeam(Team& team)
 {
 	cout << endl << "TEAM: " << team.name << endl;
@@ -158,8 +194,7 @@ int displayMenu()
 	cout << "\n1. Database";
 	cout << "\n2. Play";
 	cout << "\n3. Exit";
-	cout << "\n\nEnter the choice:\n";
-	cin >> choice;
+	choice = getNum("\nEnter the choice:\n");
 	return choice;
 }
 void addPlayer()
@@ -190,21 +225,15 @@ void addPlayer()
 					return;
 				}
 
-			cout << "\nEnter the total runs made by player:\n";
 			int pTRuns;
-			cin >> pTRuns;
-			cout << "\nEnter total wickets taken by player:\n";
+			pTRuns = getPositiveNum("Enter the total runs made by player:\n");
 			int pTWickets;
-			cin >> pTWickets;
-			cout << "\nEnter total matches played by player:\n";
+			pTWickets = getPositiveNum("Enter total wickets taken by player:\n");
 			int pTMatches;
-			cin >> pTMatches;
-			cout << "\nEnter total overs bowled by player:\n";
+			pTMatches = getPositiveNum("Enter total matches played by player:\n");
 			int pTOvers;
-			cin >> pTOvers;
+			pTOvers = getPositiveNum("Enter total overs bowled by player:\n");
 
-			if (!cin)
-				throw runtime_error("Unable to read input");
 
 			t.addPlayer(*(new Player(pName, pTMatches, pTOvers, pTRuns, pTWickets)));
 			found = true;
@@ -249,21 +278,14 @@ void modifyPlayer()
 				if (p.name == pName) {
 
 					cout << "\nEnter new details:\n";
-					cout << "\nEnter the total runs made by player:\n";
 					int pTRuns;
-					cin >> pTRuns;
-					cout << "\nEnter total wickets taken by player:\n";
+					pTRuns = getPositiveNum("Enter the total runs made by player:\n");
 					int pTWickets;
-					cin >> pTWickets;
-					cout << "\nEnter total matches played by player:\n";
+					pTWickets = getPositiveNum("Enter total wickets taken by player:\n");
 					int pTMatches;
-					cin >> pTMatches;
-					cout << "\nEnter total overs bowled by player:\n";
+					pTMatches = getPositiveNum("Enter total matches played by player:\n");
 					int pTOvers;
-					cin >> pTOvers;
-
-					if (!cin)
-						throw runtime_error("Unable to read input");
+					pTOvers = getPositiveNum("Enter total overs bowled by player:\n");
 
 					p = Player(p.name, pTMatches, pTOvers, pTRuns, pTWickets);
 
@@ -385,8 +407,7 @@ void database()
 		cout << "\n5. Reset all Players";
 		cout << "\n6. Delete a team";
 		cout << "\n7. Go back to MAIN MENU";
-		cout << "\nEnter your choice:\n";
-		cin >> choice;
+		choice= getNum("Enter your choice:\n");
 
 		switch (choice) {
 		case 1:
@@ -444,12 +465,10 @@ bool toss(string name1, string name2)
 
 		_sleep(2000);
 
-		cout << name1 << ": You want Batting or Bowling(1/2)?";
-		cin >> input;
+		input = getNum(name1 + ": You want Batting or Bowling(1/2)?");
 		while (input != 1 && input != 2) {
 			cout << "\nSorry, wrong input!! Please try again.....\n";
-			cout << name1 << ": You want Batting or Bowling(1/2)?";
-			cin >> input;
+			input = getNum(name1 + ": You want Batting or Bowling(1/2)?");
 		}
 
 		if (input == 1) {
@@ -471,12 +490,10 @@ bool toss(string name1, string name2)
 
 		_sleep(2000);
 
-		cout << name2 << ": You want Batting or Bowling(1/2)?";
-		cin >> input;
+		input = getNum(name2 + ": You want Batting or Bowling(1/2)?");
 		while (input != 1 && input != 2) {
 			cout << "\nSorry, wrong input!! Please try again.....\n";
-			cout << name2 << ": You want Batting or Bowling(1/2)?";
-			cin >> input;
+			input = getNum(name2 + ": You want Batting or Bowling(1/2)?");
 		}
 
 		if (input == 1) {
