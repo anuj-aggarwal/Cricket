@@ -34,7 +34,7 @@ int leftBalls;
 
 
 Database database(fileName);
-vector<Team>& teams= database.getTeams();
+vector<Team>& teams = database.getTeams();
 
 int main()
 try {
@@ -202,7 +202,7 @@ void play()
 	}
 
 	if (eligibleTeams < 2) {
-		cout<<"\nNot enough teams to play!!\n\n";
+		cout << "\nNot enough teams to play!!\n\n";
 		return;
 	}
 
@@ -218,6 +218,7 @@ void play()
 	int pos1 = -1;
 
 	while (pos1 == -1) {
+		bool flag = false;
 		cout << "\n\nEnter name of first team:\n";
 		string firstTeam;
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -228,13 +229,19 @@ void play()
 
 		for (int i = 0; i < teams.size(); ++i) {
 			if (firstTeam == teams[i].name) {
-				if (!teams[i].canPlay(noOfWickets, ceil(static_cast<double>(noOfBalls) / ballsPerOver)))
-					throw runtime_error(teams[i].name + " has only " + to_string(teams[i].players.size()) + " players!!\nMinimum players required to play : " + to_string(noOfWickets));
-				pos1 = i;
+				if (!teams[i].canPlay(noOfWickets, ceil(static_cast<double>(noOfBalls) / ballsPerOver))) {
+					cout << endl << teams[i].name << " has only " << teams[i].players.size() << " players!!";
+					int bowlersReq = ceil(static_cast<double>(noOfBalls) / ballsPerOver / 4);
+					cout << "\nMinimum players required to play : " << (noOfWickets > bowlersReq ? noOfWickets : bowlersReq) << "\n\n";
+					flag = true;
+				}
+				else
+					pos1 = i;
+
 				break;
 			}
 		}
-		if (pos1 == -1) {
+		if (pos1 == -1 && flag == false) {
 			cout << "\nTeam not found: " << firstTeam << "!! Please try again.....\n";
 		}
 	}
@@ -243,6 +250,7 @@ void play()
 	int pos2 = -1;
 
 	while (pos2 == -1) {
+		bool flag = false;
 		cout << "\nEnter name of second team:\n";
 		string secondTeam;
 		getline(cin, secondTeam);
@@ -252,14 +260,20 @@ void play()
 
 		for (int i = 0; i < teams.size(); ++i) {
 			if (secondTeam == teams[i].name) {
-				if (!teams[i].canPlay(noOfWickets, ceil(static_cast<double>(noOfBalls) / ballsPerOver)))
-					throw runtime_error(teams[i].name + " has only " + to_string(teams[i].players.size()) + " players!!\nMinimum players required to play : " + to_string(noOfWickets));
-				pos2 = i;
+				if (!teams[i].canPlay(noOfWickets, ceil(static_cast<double>(noOfBalls) / ballsPerOver))) {
+					cout << endl << teams[i].name << " has only " << teams[i].players.size() << " players!!";
+					int bowlersReq = ceil(static_cast<double>(noOfBalls) / ballsPerOver / 4);
+					cout << "\nMinimum players required to play : " << (noOfWickets > bowlersReq ? noOfWickets : bowlersReq) << "\n\n";
+					flag = true;
+				}
+				else
+					pos2 = i;
+
 				break;
 			}
 		}
 
-		if (pos2 == -1) {
+		if (pos2 == -1 && flag == false) {
 			cout << "\nTeam not found: " << secondTeam << "!! Please try again.....\n";
 		}
 
