@@ -78,16 +78,18 @@ void Player::write(ofstream& ofs)
 	if (!ofs)
 		throw runtime_error("Error writing to File");
 
-	ofs << "( " << name << " " << totalMatches << " " << totalOversBowled << " " << totalRuns << " " << totalWickets << " )\n";
+	ofs << "(\n" << name << "\n" << totalMatches << "\n" << totalOversBowled << "\n" << totalRuns << "\n" << totalWickets << "\n)\n";
 }
 void Player::read(ifstream& ifs)
 {
 	if (!ifs)
 		throw runtime_error("Error reading from File");
-	char ch1, ch2;
+	// char ch1, ch2;
 
 	// ifs >> ch1;
-	ifs >> name >> totalMatches >> totalOversBowled >> totalRuns >> totalWickets;
+	ifs.ignore(numeric_limits<streamsize>::max(), '\n');
+	getline(ifs, name);
+	ifs >> totalMatches >> totalOversBowled >> totalRuns >> totalWickets;
 	// ifs>> ch2;
 
 	if (!ifs)

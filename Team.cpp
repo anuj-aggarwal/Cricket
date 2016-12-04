@@ -180,7 +180,7 @@ void Team::read(ifstream& ifs)
 	if (!ifs)
 		throw runtime_error("Error reading from File");
 	vector<Player> temp;
-	ifs >> name;
+	getline(ifs, name);
 
 	while (true) {
 		char ch;

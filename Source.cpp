@@ -213,7 +213,8 @@ void addPlayer()
 
 	cout << "\n\nEnter team of player:\n";
 	string tname;
-	cin >> tname;
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	getline(cin, tname);
 
 	if (!cin)
 		throw runtime_error("End of Input received!!\n");
@@ -225,7 +226,7 @@ void addPlayer()
 
 			cout << "\nEnter the name of player to add:\n";
 			string pName;
-			cin >> pName;
+			getline(cin, pName);
 
 			if (!cin)
 				throw runtime_error("End of Input received!!\n");
@@ -277,7 +278,8 @@ void modifyPlayer()
 		cout << endl << t.name;
 
 	cout << "\n\nEnter the team of player:\n";
-	cin >> tName;
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	getline(cin, tName);
 
 	if (!cin)
 		throw runtime_error("End of Input received!!\n");
@@ -289,7 +291,7 @@ void modifyPlayer()
 			displayTeam(team);
 			string pName;
 			cout << "\n\nEnter the player name:\n";
-			cin >> pName;
+			getline(cin, pName);
 
 			if (!cin)
 				throw runtime_error("End of Input received!!\n");
@@ -340,7 +342,8 @@ void deletePlayer()
 		cout << endl << t.name;
 
 	cout << "\n\nEnter the team of player:\n";
-	cin >> tName;
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	getline(cin, tName);
 
 	if (!cin)
 		throw runtime_error("End of Input received!!\n");
@@ -352,7 +355,7 @@ void deletePlayer()
 			displayTeam(team);
 			string pName;
 			cout << "\n\nEnter the player name:\n";
-			cin >> pName;
+			getline(cin, pName);
 
 			if (!cin)
 				throw runtime_error("End of Input received!!\n");
@@ -392,7 +395,8 @@ void deleteTeam()
 		cout << endl << t.name;
 
 	cout << "\n\nEnter the team name:\n";
-	cin >> tName;
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	getline(cin, tName);
 
 	if (!cin)
 		throw runtime_error("End of Input received!!\n");
@@ -572,7 +576,8 @@ void play()
 	while (pos1 == -1) {
 		cout << "\n\nEnter name of first team:\n";
 		string firstTeam;
-		cin >> firstTeam;
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		getline(cin, firstTeam);
 
 		if (!cin)
 			throw runtime_error("End of Input received!!\n");
@@ -596,7 +601,7 @@ void play()
 	while (pos2 == -1) {
 		cout << "\nEnter name of second team:\n";
 		string secondTeam;
-		cin >> secondTeam;
+		getline(cin, secondTeam);
 
 		if (!cin)
 			throw runtime_error("End of Input received!!\n");
