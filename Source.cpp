@@ -714,7 +714,8 @@ int innings(Team& battingTeam, Team& bowlingTeam)
 			cout << "Run Out!!\n";
 			leftWickets--;
 			battingTeam.playerOut(batsman);
-			batsman = battingTeam.getNextBatsman(batsmanPlayed);
+			if (leftWickets > 0)
+				batsman = battingTeam.getNextBatsman(batsmanPlayed);
 			bowler.increaseWickets(1);
 			break;
 
