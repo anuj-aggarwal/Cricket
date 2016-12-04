@@ -74,7 +74,7 @@ Player& Team::getNextBatsman(vector<Player> & batsmanPlayed)
 
 
 }
-Player& Team::getNextBowler(unordered_map<Player, int> & playersBowled)
+Player& Team::getNextBowler()
 {
 	while (true) {
 		bool flag = false;
@@ -95,7 +95,6 @@ Player& Team::getNextBowler(unordered_map<Player, int> & playersBowled)
 				}
 				else {
 					oversBowled[p]++;
-					playersBowled = oversBowled;
 					return p;
 				}
 			}
@@ -158,10 +157,10 @@ void Team::updateBatsmen(const vector<Player> & batsmanPlayed)
 		}
 	}
 }
-void Team::updateBowlers(unordered_map<Player, int> & playersBowled)
+void Team::updateBowlers()
 {
 	for (Player& p : players) {
-		p.increaseOvers(playersBowled[p]);
+		p.increaseOvers(oversBowled[p]);
 	}
 }
 

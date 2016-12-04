@@ -25,7 +25,7 @@ public:
 
 	void addPlayer(Player&);
 	Player& getNextBatsman(vector<Player> &);
-	Player& getNextBowler(unordered_map<Player, int> &);
+	Player& getNextBowler();
 	void reset();
 	void displayBatsman();
 	void displayBowler();
@@ -33,7 +33,7 @@ public:
 	bool canPlay(int, int);
 
 	void updateBatsmen(const vector<Player> &);
-	void updateBowlers(unordered_map<Player, int> &);
+	void updateBowlers();
 
 	void write(ofstream&);
 	void read(ifstream&);

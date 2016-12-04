@@ -638,11 +638,10 @@ int innings(Team& battingTeam, Team& bowlingTeam)
 	int totalSixes = 0;
 	int totalWickets = 0;
 
-	unordered_map<Player, int> oversBowled;
 	vector<Player> batsmanPlayed;
 
 	Player& batsman = battingTeam.getNextBatsman(batsmanPlayed);
-	Player& bowler = bowlingTeam.getNextBowler(oversBowled);
+	Player& bowler = bowlingTeam.getNextBowler();
 
 	system("cls");
 	cout << "\n\nOver: 1\n";
@@ -650,7 +649,7 @@ int innings(Team& battingTeam, Team& bowlingTeam)
 
 		if (leftBalls != noOfBalls && leftBalls%ballsPerOver == 0) {
 			cout << "\nEnd of Over!!\nRuns till now: " << totalRuns << endl;
-			bowler = bowlingTeam.getNextBowler(oversBowled);
+			bowler = bowlingTeam.getNextBowler();
 			system("cls");
 			cout << "\n\nOver: " << (noOfBalls - leftBalls) / ballsPerOver + 1 << endl;
 		}
@@ -727,7 +726,7 @@ int innings(Team& battingTeam, Team& bowlingTeam)
 	cout << "\nEND OF INNINGS........!!\n";
 
 	battingTeam.updateBatsmen(batsmanPlayed);
-	bowlingTeam.updateBowlers(oversBowled);
+	bowlingTeam.updateBowlers();
 
 	return totalRuns;
 }
