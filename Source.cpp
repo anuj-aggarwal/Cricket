@@ -17,6 +17,8 @@ using namespace std;
 void init_play();
 int displayMenu();
 
+
+int posPlayingTeam(string);
 bool Toss(string&, string&);
 void play();
 int innings(Team&, Team&);
@@ -131,6 +133,37 @@ int displayMenu()
 
 
 
+int posPlayingTeam(string prompt)
+{
+	int pos = -1;
+
+	while (pos == -1) {
+
+		cout << prompt;
+		string teamName;
+		getline(cin, teamName);
+
+		while (teamName == "")
+			getline(cin, teamName);
+
+		if (!cin)
+			throw runtime_error("End of Input received!!\n");
+
+		pos = findPos(teams, Team(teamName));
+		if (pos == -1) {
+			cout << "\nTeam not found: " << teamName << "!! Please try again.....\n";
+		}
+		else if (!teams[pos].canPlay(noOfWickets, ceil(static_cast<double>(noOfBalls) / ballsPerOver))) {
+			cout << endl << teams[pos].name << " has only " << teams[pos].players.size() << " players!!";
+			int bowlersReq = ceil(static_cast<double>(noOfBalls) / ballsPerOver / 4);
+			cout << "\nMinimum players required to play : " << (noOfWickets > bowlersReq ? noOfWickets : bowlersReq) << "\n\n";
+			pos = -1;
+		}
+
+	}
+
+	return pos;
+}
 
 bool toss(string name1, string name2)
 {
@@ -215,69 +248,13 @@ void play()
 	}
 
 
-	int pos1 = -1;
+	int pos1 = posPlayingTeam("\n\nEnter name of first team:\n");
 
-	while (pos1 == -1) {
+	int pos2 = posPlayingTeam("\n\nEnter name of second team:\n");
 
-		cout << "\n\nEnter name of first team:\n";
-		string firstTeam;
-		getline(cin, firstTeam);
-
-		while (firstTeam == "")
-			getline(cin, firstTeam);
-
-		if (!cin)
-			throw runtime_error("End of Input received!!\n");
-
-		pos1 = findPos(teams, Team(firstTeam));
-		if (pos1 == -1) {
-			cout << "\nTeam not found: " << firstTeam << "!! Please try again.....\n";
-		}
-		else if (!teams[pos1].canPlay(noOfWickets, ceil(static_cast<double>(noOfBalls) / ballsPerOver))) {
-			cout << endl << teams[pos1].name << " has only " << teams[pos1].players.size() << " players!!";
-			int bowlersReq = ceil(static_cast<double>(noOfBalls) / ballsPerOver / 4);
-			cout << "\nMinimum players required to play : " << (noOfWickets > bowlersReq ? noOfWickets : bowlersReq) << "\n\n";
-			pos1 = -1;
-		}
-
-	}
-
-
-
-
-	int pos2 = -1;
-
-	while (pos2 == -1) {
-
-		cout << "\nEnter name of second team:\n";
-		string secondTeam;
-		getline(cin, secondTeam);
-
-		while (secondTeam == "")
-			getline(cin, secondTeam);
-
-		if (!cin)
-			throw runtime_error("End of Input received!!\n");
-
-		pos2 = findPos(teams, Team(secondTeam));
-		if (pos2 == -1) {
-			cout << "\nTeam not found: " << secondTeam << "!! Please try again.....\n";
-		}
-
-		else if (pos2 == pos1) {
-			cout << "\nTeam: " << teams[pos2].name << " already playing!! Please try again.....\n";
-			pos2 = -1;
-		}
-		else if (!teams[pos2].canPlay(noOfWickets, ceil(static_cast<double>(noOfBalls) / ballsPerOver))) {
-			cout << endl << teams[pos2].name << " has only " << teams[pos2].players.size() << " players!!";
-			int bowlersReq = ceil(static_cast<double>(noOfBalls) / ballsPerOver / 4);
-			cout << "\nMinimum players required to play : " << (noOfWickets > bowlersReq ? noOfWickets : bowlersReq) << "\n\n";
-			pos2 = -1;
-		}
-
-
-
-
+	while (pos2 == pos1) {
+		cout << "\nTeam: " << teams[pos2].name << " already playing!! Please try again.....\n";
+		pos2 = posPlayingTeam("\n\nEnter name of second team:\n");
 	}
 
 
