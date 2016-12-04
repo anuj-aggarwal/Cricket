@@ -175,7 +175,10 @@ void init_teams()
 	ifstream fin(fileName);
 	if (!fin) {
 		ofstream fout(fileName);
+		fout.close();
 	}
+	else
+		fin.close();
 
 	teams = read(fileName);
 }
