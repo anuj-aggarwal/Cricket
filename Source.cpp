@@ -8,26 +8,21 @@
 #include "Team.h"
 #include "Result.h"
 #include "Ball.h"
+#include "Input.h"
+#include "Database.h"
 
 using namespace std;
 
-void wait(string ch);
-void wait();
-int getNum(string);
-int getPositiveNum(string);
 
-void init_teams();
 void init_play();
 int displayMenu();
-void database();
 
 bool Toss(string&, string&);
 void play();
 int innings(Team&, Team&);
 int match(Team&, Team&);
 
-void write(string, vector<Team>&);
-vector<Team> read(string);
+
 
 const int noOfWickets = 1;
 const int noOfBalls = 30;
@@ -36,11 +31,13 @@ const string fileName = "../Cricket/Details.txt";
 
 int leftWickets;
 int leftBalls;
-vector<Team> teams;
+
+
+Database database(fileName);
+vector<Team>& teams= database.getTeams();
 
 int main()
 try {
-	init_teams();
 	char ch;
 
 	do {
@@ -50,7 +47,7 @@ try {
 		switch (choice) {
 
 		case 1:
-			database();
+			database.menu();
 			break;
 
 		case 2:
@@ -58,7 +55,6 @@ try {
 			break;
 
 		case 3:
-			write(fileName, teams);
 			cout << "\nEND OF PROGRAM\n";
 			return 0;
 
@@ -88,7 +84,6 @@ try {
 
 	///*cout << innings(t, t1);*/
 
-	write(fileName, teams);
 	wait();
 	return 0;
 }
@@ -106,55 +101,7 @@ catch (...) {
 
 
 
-void wait(string ch)
-{
-	cin.clear();
-	cout << "\nPress " << ch << " to continue: ";
-	string c;
-	cin >> c;
-	while (c != ch) {
-		cout << "\nPress " << ch << " to continue: ";
-		cin >> c;
-	}
-}
-void wait()
-{
-	cin.clear();
-	cout << "\nPress any key to continue: ";
-	string ch;
-	cin >> ch;
 
-}
-int getNum(string prompt)
-{
-	cout << endl << prompt;
-	int n;
-	cin >> n;
-
-	while (!cin) {
-		if (cin.eof())
-			throw runtime_error("End of Input received!!\n");
-		cin.clear();
-		string ch;
-		cout << "\nOOps, a number is required!!Please try again.....\n";
-		getline(cin, ch);
-		cout << endl << prompt;
-		cin >> n;
-
-	}
-
-	return n;
-}
-int getPositiveNum(string prompt)
-{
-	int n;
-	n = getNum(prompt);
-	while (n < 0) {
-		cout << "\nSorry, positive number expected(>=0)!!Please try again.....\n";
-		n = getNum(prompt);
-	}
-	return n;
-}
 
 
 void init_play()
@@ -169,31 +116,7 @@ void init_play()
 	srand((unsigned int)time1);
 
 }
-void init_teams()
-{
-	// make a file to store all data if it not already exists
-	ifstream fin(fileName);
-	if (!fin) {
-		ofstream fout(fileName);
-		fout.close();
-	}
-	else
-		fin.close();
 
-	teams = read(fileName);
-}
-
-
-
-
-void displayTeam(Team& team)
-{
-	cout << endl << "TEAM: " << team.name << endl;
-	cout << endl << setw(15) << "Player Name" << setw(20) << "Batting Skills" << setw(20) << "Bowling Skills";
-	for (const Player& p : team.players) {
-		cout << endl << setw(15) << p.name << setw(20) << p.getBattingSkills() << setw(20) << p.getBowlingSkills();
-	}
-}
 int displayMenu()
 {
 	system("cls");
@@ -205,290 +128,7 @@ int displayMenu()
 	choice = getNum("\nEnter the choice:\n");
 	return choice;
 }
-void addPlayer()
-{
-	system("cls");
-	cout << "\t\tADDING PLAYERS";
-	cout << "\n\n\tTEAMS\n";
-	for (const Team &t : teams) {
-		cout << endl << t.name;
-	}
 
-	cout << "\n\nEnter team of player:\n";
-	string tname;
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	getline(cin, tname);
-
-	if (!cin)
-		throw runtime_error("End of Input received!!\n");
-
-	bool found = false;
-
-	for (Team& t : teams)
-		if (t.name == tname) {
-
-			cout << "\nEnter the name of player to add:\n";
-			string pName;
-			getline(cin, pName);
-
-			if (!cin)
-				throw runtime_error("End of Input received!!\n");
-
-			for (const Player& p : t.players)
-				if (p.name == pName) {
-					cout << "\n\nPlayer already present!!";
-					return;
-				}
-
-			int pTRuns;
-			pTRuns = getPositiveNum("Enter the total runs made by player:\n");
-			int pTWickets;
-			pTWickets = getPositiveNum("Enter total wickets taken by player:\n");
-			int pTMatches;
-			pTMatches = getPositiveNum("Enter total matches played by player:\n");
-			int pTOvers;
-			pTOvers = getPositiveNum("Enter total overs bowled by player:\n");
-
-
-			t.addPlayer(*(new Player(pName, pTMatches, pTOvers, pTRuns, pTWickets)));
-			found = true;
-			break;
-		}
-
-	if (!found) {
-		char create;
-		cout << "\nTeam not found!!";
-		cout << "\nDo you want to create a new team named " << tname << " (y/n)?\n";
-		cin >> create;
-
-		if (!cin)
-			throw runtime_error("End of Input received!!\n");
-
-		if (create == 'y' || create == 'Y') {
-			teams.push_back(*(new Team(tname)));
-			addPlayer();
-		}
-	}
-
-}
-void modifyPlayer()
-{
-	system("cls");
-	string tName;
-	cout << "\t\tMODIFYING PLAYERS";
-	cout << "\n\n\tTEAMS\n";
-	for (const Team& t : teams)
-		cout << endl << t.name;
-
-	cout << "\n\nEnter the team of player:\n";
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	getline(cin, tName);
-
-	if (!cin)
-		throw runtime_error("End of Input received!!\n");
-
-	bool teamFound = false;
-	for (Team& team : teams) {
-		if (team.name == tName) {
-			system("cls");
-			displayTeam(team);
-			string pName;
-			cout << "\n\nEnter the player name:\n";
-			getline(cin, pName);
-
-			if (!cin)
-				throw runtime_error("End of Input received!!\n");
-
-			bool pFound = false;
-			for (Player& p : team.players) {
-				if (p.name == pName) {
-
-					cout << "\nEnter new details:\n";
-					int pTRuns;
-					pTRuns = getPositiveNum("Enter the total runs made by player:\n");
-					int pTWickets;
-					pTWickets = getPositiveNum("Enter total wickets taken by player:\n");
-					int pTMatches;
-					pTMatches = getPositiveNum("Enter total matches played by player:\n");
-					int pTOvers;
-					pTOvers = getPositiveNum("Enter total overs bowled by player:\n");
-
-					p = Player(p.name, pTMatches, pTOvers, pTRuns, pTWickets);
-
-
-					pFound = true;
-					break;
-				}
-			}
-
-			if (!pFound) {
-				cout << "\nPlayer not found!!";
-			}
-
-			teamFound = true;
-			break;
-		}
-	}
-
-	if (!teamFound) {
-		cout << "\nTeam not found!!";
-	}
-
-}
-void deletePlayer()
-{
-	string tName;
-	system("cls");
-	cout << "\t\tDELETING A PLAYER";
-	cout << "\n\n\tTEAMS\n";
-	for (const Team& t : teams)
-		cout << endl << t.name;
-
-	cout << "\n\nEnter the team of player:\n";
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	getline(cin, tName);
-
-	if (!cin)
-		throw runtime_error("End of Input received!!\n");
-
-	bool teamFound = false;
-	for (Team& team : teams) {
-		if (team.name == tName) {
-			system("cls");
-			displayTeam(team);
-			string pName;
-			cout << "\n\nEnter the player name:\n";
-			getline(cin, pName);
-
-			if (!cin)
-				throw runtime_error("End of Input received!!\n");
-
-			bool pFound = false;
-			for (Player& p : team.players) {
-				if (p.name == pName) {
-
-					team.players.erase(find(team.players.begin(), team.players.end(), p));
-					cout << "\nSuccessfully deleted Player: " << pName;
-					pFound = true;
-					break;
-				}
-			}
-
-			if (!pFound) {
-				cout << "\nPlayer not found!!";
-			}
-
-			teamFound = true;
-			break;
-		}
-	}
-
-	if (!teamFound) {
-		cout << "\nTeam not found!!";
-	}
-
-}
-void deleteTeam()
-{
-	string tName;
-	system("cls");
-	cout << "\t\tDELETING A TEAM";
-	cout << "\n\n\tTEAMS\n";
-	for (const Team& t : teams)
-		cout << endl << t.name;
-
-	cout << "\n\nEnter the team name:\n";
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	getline(cin, tName);
-
-	if (!cin)
-		throw runtime_error("End of Input received!!\n");
-
-	bool teamFound = false;
-	for (Team& team : teams) {
-		if (team.name == tName) {
-			teams.erase(find(teams.begin(), teams.end(), team));
-			cout << "\nSuccessfully deleted Team: " << tName;
-			teamFound = true;
-			break;
-		}
-	}
-
-	if (!teamFound) {
-		cout << "\nTeam not found!!";
-	}
-
-}
-void display()
-{
-	system("cls");
-
-	cout << "\t\tALL PLAYERS RECORD\n\n";
-	for (Team& t : teams) {
-		displayTeam(t);
-		cout << endl;
-	}
-}
-
-void database()
-{
-	char ch = 'n';
-
-	do {
-		int choice;
-		system("cls");
-		cout << "\nDATABASE MENU";
-		cout << "\n1. Add Player";
-		cout << "\n2. Modify Player";
-		cout << "\n3. Delete Player";
-		cout << "\n4. Display all Players";
-		cout << "\n5. Reset all Players";
-		cout << "\n6. Delete a team";
-		cout << "\n7. Go back to MAIN MENU";
-		choice = getNum("Enter your choice:\n");
-
-		switch (choice) {
-		case 1:
-			addPlayer();
-			break;
-
-		case 2:
-			modifyPlayer();
-			break;
-
-		case 3:
-			deletePlayer();
-			break;
-
-		case 4:
-			display();
-			break;
-
-		case 5:
-			teams.clear();
-			cout << "\n\nDeleted teams successfully!!";
-			break;
-
-		case 6:
-			deleteTeam();
-			break;
-
-		case 7:
-			return;
-
-		default:
-			cout << "\nWrong choice!!";
-			break;
-		}
-
-		cout << "\n\n\nDo you want to go to Database Menu(y/n)?\n";
-		cin >> ch;
-
-		if (!cin)
-			throw runtime_error("End of Input received!!\n");
-
-	} while (ch == 'y' || ch == 'Y');
-}
 
 
 
@@ -768,45 +408,4 @@ int match(Team& t1, Team& t2)
 		cout << "\nDRAW between " << t1.name << " and " << t2.name;
 		return 0;
 	}
-}
-
-
-
-void write(string fileName, vector<Team>& t)
-{
-	ofstream fout(fileName, ios::out);
-	if (!fout) {
-		cout << "File not opened: " << fileName << endl;
-		exit(1);
-	}
-
-	for (Team& team : t) {
-		team.write(fout);
-	}
-
-	fout.close();
-}
-vector<Team> read(string fileName)
-{
-	ifstream fin(fileName);
-	if (!fin) {
-		cout << "Unable to open file: " << fileName << endl;
-		exit(1);
-	}
-
-	vector<Team> teams;
-	while (fin) {
-		Team t;
-		t.read(fin);
-		teams.push_back(t);
-	}
-	/*
-	int i = 0;
-	while (fin.read((char*)&teams[i], sizeof(teams[i]))) {
-	i++;
-	}*/
-
-	fin.close();
-	return teams;
-
 }
