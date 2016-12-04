@@ -24,7 +24,6 @@ public:
 	void write(ofstream&);
 	void read(ifstream&);
 
-	Player& operator=(const Player&);
 	bool operator==(const Player&);
 	bool operator!=(const Player&);
 

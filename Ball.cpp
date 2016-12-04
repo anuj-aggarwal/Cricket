@@ -76,12 +76,3 @@ Result Ball::getResult()
 {
 	return result;
 }
-
-
-Ball& Ball::operator=(const Ball& b)
-{
-	batsman = b.batsman;
-	bowler = b.bowler;
-	setResult();
-	return *this;
-}

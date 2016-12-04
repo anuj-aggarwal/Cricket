@@ -204,13 +204,6 @@ void Team::read(ifstream& ifs)
 
 
 
-Team& Team::operator=(const Team& t)
-{
-	name = t.name;
-	players = t.players;
-
-	return *this;
-}
 
 bool Team::operator==(const Team& t) {
 	return (name == t.name);

@@ -11,7 +11,6 @@ public:
 
 	Result getResult();
 
-	Ball& operator=(const Ball&);
 
 private:
 	Player batsman;

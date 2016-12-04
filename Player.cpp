@@ -112,19 +112,7 @@ void Player::read(ifstream& ifs)
 
 
 
-Player& Player::operator=(const Player& p)
-{
-	name = p.name;
-	totalMatches = p.totalMatches;
-	totalOversBowled = p.totalOversBowled;
-	totalRuns = p.totalRuns;
-	totalWickets = p.totalWickets;
 
-	setBattingSkills();
-	setBowlingSkills();
-
-	return *this;
-}
 bool Player::operator==(const Player& p)
 {
 	return (name == p.name); // && totalMatches == p.totalMatches && totalOversBowled == p.totalOversBowled && totalRuns == p.totalRuns && totalWickets == p.totalWickets);

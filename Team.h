@@ -39,7 +39,6 @@ public:
 	void read(ifstream&);
 
 
-	Team& operator=(const Team&);
 	bool operator==(const Team&);
 	bool operator!=(const Team&);
 
