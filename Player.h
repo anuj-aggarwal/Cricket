@@ -9,7 +9,6 @@ public:
 	Player();
 	~Player();
 	Player(string, int, int, int, int);
-	Player(const Player&);
 
 	string name;
 

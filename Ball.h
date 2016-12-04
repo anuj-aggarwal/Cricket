@@ -6,7 +6,6 @@ class Ball
 {
 public:
 	Ball(Player&, Player&);
-	Ball(const Ball&);
 	~Ball();
 
 	Result getResult();

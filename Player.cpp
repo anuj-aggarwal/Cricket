@@ -18,16 +18,6 @@ Player::Player(string nm, int matches, int overs, int runs, int wickets)
 	setBowlingSkills();
 	setBattingSkills();
 }
-Player::Player(const Player& p)
-{
-	name = p.name;
-	battingSkills = p.battingSkills;
-	bowlingSkills = p.bowlingSkills;
-	totalMatches = p.totalMatches;
-	totalOversBowled = p.totalOversBowled;
-	totalRuns = p.totalRuns;
-	totalWickets = p.totalWickets;
-}
 
 
 void Player::setBattingSkills()

@@ -17,11 +17,6 @@ Ball::Ball(Player& abatsman, Player& abowler)
 	setResult();
 }
 
-Ball::Ball(const Ball& b)
-	: batsman{ b.batsman }, bowler{ b.bowler }
-{
-	setResult();
-}
 
 
 void Ball::setResult()
