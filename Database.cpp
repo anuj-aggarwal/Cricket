@@ -114,42 +114,10 @@ void Database::addPlayer()
 	if (!cin)
 		throw runtime_error("End of Input received!!\n");
 
-	bool found = false;
 
-	for (Team& t : teams)
-		if (t.name == tname) {
+	int posTeam = findPos(teams, Team(tname));
 
-			cout << "\nEnter the name of player to add:\n";
-			string pName;
-			getline(cin, pName);
-			while (pName == "")
-				getline(cin, pName);
-
-			if (!cin)
-				throw runtime_error("End of Input received!!\n");
-
-			for (const Player& p : t.players)
-				if (p.name == pName) {
-					cout << "\n\nPlayer already present!!";
-					return;
-				}
-
-			int pTRuns;
-			pTRuns = getPositiveNum("Enter the total runs made by player:\n");
-			int pTWickets;
-			pTWickets = getPositiveNum("Enter total wickets taken by player:\n");
-			int pTMatches;
-			pTMatches = getPositiveNum("Enter total matches played by player:\n");
-			int pTOvers;
-			pTOvers = getPositiveNum("Enter total overs bowled by player:\n");
-
-
-			t.addPlayer(*(new Player(pName, pTMatches, pTOvers, pTRuns, pTWickets)));
-			found = true;
-			break;
-		}
-
-	if (!found) {
+	if (posTeam == -1) {
 		char create;
 		cout << "\nTeam not found!!";
 		cout << "\nDo you want to create a new team named " << tname << " (y/n)?\n";
@@ -163,6 +131,38 @@ void Database::addPlayer()
 			addPlayer();
 		}
 	}
+	else {
+		cout << "\nEnter the name of player to add:\n";
+		string pName;
+		getline(cin, pName);
+
+		while (pName == "")
+			getline(cin, pName);
+
+		if (!cin)
+			throw runtime_error("End of Input received!!\n");
+
+		int posPlayer = findPos(teams[posTeam].players, Player(pName));
+		if (posPlayer != -1) {
+			cout << "\n\nPlayer already present!!";
+			return;
+		}
+
+		int pTRuns;
+		pTRuns = getPositiveNum("Enter the total runs made by player:\n");
+		int pTWickets;
+		pTWickets = getPositiveNum("Enter total wickets taken by player:\n");
+		int pTMatches;
+		pTMatches = getPositiveNum("Enter total matches played by player:\n");
+		int pTOvers;
+		pTOvers = getPositiveNum("Enter total overs bowled by player:\n");
+
+
+		teams[posTeam].addPlayer(*(new Player(pName, pTMatches, pTOvers, pTRuns, pTWickets)));
+
+	}
+
+
 
 }
 void Database::modifyPlayer()
@@ -183,57 +183,48 @@ void Database::modifyPlayer()
 	if (!cin)
 		throw runtime_error("End of Input received!!\n");
 
-	bool teamFound = false;
-	for (Team& team : teams) {
-		if (team.name == tName) {
-			system("cls");
-			displayTeam(team);
-			string pName;
-			cout << "\n\nEnter the player name:\n";
-			getline(cin, pName);
+	int posTeam = findPos(teams, Team(tName));
 
-			while (pName == "")
-				getline(cin, pName);
-
-			if (!cin)
-				throw runtime_error("End of Input received!!\n");
-
-			bool pFound = false;
-			for (Player& p : team.players) {
-				if (p.name == pName) {
-
-					cout << "\nEnter new details:\n";
-					int pTRuns;
-					pTRuns = getPositiveNum("Enter the total runs made by player:\n");
-					int pTWickets;
-					pTWickets = getPositiveNum("Enter total wickets taken by player:\n");
-					int pTMatches;
-					pTMatches = getPositiveNum("Enter total matches played by player:\n");
-					int pTOvers;
-					pTOvers = getPositiveNum("Enter total overs bowled by player:\n");
-
-					p = Player(p.name, pTMatches, pTOvers, pTRuns, pTWickets);
-
-
-					pFound = true;
-					break;
-				}
-			}
-
-			if (!pFound) {
-				cout << "\nPlayer not found!!";
-			}
-
-			teamFound = true;
-			break;
-		}
-	}
-
-	if (!teamFound) {
+	if (posTeam == -1) {
 		cout << "\nTeam not found!!";
 	}
+	else {
+		system("cls");
+		displayTeam(teams[posTeam]);
+		string pName;
+		cout << "\n\nEnter the player name:\n";
+		getline(cin, pName);
+
+		while (pName == "")
+			getline(cin, pName);
+
+		if (!cin)
+			throw runtime_error("End of Input received!!\n");
+
+
+		int posPlayer = findPos(teams[posTeam].players, Player(pName));
+
+		if (posPlayer == -1) {
+			cout << "\nPlayer not found!!";
+		}
+
+		cout << "\nEnter new details:\n";
+		int pTRuns;
+		pTRuns = getPositiveNum("Enter the total runs made by player:\n");
+		int pTWickets;
+		pTWickets = getPositiveNum("Enter total wickets taken by player:\n");
+		int pTMatches;
+		pTMatches = getPositiveNum("Enter total matches played by player:\n");
+		int pTOvers;
+		pTOvers = getPositiveNum("Enter total overs bowled by player:\n");
+
+		teams[posTeam].players[posPlayer] = Player(pName, pTMatches, pTOvers, pTRuns, pTWickets);
+
+	}
+
 
 }
+
 void Database::deletePlayer()
 {
 	string tName;
@@ -252,44 +243,33 @@ void Database::deletePlayer()
 	if (!cin)
 		throw runtime_error("End of Input received!!\n");
 
-	bool teamFound = false;
-	for (Team& team : teams) {
-		if (team.name == tName) {
-			system("cls");
-			displayTeam(team);
-			string pName;
-			cout << "\n\nEnter the player name:\n";
-			getline(cin, pName);
+	int posTeam = findPos(teams, Team(tName));
 
-			while (pName == "")
-				getline(cin, pName);
-
-			if (!cin)
-				throw runtime_error("End of Input received!!\n");
-
-			bool pFound = false;
-			for (Player& p : team.players) {
-				if (p.name == pName) {
-
-					team.players.erase(find(team.players.begin(), team.players.end(), p));
-					cout << "\nSuccessfully deleted Player: " << pName;
-					pFound = true;
-					break;
-				}
-			}
-
-			if (!pFound) {
-				cout << "\nPlayer not found!!";
-			}
-
-			teamFound = true;
-			break;
-		}
-	}
-
-	if (!teamFound) {
+	if (posTeam == -1) {
 		cout << "\nTeam not found!!";
 	}
+
+	system("cls");
+	displayTeam(teams[posTeam]);
+	string pName;
+	cout << "\n\nEnter the player name:\n";
+	getline(cin, pName);
+
+	while (pName == "")
+		getline(cin, pName);
+
+	if (!cin)
+		throw runtime_error("End of Input received!!\n");
+
+
+	int posPlayer = findPos(teams[posTeam].players, Player(pName));
+	if (posPlayer == -1) {
+		cout << "\nPlayer not found!!";
+	}
+
+	teams[posTeam].players.erase(teams[posTeam].players.begin() + posPlayer);
+	cout << "\nSuccessfully deleted Player: " << pName;
+
 
 }
 void Database::deleteTeam()
@@ -310,19 +290,13 @@ void Database::deleteTeam()
 	if (!cin)
 		throw runtime_error("End of Input received!!\n");
 
-	bool teamFound = false;
-	for (Team& team : teams) {
-		if (team.name == tName) {
-			teams.erase(find(teams.begin(), teams.end(), team));
-			cout << "\nSuccessfully deleted Team: " << tName;
-			teamFound = true;
-			break;
-		}
-	}
+	int posTeam = findPos(teams, Team(tName));
 
-	if (!teamFound) {
+	if (posTeam == -1) {
 		cout << "\nTeam not found!!";
 	}
+	teams.erase(teams.begin() + posTeam);
+	cout << "\nSuccessfully deleted Team: " << tName;
 
 }
 void Database::display()

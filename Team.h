@@ -50,3 +50,17 @@ private:
 
 	bool canBowl(Player&);
 };
+
+
+
+
+
+template<class T>
+int findPos(vector<T>& elements, T& element)
+{
+	for (int i = 0; i < elements.size(); ++i) {
+		if (element == elements[i])
+			return i;
+	}
+	return -1;
+}

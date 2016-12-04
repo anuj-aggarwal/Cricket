@@ -11,9 +11,14 @@ Player::Player()
 Player::~Player()
 {
 }
-
+Player::Player(string nm)
+	:name{ nm }, totalMatches{ 0 }, totalOversBowled{ 0 }, totalRuns{ 0 }, totalWickets{ 0 }
+{
+	setBowlingSkills();
+	setBattingSkills();
+}
 Player::Player(string nm, int matches, int overs, int runs, int wickets)
-	:name{ nm }, totalMatches{ matches }, totalOversBowled{ overs }, totalRuns{ runs }, totalWickets{ wickets }
+	: name{ nm }, totalMatches{ matches }, totalOversBowled{ overs }, totalRuns{ runs }, totalWickets{ wickets }
 {
 	setBowlingSkills();
 	setBattingSkills();
@@ -90,6 +95,7 @@ void Player::read(ifstream& ifs)
 	getline(ifs, name);
 	while (name == "")
 		getline(ifs, name);
+
 	ifs >> totalMatches >> totalOversBowled >> totalRuns >> totalWickets;
 	// ifs>> ch2;
 

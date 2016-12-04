@@ -8,6 +8,7 @@ class Player
 public:
 	Player();
 	~Player();
+	Player(string);
 	Player(string, int, int, int, int);
 
 	string name;

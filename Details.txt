@@ -84,19 +84,3 @@ THIRD
 0
 0
 )
-new team
-(
-new player
-1
-1
-1
-1
-)
-new team 2
-(
-new player 2
-1
-1
-1
-1
-)

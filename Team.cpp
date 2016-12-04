@@ -41,7 +41,7 @@ bool Team::canBowl(Player& p)
 
 void Team::addPlayer(Player& p)
 {
-	if (find(players.begin(), players.end(), p) != players.end())
+	if (findPos(players, p) != -1)
 		return;
 	players.push_back(p);
 	oversBowled.insert(pair<Player, int>(p, 0));
@@ -62,17 +62,16 @@ Player& Team::getNextBatsman(vector<Player> & batsmanPlayed)
 		if (!cin)
 			throw runtime_error("End of Input received!!\n");
 
-		for (Player& p : players)
-			if (p.name == batsman) {
-				if (find(out.begin(), out.end(), p) != out.end()) {
-					cout << '\n' << batsman << " already out!!\n";
-					continue;
-				}
+		int batsmanPos = findPos(players, Player(batsman));
+		if (findPos(out, players[batsmanPos]) != -1) {
+			cout << '\n' << batsman << " already out!!\n";
+		}
+		else {
+			batsmanPlayed.push_back(players[batsmanPos]);
+			return players[batsmanPos];
 
-				batsmanPlayed.push_back(p);
-				return p;
-			}
-		cout << "\nPlayer not found!!\n";
+			cout << "\nPlayer not found!!\n";
+		}
 	}
 
 
@@ -80,7 +79,7 @@ Player& Team::getNextBatsman(vector<Player> & batsmanPlayed)
 Player& Team::getNextBowler()
 {
 	while (true) {
-		bool flag = false;
+
 		string bowler;
 		cout << "\nEnter the name of next bowler:\n";
 		displayBowler();
@@ -93,19 +92,17 @@ Player& Team::getNextBowler()
 		if (!cin)
 			throw runtime_error("End of Input received!!\n");
 
-		for (Player& p : players)
-			if (p.name == bowler) {
-				if (!canBowl(p)) {
-					cout << '\n' << bowler << " already bowled maximum overs bowled i.e. " << maxOvers << " overs!!\n";
-					flag = true;
-				}
-				else {
-					oversBowled[p]++;
-					return p;
-				}
-			}
-		if (!flag)
+		int bowlerPos = findPos(players, Player(bowler));
+		if (bowlerPos == -1)
 			cout << "\nPlayer not found!!\n";
+		else if (!canBowl(players[bowlerPos])) {
+			cout << '\n' << bowler << " already bowled maximum overs bowled i.e. " << maxOvers << " overs!!\n";
+		}
+		else {
+			oversBowled[players[bowlerPos]]++;
+			return players[bowlerPos];
+		}
+
 	}
 
 
@@ -116,7 +113,7 @@ void Team::displayBatsman()
 {
 	cout << endl << setw(25) << "Batsman Name" << setw(10) << "Skills" << "\n";
 	for (Player& p : players) {
-		if (find(out.begin(), out.end(), p) == out.end()) {
+		if (findPos(out, p) == -1) {
 			cout << setw(25) << p.name << setw(10) << p.getBattingSkills() << '\n';
 		}
 	}
@@ -144,7 +141,7 @@ void Team::reset()
 
 void Team::playerOut(Player& p)
 {
-	if (find(out.begin(), out.end(), p) != out.end())
+	if (findPos(out, p) != -1)
 		return;
 	out.push_back(p);
 }
@@ -157,10 +154,11 @@ bool Team::canPlay(int noOfWickets, int noOfOvers)
 void Team::updateBatsmen(const vector<Player> & batsmanPlayed)
 {
 	for (Player p : batsmanPlayed) {
-		for (Player& p1 : players) {
-			if (p1 == p)
-				p1.increaseMatches(1);
-		}
+		int batsmanPos = findPos(players, p);
+		if (batsmanPos == -1)
+			return;
+		players[batsmanPos].increaseMatches(1);
+
 	}
 }
 void Team::updateBowlers()
