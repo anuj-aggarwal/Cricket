@@ -740,6 +740,8 @@ int innings(Team& battingTeam, Team& bowlingTeam)
 }
 int match(Team& t1, Team& t2)
 {
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
 	system("cls");
 	cout << "INNINGS 1:\n";
 	int runst1 = innings(t1, t2);

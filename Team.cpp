@@ -54,7 +54,7 @@ Player& Team::getNextBatsman(vector<Player> & batsmanPlayed)
 		cout << "\nEnter the name of next batsman:\n";
 		displayBatsman();
 
-		cin >> batsman;
+		getline(cin, batsman);
 
 		if (!cin)
 			throw runtime_error("End of Input received!!\n");
@@ -82,7 +82,7 @@ Player& Team::getNextBowler()
 		cout << "\nEnter the name of next bowler:\n";
 		displayBowler();
 
-		cin >> bowler;
+		getline(cin, bowler);
 
 		if (!cin)
 			throw runtime_error("End of Input received!!\n");
