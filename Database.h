@@ -13,7 +13,7 @@ public:
 
 	vector<Team>& getTeams();
 	void menu();
-	
+
 
 
 private:
@@ -27,9 +27,9 @@ private:
 	void display();
 
 	void displayTeam(Team&);
-
+	string getTeamName(string);
 
 	void write();
 	void read();
-	
+
 };

@@ -100,34 +100,22 @@ void Database::addPlayer()
 {
 	system("cls");
 	cout << "\t\tADDING PLAYERS";
-	cout << "\n\n\tTEAMS\n";
-	for (const Team &t : teams) {
-		cout << endl << t.name;
-	}
 
-	cout << "\n\nEnter team of player:\n";
-	string tname;
-	getline(cin, tname);
-	while (tname == "")
-		getline(cin, tname);
+	string tName = getTeamName("\n\nEnter team of player:\n");
 
-	if (!cin)
-		throw runtime_error("End of Input received!!\n");
-
-
-	int posTeam = findPos(teams, Team(tname));
+	int posTeam = findPos(teams, Team(tName));
 
 	if (posTeam == -1) {
 		char create;
 		cout << "\nTeam not found!!";
-		cout << "\nDo you want to create a new team named " << tname << " (y/n)?\n";
+		cout << "\nDo you want to create a new team named " << tName << " (y/n)?\n";
 		cin >> create;
 
 		if (!cin)
 			throw runtime_error("End of Input received!!\n");
 
 		if (create == 'y' || create == 'Y') {
-			teams.push_back(*(new Team(tname)));
+			teams.push_back(*(new Team(tName)));
 			addPlayer();
 		}
 	}
@@ -168,20 +156,9 @@ void Database::addPlayer()
 void Database::modifyPlayer()
 {
 	system("cls");
-	string tName;
 	cout << "\t\tMODIFYING PLAYERS";
-	cout << "\n\n\tTEAMS\n";
-	for (const Team& t : teams)
-		cout << endl << t.name;
 
-	cout << "\n\nEnter the team of player:\n";
-	getline(cin, tName);
-
-	while (tName == "")
-		getline(cin, tName);
-
-	if (!cin)
-		throw runtime_error("End of Input received!!\n");
+	string tName = getTeamName("\n\nEnter team of player:\n");
 
 	int posTeam = findPos(teams, Team(tName));
 
@@ -227,21 +204,10 @@ void Database::modifyPlayer()
 
 void Database::deletePlayer()
 {
-	string tName;
 	system("cls");
 	cout << "\t\tDELETING A PLAYER";
-	cout << "\n\n\tTEAMS\n";
-	for (const Team& t : teams)
-		cout << endl << t.name;
 
-	cout << "\n\nEnter the team of player:\n";
-	getline(cin, tName);
-
-	while (tName == "")
-		getline(cin, tName);
-
-	if (!cin)
-		throw runtime_error("End of Input received!!\n");
+	string tName = getTeamName("\n\nEnter team of player:\n");
 
 	int posTeam = findPos(teams, Team(tName));
 
@@ -274,21 +240,10 @@ void Database::deletePlayer()
 }
 void Database::deleteTeam()
 {
-	string tName;
 	system("cls");
 	cout << "\t\tDELETING A TEAM";
-	cout << "\n\n\tTEAMS\n";
-	for (const Team& t : teams)
-		cout << endl << t.name;
 
-	cout << "\n\nEnter the team name:\n";
-	getline(cin, tName);
-
-	while (tName == "")
-		getline(cin, tName);
-
-	if (!cin)
-		throw runtime_error("End of Input received!!\n");
+	string tName = getTeamName("\n\nEnter the team name:\n");
 
 	int posTeam = findPos(teams, Team(tName));
 
@@ -318,6 +273,25 @@ void Database::displayTeam(Team& team)
 	for (const Player& p : team.players) {
 		cout << endl << setw(15) << p.name << setw(20) << p.getBattingSkills() << setw(20) << p.getBowlingSkills();
 	}
+}
+string Database::getTeamName(string prompt)
+{
+	cout << "\n\n\tTEAMS\n";
+	for (const Team &t : teams) {
+		cout << endl << t.name;
+	}
+
+	cout << prompt;
+	string tName;
+	getline(cin, tName);
+	while (tName == "")
+		getline(cin, tName);
+
+	if (!cin)
+		throw runtime_error("End of Input received!!\n");
+
+	return tName;
+
 }
 
 
