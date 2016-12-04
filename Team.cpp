@@ -56,6 +56,9 @@ Player& Team::getNextBatsman(vector<Player> & batsmanPlayed)
 
 		getline(cin, batsman);
 
+		while (batsman == "")
+			getline(cin, batsman);
+
 		if (!cin)
 			throw runtime_error("End of Input received!!\n");
 
@@ -83,6 +86,9 @@ Player& Team::getNextBowler()
 		displayBowler();
 
 		getline(cin, bowler);
+
+		while (bowler == "")
+			getline(cin, bowler);
 
 		if (!cin)
 			throw runtime_error("End of Input received!!\n");

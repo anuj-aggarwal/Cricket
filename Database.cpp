@@ -107,8 +107,9 @@ void Database::addPlayer()
 
 	cout << "\n\nEnter team of player:\n";
 	string tname;
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	getline(cin, tname);
+	while (tname == "")
+		getline(cin, tname);
 
 	if (!cin)
 		throw runtime_error("End of Input received!!\n");
@@ -121,6 +122,8 @@ void Database::addPlayer()
 			cout << "\nEnter the name of player to add:\n";
 			string pName;
 			getline(cin, pName);
+			while (pName == "")
+				getline(cin, pName);
 
 			if (!cin)
 				throw runtime_error("End of Input received!!\n");
@@ -172,8 +175,10 @@ void Database::modifyPlayer()
 		cout << endl << t.name;
 
 	cout << "\n\nEnter the team of player:\n";
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	getline(cin, tName);
+
+	while (tName == "")
+		getline(cin, tName);
 
 	if (!cin)
 		throw runtime_error("End of Input received!!\n");
@@ -186,6 +191,9 @@ void Database::modifyPlayer()
 			string pName;
 			cout << "\n\nEnter the player name:\n";
 			getline(cin, pName);
+
+			while (pName == "")
+				getline(cin, pName);
 
 			if (!cin)
 				throw runtime_error("End of Input received!!\n");
@@ -236,8 +244,10 @@ void Database::deletePlayer()
 		cout << endl << t.name;
 
 	cout << "\n\nEnter the team of player:\n";
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	getline(cin, tName);
+
+	while (tName == "")
+		getline(cin, tName);
 
 	if (!cin)
 		throw runtime_error("End of Input received!!\n");
@@ -250,6 +260,9 @@ void Database::deletePlayer()
 			string pName;
 			cout << "\n\nEnter the player name:\n";
 			getline(cin, pName);
+
+			while (pName == "")
+				getline(cin, pName);
 
 			if (!cin)
 				throw runtime_error("End of Input received!!\n");
@@ -289,8 +302,10 @@ void Database::deleteTeam()
 		cout << endl << t.name;
 
 	cout << "\n\nEnter the team name:\n";
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	getline(cin, tName);
+
+	while (tName == "")
+		getline(cin, tName);
 
 	if (!cin)
 		throw runtime_error("End of Input received!!\n");

@@ -87,8 +87,9 @@ void Player::read(ifstream& ifs)
 	// char ch1, ch2;
 
 	// ifs >> ch1;
-	ifs.ignore(numeric_limits<streamsize>::max(), '\n');
 	getline(ifs, name);
+	while (name == "")
+		getline(ifs, name);
 	ifs >> totalMatches >> totalOversBowled >> totalRuns >> totalWickets;
 	// ifs>> ch2;
 

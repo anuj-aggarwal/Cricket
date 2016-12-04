@@ -221,8 +221,10 @@ void play()
 		bool flag = false;
 		cout << "\n\nEnter name of first team:\n";
 		string firstTeam;
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		getline(cin, firstTeam);
+
+		while (firstTeam == "")
+			getline(cin, firstTeam);
 
 		if (!cin)
 			throw runtime_error("End of Input received!!\n");
@@ -254,6 +256,9 @@ void play()
 		cout << "\nEnter name of second team:\n";
 		string secondTeam;
 		getline(cin, secondTeam);
+
+		while (secondTeam == "")
+			getline(cin, secondTeam);
 
 		if (!cin)
 			throw runtime_error("End of Input received!!\n");
@@ -395,7 +400,6 @@ int innings(Team& battingTeam, Team& bowlingTeam)
 }
 int match(Team& t1, Team& t2)
 {
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 	system("cls");
 	cout << "INNINGS 1:\n";
