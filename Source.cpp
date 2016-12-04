@@ -609,7 +609,7 @@ void play()
 				break;
 			}
 		}
-		
+
 		if (pos2 == -1) {
 			cout << "\nTeam not found: " << secondTeam << "!! Please try again.....\n";
 		}
@@ -641,8 +641,8 @@ int innings(Team& battingTeam, Team& bowlingTeam)
 	unordered_map<Player, int> oversBowled;
 	vector<Player> batsmanPlayed;
 
-	Player batsman = battingTeam.getNextBatsman(batsmanPlayed);
-	Player bowler = bowlingTeam.getNextBowler(oversBowled);
+	Player& batsman = battingTeam.getNextBatsman(batsmanPlayed);
+	Player& bowler = bowlingTeam.getNextBowler(oversBowled);
 
 	system("cls");
 	cout << "\n\nOver: 1\n";
