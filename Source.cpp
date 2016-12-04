@@ -202,7 +202,8 @@ void play()
 	}
 
 	if (eligibleTeams < 2) {
-		throw runtime_error("Not enough teams to play!!");
+		cout<<"\nNot enough teams to play!!\n\n";
+		return;
 	}
 
 	system("cls");
