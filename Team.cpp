@@ -63,14 +63,16 @@ Player& Team::getNextBatsman(vector<Player> & batsmanPlayed)
 			throw runtime_error("End of Input received!!\n");
 
 		int batsmanPos = findPos(players, Player(batsman));
-		if (findPos(out, players[batsmanPos]) != -1) {
+		if (batsmanPos == -1) {
+			cout << " \nPlayer not found!!\n";
+		}
+		else if (findPos(out, players[batsmanPos]) != -1) {
 			cout << '\n' << batsman << " already out!!\n";
 		}
 		else {
 			batsmanPlayed.push_back(players[batsmanPos]);
 			return players[batsmanPos];
 
-			cout << "\nPlayer not found!!\n";
 		}
 	}
 
