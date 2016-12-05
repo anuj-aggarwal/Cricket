@@ -365,6 +365,9 @@ int innings(Team& battingTeam, Team& bowlingTeam)
 	battingTeam.updateBatsmen(batsmanPlayed);
 	bowlingTeam.updateBowlers();
 
+	battingTeam.reset();
+	bowlingTeam.reset();
+
 	return totalRuns;
 }
 int match(Team& t1, Team& t2)
