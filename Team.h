@@ -24,8 +24,8 @@ public:
 
 
 	void addPlayer(Player&);
-	Player& getNextBatsman(vector<Player> &);
-	Player& getNextBowler();
+	Player* getNextBatsman(vector<Player> &);
+	Player* getNextBowler();
 	void reset();
 	void displayBatsman();
 	void displayBowler();

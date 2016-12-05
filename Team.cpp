@@ -47,7 +47,7 @@ void Team::addPlayer(Player& p)
 	oversBowled.insert(pair<Player, int>(p, 0));
 }
 
-Player& Team::getNextBatsman(vector<Player> & batsmanPlayed)
+Player* Team::getNextBatsman(vector<Player> & batsmanPlayed)
 {
 	while (true) {
 		string batsman;
@@ -71,14 +71,15 @@ Player& Team::getNextBatsman(vector<Player> & batsmanPlayed)
 		}
 		else {
 			batsmanPlayed.push_back(players[batsmanPos]);
-			return players[batsmanPos];
+			Player* ptrBatsman = &(players[batsmanPos]);
+			return ptrBatsman;
 
 		}
 	}
 
 
 }
-Player& Team::getNextBowler()
+Player* Team::getNextBowler()
 {
 	while (true) {
 
@@ -102,7 +103,7 @@ Player& Team::getNextBowler()
 		}
 		else {
 			oversBowled[players[bowlerPos]]++;
-			return players[bowlerPos];
+			Player* ptrBowler= &(players[bowlerPos]);
 		}
 
 	}

@@ -277,8 +277,8 @@ int innings(Team& battingTeam, Team& bowlingTeam)
 
 	vector<Player> batsmanPlayed;
 
-	Player& batsman = battingTeam.getNextBatsman(batsmanPlayed);
-	Player& bowler = bowlingTeam.getNextBowler();
+	Player* batsman = battingTeam.getNextBatsman(batsmanPlayed);
+	Player* bowler = bowlingTeam.getNextBowler();
 
 	system("cls");
 	cout << "\n\nOver: 1\n";
@@ -292,7 +292,7 @@ int innings(Team& battingTeam, Team& bowlingTeam)
 		}
 
 		Result result;
-		Ball b(batsman, bowler);
+		Ball b(*batsman, *bowler);
 		result = b.getResult();
 		leftBalls--;
 
@@ -308,51 +308,51 @@ int innings(Team& battingTeam, Team& bowlingTeam)
 		case Result::ONE:
 			cout << "Single.\n";
 			totalRuns++;
-			batsman.increaseRuns(1);
+			(*batsman).increaseRuns(1);
 			break;
 
 		case Result::DOUBLE:
 			cout << "Double.\n";
 			totalRuns += 2;
-			batsman.increaseRuns(2);
+			(*batsman).increaseRuns(2);
 			break;
 
 		case Result::TRIPLE:
 			cout << "Triple.\n";
 			totalRuns += 3;
-			batsman.increaseRuns(3);
+			(*batsman).increaseRuns(3);
 			break;
 
 		case Result::FOUR:
 			cout << "Four.\n";
 			totalRuns += 4;
-			batsman.increaseRuns(4);
+			(*batsman).increaseRuns(4);
 			totalFours++;
 			break;
 
 		case Result::SIX:
 			cout << "Six!!\n";
 			totalRuns += 6;
-			batsman.increaseRuns(6);
+			(*batsman).increaseRuns(6);
 			totalSixes++;
 			break;
 
 		case Result::OUT:
 			cout << "Out!!\n";
 			leftWickets--;
-			battingTeam.playerOut(batsman);
+			battingTeam.playerOut((*batsman));
 			if (leftWickets > 0)
 				batsman = battingTeam.getNextBatsman(batsmanPlayed);
-			bowler.increaseWickets(1);
+			(*bowler).increaseWickets(1);
 			break;
 
 		case Result::RUNOUT:
 			cout << "Run Out!!\n";
 			leftWickets--;
-			battingTeam.playerOut(batsman);
+			battingTeam.playerOut((*batsman));
 			if (leftWickets > 0)
 				batsman = battingTeam.getNextBatsman(batsmanPlayed);
-			bowler.increaseWickets(1);
+			(*bowler).increaseWickets(1);
 			break;
 
 		}
