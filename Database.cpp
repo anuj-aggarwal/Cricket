@@ -184,19 +184,19 @@ void Database::modifyPlayer()
 		if (posPlayer == -1) {
 			cout << "\nPlayer not found!!";
 		}
+		else {
+			cout << "\nEnter new details:\n";
+			int pTRuns;
+			pTRuns = getPositiveNum("Enter the total runs made by player:\n");
+			int pTWickets;
+			pTWickets = getPositiveNum("Enter total wickets taken by player:\n");
+			int pTMatches;
+			pTMatches = getPositiveNum("Enter total matches played by player:\n");
+			int pTOvers;
+			pTOvers = getPositiveNum("Enter total overs bowled by player:\n");
 
-		cout << "\nEnter new details:\n";
-		int pTRuns;
-		pTRuns = getPositiveNum("Enter the total runs made by player:\n");
-		int pTWickets;
-		pTWickets = getPositiveNum("Enter total wickets taken by player:\n");
-		int pTMatches;
-		pTMatches = getPositiveNum("Enter total matches played by player:\n");
-		int pTOvers;
-		pTOvers = getPositiveNum("Enter total overs bowled by player:\n");
-
-		teams[posTeam].players[posPlayer] = Player(pName, pTMatches, pTOvers, pTRuns, pTWickets);
-
+			teams[posTeam].players[posPlayer] = Player(pName, pTMatches, pTOvers, pTRuns, pTWickets);
+		}
 	}
 
 
