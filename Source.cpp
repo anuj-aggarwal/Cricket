@@ -10,6 +10,7 @@
 #include "Ball.h"
 #include "Input.h"
 #include "Database.h"
+#include "Help.h"
 
 using namespace std;
 
@@ -29,7 +30,10 @@ int match(Team&, Team&);
 const int noOfWickets = 1;
 const int noOfBalls = 30;
 const int ballsPerOver = 6;
+
 const string fileName = "../Cricket/Details.txt";
+const vector<string> helpFileNames = { "../Cricket/Help/Help.txt", "../Cricket/Help/DatabaseHelp.txt", "../Cricket/Help/RulesHelp.txt", "../Cricket/Help/GamePlayHelp.txt" };
+
 
 int leftWickets;
 int leftBalls;
@@ -37,6 +41,8 @@ int leftBalls;
 
 Database database(fileName);
 vector<Team>& teams = database.getTeams();
+
+Help help(helpFileNames);
 
 int main()
 try {
@@ -57,6 +63,10 @@ try {
 			break;
 
 		case 3:
+			help.displayHelp();
+			break;
+
+		case 4:
 			cout << "\nEND OF PROGRAM\n";
 			return 0;
 
@@ -126,7 +136,8 @@ int displayMenu()
 	cout << "MENU\n";
 	cout << "\n1. Database";
 	cout << "\n2. Play";
-	cout << "\n3. Exit";
+	cout << "\n3. Help";
+	cout << "\n4. Exit";
 	choice = getNum("\nEnter the choice:\n");
 	return choice;
 }

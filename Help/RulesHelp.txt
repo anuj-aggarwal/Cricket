@@ -1,0 +1,20 @@
+		PLAY
+
+
+	Asks for the two teams which will play the next match
+Rules:
+	- Total Overs: 10
+	- Total wickets: 5
+	- Maximum Overs a Player can bowl: 3
+
+Toss:
+	- First team has the HEADS, second has the TAILS
+
+
+
+In the version of the game, there is only one batsman playing i.e. Batsman on strike.
+Both teams will get full batting untill either all their batsmen are out or all the balls are over.
+The result of a match is decided on the basis of the total runs scored by the two teams
+
+All names are "Case Sensitive"
+

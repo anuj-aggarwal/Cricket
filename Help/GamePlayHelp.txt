@@ -1,0 +1,34 @@
+GamePlay
+
+After entering the two teams, Opening batsman and bowler need to be selected
+
+
+The result of each Ball is displayed on the screen one by one with certain time gap
+The next bowler needs to be entered at the end of every over.
+A bowler can bowl a maximum of 3 Overs per innings.
+
+
+
+In the course of the innings, the runs scored by a batsman, overs bowled, wickets taken by a bowler, are updated in the stats of the player and the result of each ball is affected by the skills of Batsman and Bowler.
+
+Batting Skills depends on-
+-No of matches played
+-Total no of runs scored
+
+Bowling Skills depends on-
+-No of matches playes
+-Total no of wickets taken
+
+
+The result of a ball can be one of these:
+- Single
+- Double
+- Triple
+- FOUR
+- SIX
+- Runout
+- Out
+
+When the player gets out, new batsman should be selected.
+Batsman who are out cannot be selected again.
+
