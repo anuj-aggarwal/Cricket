@@ -1,13 +1,8 @@
 #include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <ctime>
-#include <iomanip>
+#include <string>	// NOT REQUIRED
+#include <vector>	// NOT REQUIRED
 
-#include "Team.h"
-#include "Result.h"
-#include "Ball.h"
+#include "Team.h"	// NOT REQUIRED
 #include "Input.h"
 #include "Database.h"
 #include "Help.h"

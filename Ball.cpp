@@ -1,7 +1,5 @@
 #include "Ball.h"
-#include <cstdlib>
-#include <ctime>
-#include <math.h>
+#include <cmath>
 #include <random>
 
 

@@ -3,7 +3,7 @@
 #include <random>
 #include <iostream>
 #include "Input.h"
-#include "Result.h"
+#include "Result.h"	// NOT REQUIRED
 #include "Ball.h"
 
 using namespace std;
