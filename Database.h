@@ -8,7 +8,7 @@ using namespace std;
 class Database
 {
 public:
-	Database(string);
+	Database(const string&);
 	~Database();
 
 	vector<Team>& getTeams();
@@ -26,8 +26,8 @@ private:
 	void deleteTeam();
 	void display();
 
-	void displayTeam(Team&);
-	string getTeamName(string);
+	void displayTeam(const Team&);
+	string getTeamName(const string&);
 
 	void write();
 	void read();

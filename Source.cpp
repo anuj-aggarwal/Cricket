@@ -19,8 +19,8 @@ void init_play();
 int displayMenu();
 
 
-int posPlayingTeam(string);
-bool Toss(string&, string&);
+int posPlayingTeam(const string&);
+bool Toss(const string&, const string&);
 void play();
 int innings(Team&, Team&);
 int match(Team&, Team&);
@@ -144,7 +144,7 @@ int displayMenu()
 
 
 
-int posPlayingTeam(string prompt)
+int posPlayingTeam(const string& prompt)
 {
 	int pos = -1;
 
@@ -176,7 +176,7 @@ int posPlayingTeam(string prompt)
 	return pos;
 }
 
-bool toss(string name1, string name2)
+bool toss(const string& name1, const string& name2)
 {
 	system("cls");
 	cout << "\t\tTOSS";

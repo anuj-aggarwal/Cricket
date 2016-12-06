@@ -11,7 +11,7 @@ Ball::~Ball()
 {
 }
 
-Ball::Ball(Player& abatsman, Player& abowler)
+Ball::Ball(const Player& abatsman, const Player& abowler)
 	:batsman{ abatsman }, bowler{ abowler }
 {
 	setResult();

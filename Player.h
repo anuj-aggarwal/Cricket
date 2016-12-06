@@ -8,8 +8,8 @@ class Player
 public:
 	Player();
 	~Player();
-	Player(string);
-	Player(string, int, int, int, int);
+	Player(const string&);
+	Player(const string&, int, int, int, int);
 
 	string name;
 

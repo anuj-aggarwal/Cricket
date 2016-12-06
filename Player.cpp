@@ -11,13 +11,13 @@ Player::Player()
 Player::~Player()
 {
 }
-Player::Player(string nm)
+Player::Player(const string& nm)
 	:name{ nm }, totalMatches{ 0 }, totalOversBowled{ 0 }, totalRuns{ 0 }, totalWickets{ 0 }
 {
 	setBowlingSkills();
 	setBattingSkills();
 }
-Player::Player(string nm, int matches, int overs, int runs, int wickets)
+Player::Player(const string& nm, int matches, int overs, int runs, int wickets)
 	: name{ nm }, totalMatches{ matches }, totalOversBowled{ overs }, totalRuns{ runs }, totalWickets{ wickets }
 {
 	setBowlingSkills();

@@ -23,13 +23,13 @@ public:
 
 
 
-	void addPlayer(Player&);
+	void addPlayer(const Player&);
 	Player* getNextBatsman(vector<Player> &);
 	Player* getNextBowler();
 	void reset();
 	void displayBatsman();
 	void displayBowler();
-	void playerOut(Player&);
+	void playerOut(const Player&);
 	bool canPlay(int, int);
 
 	void updateBatsmen(const vector<Player> &);
@@ -42,21 +42,22 @@ public:
 	bool operator==(const Team&);
 	bool operator!=(const Team&);
 
+	friend bool operator==(const Team&, const Team&);
 
 private:
 
 	vector<Player> out;
 	unordered_map<Player, int> oversBowled;
 
-	bool canBowl(Player&);
+	bool canBowl(const Player&);
 };
 
 
-
+bool operator==(const Team&, const Team&);
 
 
 template<class T>
-int findPos(vector<T>& elements, T& element)
+int findPos( vector<T>& elements,const T& element)
 {
 	for (int i = 0; i < elements.size(); ++i) {
 		if (element == elements[i])

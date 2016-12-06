@@ -7,7 +7,7 @@
 using namespace std;
 
 
-Database::Database(string name)
+Database::Database(const string& name)
 {
 	// make a file to store all data if it not already exists
 	ifstream fin(fileName);
@@ -266,7 +266,7 @@ void Database::display()
 }
 
 
-void Database::displayTeam(Team& team)
+void Database::displayTeam(const Team& team)
 {
 	cout << endl << "TEAM: " << team.name << endl;
 	cout << endl << setw(15) << "Player Name" << setw(20) << "Batting Skills" << setw(20) << "Bowling Skills";
@@ -274,7 +274,7 @@ void Database::displayTeam(Team& team)
 		cout << endl << setw(15) << p.name << setw(20) << p.getBattingSkills() << setw(20) << p.getBowlingSkills();
 	}
 }
-string Database::getTeamName(string prompt)
+string Database::getTeamName(const string& prompt)
 {
 	cout << "\n\n\tTEAMS\n";
 	for (const Team &t : teams) {

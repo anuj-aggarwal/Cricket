@@ -4,5 +4,5 @@ using namespace std;
 
 void wait(string ch);
 void wait();
-int getNum(string);
-int getPositiveNum(string);
+int getNum(const string&);
+int getPositiveNum(const string&);

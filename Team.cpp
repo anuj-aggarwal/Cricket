@@ -31,7 +31,7 @@ Team::~Team()
 }
 
 
-bool Team::canBowl(Player& p)
+bool Team::canBowl(const Player& p)
 {
 	if (oversBowled[p] >= 4)
 		return false;
@@ -39,7 +39,7 @@ bool Team::canBowl(Player& p)
 }
 
 
-void Team::addPlayer(Player& p)
+void Team::addPlayer(const Player& p)
 {
 	if (findPos(players, p) != -1)
 		return;
@@ -142,7 +142,7 @@ void Team::reset()
 		oversBowled[p] = 0;
 }
 
-void Team::playerOut(Player& p)
+void Team::playerOut(const Player& p)
 {
 	if (findPos(out, p) != -1)
 		return;
@@ -217,4 +217,9 @@ bool Team::operator==(const Team& t) {
 }
 bool Team::operator!=(const Team& t) {
 	return !(name == t.name);
+}
+
+bool operator==(const Team& t1, const Team& t2)
+{
+	return (t1.name == t2.name);
 }

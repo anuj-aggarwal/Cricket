@@ -23,7 +23,7 @@ void wait()
 	cin >> ch;
 
 }
-int getNum(string prompt)
+int getNum(const string& prompt)
 {
 	cout << endl << prompt;
 	int n;
@@ -43,7 +43,7 @@ int getNum(string prompt)
 
 	return n;
 }
-int getPositiveNum(string prompt)
+int getPositiveNum(const string& prompt)
 {
 	int n;
 	n = getNum(prompt);
