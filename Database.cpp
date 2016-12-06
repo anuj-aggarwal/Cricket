@@ -151,6 +151,10 @@ void Database::addPlayer()
 				cout << "\n\nSuccessfully added: " << pName << endl;
 				cout << "\nDo you want to add more players(y/n)?\n";
 				char choice;
+				cin >> choice;
+
+				if (!cin)
+					throw runtime_error("End of Input received!!\n");
 
 				if (!(choice == 'y' || choice == 'Y'))
 					break;
