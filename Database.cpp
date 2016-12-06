@@ -120,34 +120,42 @@ void Database::addPlayer()
 		}
 	}
 	else {
-		cout << "\nEnter the name of player to add:\n";
-		string pName;
-		getline(cin, pName);
-
-		while (pName == "")
+		while (true) {
+			cout << "\nEnter the name of player to add:\n";
+			string pName;
 			getline(cin, pName);
 
-		if (!cin)
-			throw runtime_error("End of Input received!!\n");
+			while (pName == "")
+				getline(cin, pName);
 
-		int posPlayer = findPos(teams[posTeam].players, Player(pName));
-		if (posPlayer != -1) {
-			cout << "\n\nPlayer already present!!";
-			return;
+			if (!cin)
+				throw runtime_error("End of Input received!!\n");
+
+			int posPlayer = findPos(teams[posTeam].players, Player(pName));
+			if (posPlayer != -1) {
+				cout << "\n\nPlayer already present!!";
+			}
+			else {
+				int pTRuns;
+				pTRuns = getPositiveNum("Enter the total runs made by player:\n");
+				int pTWickets;
+				pTWickets = getPositiveNum("Enter total wickets taken by player:\n");
+				int pTMatches;
+				pTMatches = getPositiveNum("Enter total matches played by player:\n");
+				int pTOvers;
+				pTOvers = getPositiveNum("Enter total overs bowled by player:\n");
+
+
+				teams[posTeam].addPlayer(*(new Player(pName, pTMatches, pTOvers, pTRuns, pTWickets)));
+
+				cout << "\n\nSuccessfully added: " << pName << endl;
+				cout << "\nDo you want to add more players(y/n)?\n";
+				char choice;
+
+				if (!(choice == 'y' || choice == 'Y'))
+					break;
+			}
 		}
-
-		int pTRuns;
-		pTRuns = getPositiveNum("Enter the total runs made by player:\n");
-		int pTWickets;
-		pTWickets = getPositiveNum("Enter total wickets taken by player:\n");
-		int pTMatches;
-		pTMatches = getPositiveNum("Enter total matches played by player:\n");
-		int pTOvers;
-		pTOvers = getPositiveNum("Enter total overs bowled by player:\n");
-
-
-		teams[posTeam].addPlayer(*(new Player(pName, pTMatches, pTOvers, pTRuns, pTWickets)));
-
 	}
 
 
