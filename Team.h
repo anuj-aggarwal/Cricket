@@ -14,17 +14,17 @@ class Team
 
 public:
 	Team();
-	Team(string, vector<Player>);
-	Team(string);
+	Team(std::string, std::vector<Player>);
+	Team(std::string);
 	~Team();
 
-	string name;
-	vector<Player> players;
+	std::string name;
+	std::vector<Player> players;
 
 
 
 	void addPlayer(const Player&);
-	Player* getNextBatsman(vector<Player> &);
+	Player* getNextBatsman(std::vector<Player> &);
 	Player* getNextBowler();
 	void reset();
 	void displayBatsman();
@@ -32,11 +32,11 @@ public:
 	void playerOut(const Player&);
 	bool canPlay(int, int) const;
 
-	void updateBatsmen(const vector<Player> &);
+	void updateBatsmen(const std::vector<Player> &);
 	void updateBowlers();
 
-	void write(ofstream&) const;
-	void read(ifstream&);
+	void write(std::ofstream&) const;
+	void read(std::ifstream&);
 
 
 	friend bool operator==(const Team&, const Team&);
@@ -44,8 +44,8 @@ public:
 
 private:
 
-	vector<Player> out;
-	unordered_map<Player, int> oversBowled;
+	std::vector<Player> out;
+	std::unordered_map<Player, int> oversBowled;
 
 	bool canBowl(const Player&);
 };
@@ -55,7 +55,7 @@ bool operator==(const Team&, const Team&);
 bool operator!=(const Team&, const Team&);
 
 template<class T>
-int findPos(vector<T>& elements, const T& element)
+int findPos(std::vector<T>& elements, const T& element)
 {
 	for (int i = 0; i < elements.size(); ++i) {
 		if (element == elements[i])

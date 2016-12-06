@@ -4,9 +4,7 @@
 #include <iomanip>
 #include "Input.h"
 
-using std::cout;
-using std::cin;
-using std::setw;
+using namespace std;
 
 
 

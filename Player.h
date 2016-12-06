@@ -1,17 +1,16 @@
 #pragma once
 #include <string>
 
-using namespace std;
 
 class Player
 {
 public:
 	Player();
 	~Player();
-	Player(const string&);
-	Player(const string&, int, int, int, int);
+	Player(const std::string&);
+	Player(const std::string&, int, int, int, int);
 
-	string name;
+	std::string name;
 
 	double getBattingSkills() const;
 	double getBowlingSkills() const;
@@ -21,8 +20,8 @@ public:
 	void increaseMatches(int);
 	void increaseOvers(int);
 
-	void write(ofstream&) const;
-	void read(ifstream&);
+	void write(std::ofstream&) const;
+	void read(std::ifstream&);
 
 
 private:

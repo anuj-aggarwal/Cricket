@@ -2,6 +2,7 @@
 #include <cmath>
 #include <random>
 
+using namespace std;
 
 const double e = 2.71828;
 

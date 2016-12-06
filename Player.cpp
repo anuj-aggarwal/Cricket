@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <fstream>
 
+using namespace std;
 
 Player::Player()
 	: name{ "NOT ENTERED" }, totalMatches{ 0 }, totalOversBowled{ 0 }, totalRuns{ 0 }, totalWickets{ 0 }
