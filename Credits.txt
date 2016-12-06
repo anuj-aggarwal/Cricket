@@ -1,0 +1,7 @@
+***************  CREDITS  ***************
+
+Roll. No.           Name             Designation
+
+2016UCO1518     Anuj Aggarwal     Chief Game Developer
+2016UCO1501      Kashish Raj       Assistant Developer
+2016UCO1542      Reshu Verma       Assistant Developer

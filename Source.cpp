@@ -6,6 +6,7 @@
 #include "Input.h"
 #include "Database.h"
 #include "Help.h"
+#include "Credits.h"
 #include "Game.h"
 
 using namespace std;
@@ -16,7 +17,7 @@ int displayMenu();
 
 const string fileName = "../Cricket/Details.txt";
 const vector<string> helpFileNames = { "../Cricket/Help/Help.txt", "../Cricket/Help/DatabaseHelp.txt", "../Cricket/Help/RulesHelp.txt", "../Cricket/Help/GamePlayHelp.txt" };
-
+const string creditsFileName = "../Cricket/Credits.txt";
 
 Database database(fileName);
 vector<Team>& teams = database.getTeams();
@@ -24,6 +25,7 @@ vector<Team>& teams = database.getTeams();
 Game game(teams);
 
 Help help(helpFileNames);
+Credits credits(creditsFileName);
 
 int main()
 try {
@@ -48,6 +50,10 @@ try {
 			break;
 
 		case 4:
+			credits.displayCredits();
+			break;
+
+		case 5:
 			cout << "\nEND OF PROGRAM\n";
 			return 0;
 
@@ -102,7 +108,8 @@ int displayMenu()
 	cout << "\n1. Database";
 	cout << "\n2. Play";
 	cout << "\n3. Help";
-	cout << "\n4. Exit";
+	cout << "\n4. Credits";
+	cout << "\n5. Exit";
 	choice = getNum("\nEnter the choice:\n");
 	return choice;
 }
