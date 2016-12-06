@@ -21,7 +21,7 @@ public:
 	void increaseMatches(int);
 	void increaseOvers(int);
 
-	void write(ofstream&);
+	void write(ofstream&) const;
 	void read(ifstream&);
 
 	

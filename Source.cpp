@@ -229,7 +229,7 @@ void play()
 	// Find eligible teams
 	int eligibleTeams = 0;
 
-	for (Team t : teams) {
+	for (const Team& t : teams) {
 		if (t.canPlay(noOfWickets, ceil(static_cast<double>(noOfBalls) / ballsPerOver)))
 			++eligibleTeams;
 	}

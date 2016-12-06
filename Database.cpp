@@ -218,7 +218,7 @@ void Database::display()
 	system("cls");
 
 	cout << "\t\tALL PLAYERS RECORD\n\n";
-	for (Team& t : teams) {
+	for (const Team& t : teams) {
 		displayTeam(t);
 		cout << endl;
 	}
@@ -270,7 +270,7 @@ void Database::write()
 		exit(1);
 	}
 
-	for (Team& team : teams) {
+	for (const Team& team : teams) {
 		team.write(fout);
 	}
 

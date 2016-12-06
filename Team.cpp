@@ -18,7 +18,7 @@ Team::Team()
 Team::Team(string nm, vector<Player> newPlayers)
 	: name{ nm }, players{ newPlayers }
 {
-	for (Player& p : newPlayers) {
+	for (const Player& p : newPlayers) {
 		oversBowled.insert(pair<Player, int>(p, 0));
 	}
 }
@@ -101,7 +101,7 @@ Player* Team::getNextBowler()
 void Team::displayBatsman()
 {
 	cout << endl << setw(25) << "Batsman Name" << setw(10) << "Skills" << "\n";
-	for (Player& p : players) {
+	for (const Player& p : players) {
 		if (findPos(out, p) == -1) {
 			cout << setw(25) << p.name << setw(10) << p.getBattingSkills() << '\n';
 		}
@@ -112,7 +112,7 @@ void Team::displayBatsman()
 void Team::displayBowler()	// IN PROGRESS
 {
 	cout << endl << setw(25) << "Bowler Name" << setw(10) << "Skills" << setw(15) << "Overs Bowled\n";
-	for (Player& p : players) {
+	for (const Player& p : players) {
 		if (canBowl(p)) {
 			cout << setw(25) << p.name << setw(10) << p.getBowlingSkills() << setw(15) << oversBowled[p] << '\n';
 		}
@@ -124,7 +124,7 @@ void Team::reset()
 {
 	out.clear();
 
-	for (Player& p : players)
+	for (const Player& p : players)
 		oversBowled[p] = 0;
 }
 
@@ -135,14 +135,14 @@ void Team::playerOut(const Player& p)
 	out.push_back(p);
 }
 
-bool Team::canPlay(int noOfWickets, int noOfOvers)
+bool Team::canPlay(int noOfWickets, int noOfOvers) const
 {
 	return (players.size() >= noOfWickets && (players.size()*maxOvers) >= noOfOvers);
 }
 
 void Team::updateBatsmen(const vector<Player> & batsmanPlayed)
 {
-	for (Player p : batsmanPlayed) {
+	for (const Player& p : batsmanPlayed) {
 		int batsmanPos = findPos(players, p);
 		if (batsmanPos == -1)
 			return;
@@ -158,13 +158,13 @@ void Team::updateBowlers()
 }
 
 
-void Team::write(ofstream& ofs)
+void Team::write(ofstream& ofs) const
 {
 	if (!ofs)
 		throw runtime_error("Error writing to File");
 
 	ofs << name << '\n';
-	for (Player p : players) {
+	for (const Player& p : players) {
 		p.write(ofs);
 	}
 }

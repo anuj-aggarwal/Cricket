@@ -43,7 +43,7 @@ void Help::displayHelp()
 		return;
 	}
 
-	for (string& text : help) {
+	for (const string& text : help) {
 		system("cls");
 		cout << text << "\n\n";
 		system("pause");

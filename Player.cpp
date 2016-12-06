@@ -78,7 +78,7 @@ void Player::increaseWickets(int wickets)
 }
 
 
-void Player::write(ofstream& ofs)
+void Player::write(ofstream& ofs) const
 {
 	if (!ofs)
 		throw runtime_error("Error writing to File");

@@ -30,12 +30,12 @@ public:
 	void displayBatsman();
 	void displayBowler();
 	void playerOut(const Player&);
-	bool canPlay(int, int);
+	bool canPlay(int, int) const;
 
 	void updateBatsmen(const vector<Player> &);
 	void updateBowlers();
 
-	void write(ofstream&);
+	void write(ofstream&) const;
 	void read(ifstream&);
 
 
