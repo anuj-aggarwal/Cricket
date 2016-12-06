@@ -28,6 +28,7 @@ private:
 
 	void displayTeam(const Team&);
 	string getTeamName(const string&);
+	Player getPlayer(const string&, const string&);
 
 	void write();
 	void read();
