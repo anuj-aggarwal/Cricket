@@ -56,15 +56,16 @@ int getPositiveNum(const string& prompt)
 string getString(const string& prompt)
 {
 	cout << prompt;
-	string pName;
-	getline(cin, pName);
+	string s;
+	getline(cin, s);
 
-	while (pName == "")
-		getline(cin, pName);
+	while (s == "")
+		getline(cin, s);
 
 	if (!cin)
 		throw runtime_error("End of Input received!!\n");
 
+	return s;
 }
 char getChar(const string& prompt)
 {
@@ -75,4 +76,6 @@ char getChar(const string& prompt)
 	if (!cin) {
 		throw runtime_error("End of Input received!!\n");
 	}
+
+	return ch;
 }
