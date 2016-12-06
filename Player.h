@@ -24,9 +24,7 @@ public:
 	void write(ofstream&);
 	void read(ifstream&);
 
-	bool operator==(const Player&);
-	bool operator!=(const Player&);
-
+	
 private:
 	double battingSkills;
 	double bowlingSkills;
@@ -39,12 +37,12 @@ private:
 	void setBattingSkills();
 
 	friend bool operator==(const Player&, const Player&);
-
+	friend bool operator!=(const Player&, const Player&);
 
 };
 
 bool operator==(const Player&, const Player&);
-bool operator==(const Player& p1, const Player& p2);
+bool operator!=(const Player&, const Player&);
 
 namespace std {
 	template <> struct hash<Player>

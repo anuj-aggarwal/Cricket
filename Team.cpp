@@ -212,14 +212,12 @@ void Team::read(ifstream& ifs)
 
 
 
-bool Team::operator==(const Team& t) {
-	return (name == t.name);
-}
-bool Team::operator!=(const Team& t) {
-	return !(name == t.name);
-}
 
 bool operator==(const Team& t1, const Team& t2)
 {
 	return (t1.name == t2.name);
+}
+bool operator!=(const Team& t1, const Team& t2)
+{
+	return (t1.name != t2.name);
 }

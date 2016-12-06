@@ -39,10 +39,8 @@ public:
 	void read(ifstream&);
 
 
-	bool operator==(const Team&);
-	bool operator!=(const Team&);
-
 	friend bool operator==(const Team&, const Team&);
+	friend bool operator!=(const Team&, const Team&);
 
 private:
 
@@ -54,7 +52,7 @@ private:
 
 
 bool operator==(const Team&, const Team&);
-
+bool operator!=(const Team&, const Team&);
 
 template<class T>
 int findPos( vector<T>& elements,const T& element)

@@ -112,15 +112,6 @@ void Player::read(ifstream& ifs)
 
 
 
-bool Player::operator==(const Player& p)
-{
-	return (name == p.name); // && totalMatches == p.totalMatches && totalOversBowled == p.totalOversBowled && totalRuns == p.totalRuns && totalWickets == p.totalWickets);
-}
-bool Player::operator!=(const Player& p)
-{
-	return !(operator==(p));
-}
-
 
 
 bool operator==(const Player& p1, const Player& p2)
@@ -129,5 +120,5 @@ bool operator==(const Player& p1, const Player& p2)
 }
 bool operator!=(const Player& p1, const Player& p2)
 {
-	return !(p1 == p2);
+	return (p1.name != p2.name);
 }
