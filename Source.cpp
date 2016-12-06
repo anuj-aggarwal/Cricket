@@ -18,7 +18,7 @@ using namespace std;
 void init_play();
 int displayMenu();
 
-
+bool areTeamsEligible();
 int posPlayingTeam(const string&);
 bool Toss(const string&, const string&);
 void play();
@@ -141,14 +141,31 @@ int displayMenu()
 
 
 
+bool areTeamsEligible()
+{
+	int eligibleTeams = 0;
+
+	for (const Team& t : teams) {
+		if (t.canPlay(noOfWickets, ceil(static_cast<double>(noOfBalls) / ballsPerOver)))
+			++eligibleTeams;
+	}
+
+	if (eligibleTeams < 2) {
+		cout << "\nNot enough teams to play!!\n\n";
+		return false;
+	}
+
+	return true;
+
+}
 int posPlayingTeam(const string& prompt)
 {
 	int pos = -1;
 
 	while (pos == -1) {
 
-		string teamName= getString(prompt);
-		
+		string teamName = getString(prompt);
+
 		pos = findPos(teams, Team(teamName));
 		if (pos == -1) {
 			cout << "\nTeam not found: " << teamName << "!! Please try again.....\n";
@@ -227,17 +244,8 @@ bool toss(const string& name1, const string& name2)
 void play()
 {
 	// Find eligible teams
-	int eligibleTeams = 0;
-
-	for (const Team& t : teams) {
-		if (t.canPlay(noOfWickets, ceil(static_cast<double>(noOfBalls) / ballsPerOver)))
-			++eligibleTeams;
-	}
-
-	if (eligibleTeams < 2) {
-		cout << "\nNot enough teams to play!!\n\n";
+	if (!areTeamsEligible())
 		return;
-	}
 
 	system("cls");
 	cout << "\t\tPLAY";

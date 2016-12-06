@@ -24,7 +24,7 @@ public:
 	void write(ofstream&) const;
 	void read(ifstream&);
 
-	
+
 private:
 	double battingSkills;
 	double bowlingSkills;

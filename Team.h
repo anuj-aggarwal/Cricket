@@ -55,7 +55,7 @@ bool operator==(const Team&, const Team&);
 bool operator!=(const Team&, const Team&);
 
 template<class T>
-int findPos( vector<T>& elements,const T& element)
+int findPos(vector<T>& elements, const T& element)
 {
 	for (int i = 0; i < elements.size(); ++i) {
 		if (element == elements[i])

@@ -114,7 +114,7 @@ void Database::addPlayer()
 	else {
 		while (true) {
 			string pName = getString("\nEnter the name of player to add:\n");
-			
+
 			int posPlayer = findPos(teams[posTeam].players, Player(pName));
 			if (posPlayer != -1) {
 				cout << "\n\nPlayer already present!!";
@@ -151,15 +151,15 @@ void Database::modifyPlayer()
 	else {
 		system("cls");
 		displayTeam(teams[posTeam]);
-		string pName= getString("\n\nEnter the player name:\n");
-		
+		string pName = getString("\n\nEnter the player name:\n");
+
 		int posPlayer = findPos(teams[posTeam].players, Player(pName));
 
 		if (posPlayer == -1) {
 			cout << "\nPlayer not found!!";
 		}
 		else {
-			
+
 			teams[posTeam].players[posPlayer] = getPlayer(pName, "\nEnter new details:\n");
 		}
 	}
@@ -183,8 +183,8 @@ void Database::deletePlayer()
 
 	system("cls");
 	displayTeam(teams[posTeam]);
-	string pName= getString("\n\nEnter the player name:\n");
-	
+	string pName = getString("\n\nEnter the player name:\n");
+
 	int posPlayer = findPos(teams[posTeam].players, Player(pName));
 	if (posPlayer == -1) {
 		cout << "\nPlayer not found!!";
@@ -240,8 +240,8 @@ string Database::getTeamName(const string& prompt) const
 		cout << endl << t.name;
 	}
 
-	string tName= getString(prompt);
-	
+	string tName = getString(prompt);
+
 	return tName;
 
 }

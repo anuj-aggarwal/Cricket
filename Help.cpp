@@ -9,7 +9,7 @@ Help::Help(const vector<string>& fileNames)
 	ifstream fin;
 
 	for (const string& name : fileNames) {
-		
+
 		fin.open(name);
 
 		if (!fin) {
@@ -21,7 +21,7 @@ Help::Help(const vector<string>& fileNames)
 		help.push_back("");
 		while (fin.get(ch))
 			help.back() += ch;
-		
+
 		fin.close();
 	}
 

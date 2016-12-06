@@ -51,11 +51,11 @@ void Team::addPlayer(const Player& p)
 Player* Team::getNextBatsman(vector<Player> & batsmanPlayed)
 {
 	while (true) {
-		
+
 		displayBatsman();
 
-		string batsman= getString("\nEnter the name of next batsman:\n");
-		
+		string batsman = getString("\nEnter the name of next batsman:\n");
+
 		int batsmanPos = findPos(players, Player(batsman));
 		if (batsmanPos == -1) {
 			cout << " \nPlayer not found!!\n";
@@ -79,8 +79,8 @@ Player* Team::getNextBowler()
 
 		displayBowler();
 
-		string bowler= getString("\nEnter the name of next bowler:\n");
-		
+		string bowler = getString("\nEnter the name of next bowler:\n");
+
 		int bowlerPos = findPos(players, Player(bowler));
 		if (bowlerPos == -1)
 			cout << "\nPlayer not found!!\n";
@@ -89,7 +89,7 @@ Player* Team::getNextBowler()
 		}
 		else {
 			oversBowled[players[bowlerPos]]++;
-			Player* ptrBowler= &(players[bowlerPos]);
+			Player* ptrBowler = &(players[bowlerPos]);
 		}
 
 	}
