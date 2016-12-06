@@ -213,6 +213,7 @@ void Database::deletePlayer()
 
 	if (posTeam == -1) {
 		cout << "\nTeam not found!!";
+		return;
 	}
 
 	system("cls");
@@ -231,6 +232,7 @@ void Database::deletePlayer()
 	int posPlayer = findPos(teams[posTeam].players, Player(pName));
 	if (posPlayer == -1) {
 		cout << "\nPlayer not found!!";
+		return;
 	}
 
 	teams[posTeam].players.erase(teams[posTeam].players.begin() + posPlayer);
@@ -249,6 +251,7 @@ void Database::deleteTeam()
 
 	if (posTeam == -1) {
 		cout << "\nTeam not found!!";
+		return;
 	}
 	teams.erase(teams.begin() + posTeam);
 	cout << "\nSuccessfully deleted Team: " << tName;
