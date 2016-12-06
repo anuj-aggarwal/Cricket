@@ -23,6 +23,7 @@ private:
 	int leftBalls;
 
 	void init();
+	bool tossChoice(const string&);
 	bool toss(const string&, const string&);
 	int innings(Team&, Team&);
 	int match(Team&, Team&);

@@ -32,63 +32,55 @@ void Game::init()
 }
 
 
+bool Game::tossChoice(const string& name)
+{
+	cout << endl << name << " Won the Toss!!\n\n";
+
+	_sleep(2000);
+
+	int input = getNum(name + ": You want Batting or Bowling(1/2)?");
+	while (input != 1 && input != 2) {
+		cout << "\nSorry, wrong input!! Please try again.....\n";
+		input = getNum(name + ": You want Batting or Bowling(1/2)?");
+	}
+
+	if (input == 1) {
+		cout << "\n\n" << name << " won the toss and chose to BAT first.....";
+		cout << "\nStarting the game.....";
+		_sleep(2000);
+		return true;
+	}
+	else {
+		cout << "\n\n" << name << " won the toss and chose to BOWL first.....";
+		cout << "\nStarting the game.....";
+		_sleep(2000);
+		return false;
+	}
+}
+
 bool Game::toss(const string& name1, const string& name2)
 {
 	system("cls");
 	cout << "\t\tTOSS";
 	_sleep(2000);
 
-	int input;
+
 	int outcome = rand() % 2;
 	if (outcome == 0) {
 		cout << "\n\nHEADS!!\n";
-		cout << name1 << " Won the Toss!!\n\n";
 
-		_sleep(2000);
-
-		input = getNum(name1 + ": You want Batting or Bowling(1/2)?");
-		while (input != 1 && input != 2) {
-			cout << "\nSorry, wrong input!! Please try again.....\n";
-			input = getNum(name1 + ": You want Batting or Bowling(1/2)?");
-		}
-
-		if (input == 1) {
-			cout << "\n\n" << name1 << " won the toss and chose to BAT first.....";
-			cout << "\nStarting the game.....";
-			_sleep(2000);
+		bool choice = tossChoice(name1);
+		if (choice)
 			return true;
-		}
-		else {
-			cout << "\n\n" << name1 << " won the toss and chose to BOWL first.....";
-			cout << "\nStarting the game.....";
-			_sleep(2000);
-			return false;
-		}
+		return false;
 	}
 	else {
 		cout << "\n\nTAILS!!\n";
-		cout << name2 << " Won the Toss!!\n\n";
 
-		_sleep(2000);
-
-		input = getNum(name2 + ": You want Batting or Bowling(1/2)?");
-		while (input != 1 && input != 2) {
-			cout << "\nSorry, wrong input!! Please try again.....\n";
-			input = getNum(name2 + ": You want Batting or Bowling(1/2)?");
-		}
-
-		if (input == 1) {
-			cout << "\n\n" << name2 << " won the toss and chose to BAT first.....";
-			cout << "\nStarting the game.....";
-			_sleep(2000);
+		bool choice = tossChoice(name2);
+		if (choice)
 			return false;
-		}
-		else {
-			cout << "\n\n" << name2 << " won the toss and chose to BOWL first.....";
-			cout << "\nStarting the game.....";
-			_sleep(2000);
-			return true;
-		}
+		return true;
 	}
 }
 
