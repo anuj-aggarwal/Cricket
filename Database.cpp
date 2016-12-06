@@ -107,7 +107,7 @@ void Database::addPlayer()
 		char create = getChar("\nDo you want to create a new team named " + tName + " (y/n)?\n");
 
 		if (create == 'y' || create == 'Y') {
-			teams.push_back(*(new Team(tName)));
+			teams.push_back(Team(tName));
 			addPlayer();
 		}
 	}
@@ -130,7 +130,7 @@ void Database::addPlayer()
 				pTOvers = getPositiveNum("Enter total overs bowled by player:\n");
 
 
-				teams[posTeam].addPlayer(*(new Player(pName, pTMatches, pTOvers, pTRuns, pTWickets)));
+				teams[posTeam].addPlayer(Player(pName, pTMatches, pTOvers, pTRuns, pTWickets));
 
 				cout << "\n\nSuccessfully added: " << pName << endl;
 
