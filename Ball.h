@@ -8,7 +8,7 @@ public:
 	Ball(const Player&, const Player&);
 	~Ball();
 
-	Result getResult();
+	Result getResult() const;
 
 
 private:

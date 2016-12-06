@@ -24,13 +24,13 @@ private:
 	void modifyPlayer();
 	void deletePlayer();
 	void deleteTeam();
-	void display();
+	void display() const;
 
-	void displayTeam(const Team&);
-	string getTeamName(const string&);
-	Player getPlayer(const string&, const string&);
+	void displayTeam(const Team&) const;
+	string getTeamName(const string&) const;
+	Player getPlayer(const string&, const string&) const;
 
-	void write();
+	void write() const;
 	void read();
 
 };

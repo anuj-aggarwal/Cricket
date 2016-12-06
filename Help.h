@@ -10,7 +10,7 @@ public:
 	Help(const vector<string>&);
 	~Help();
 
-	void displayHelp();
+	void displayHelp() const;
 
 private:
 	vector<string> help;

@@ -34,7 +34,7 @@ Help::~Help()
 }
 
 
-void Help::displayHelp()
+void Help::displayHelp() const
 {
 	if (!isLoaded) {
 		system("cls");

@@ -67,7 +67,7 @@ void Ball::setResult()
 		result = Result::RUNOUT;
 }
 
-Result Ball::getResult()
+Result Ball::getResult() const
 {
 	return result;
 }

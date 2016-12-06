@@ -213,7 +213,7 @@ void Database::deleteTeam()
 	cout << "\nSuccessfully deleted Team: " << tName;
 
 }
-void Database::display()
+void Database::display() const
 {
 	system("cls");
 
@@ -225,7 +225,7 @@ void Database::display()
 }
 
 
-void Database::displayTeam(const Team& team)
+void Database::displayTeam(const Team& team) const
 {
 	cout << endl << "TEAM: " << team.name << endl;
 	cout << endl << setw(15) << "Player Name" << setw(20) << "Batting Skills" << setw(20) << "Bowling Skills";
@@ -233,7 +233,7 @@ void Database::displayTeam(const Team& team)
 		cout << endl << setw(15) << p.name << setw(20) << p.getBattingSkills() << setw(20) << p.getBowlingSkills();
 	}
 }
-string Database::getTeamName(const string& prompt)
+string Database::getTeamName(const string& prompt) const
 {
 	cout << "\n\n\tTEAMS\n";
 	for (const Team &t : teams) {
@@ -245,7 +245,7 @@ string Database::getTeamName(const string& prompt)
 	return tName;
 
 }
-Player Database::getPlayer(const string& name, const string& prompt)
+Player Database::getPlayer(const string& name, const string& prompt) const
 {
 	cout << prompt;
 
@@ -262,7 +262,7 @@ Player Database::getPlayer(const string& name, const string& prompt)
 }
 
 
-void Database::write()
+void Database::write() const
 {
 	ofstream fout(fileName, ios::out);
 	if (!fout) {

@@ -109,7 +109,7 @@ void Team::displayBatsman()
 	cout << endl;
 }
 
-void Team::displayBowler()	// IN PROGRESS
+void Team::displayBowler() 	// IN PROGRESS
 {
 	cout << endl << setw(25) << "Bowler Name" << setw(10) << "Skills" << setw(15) << "Overs Bowled\n";
 	for (const Player& p : players) {
