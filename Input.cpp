@@ -53,3 +53,16 @@ int getPositiveNum(const string& prompt)
 	}
 	return n;
 }
+string getString(const string& prompt)
+{
+	cout << prompt;
+	string pName;
+	getline(cin, pName);
+
+	while (pName == "")
+		getline(cin, pName);
+
+	if (!cin)
+		throw runtime_error("End of Input received!!\n");
+
+}

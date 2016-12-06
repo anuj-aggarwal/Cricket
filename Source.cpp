@@ -150,16 +150,8 @@ int posPlayingTeam(const string& prompt)
 
 	while (pos == -1) {
 
-		cout << prompt;
-		string teamName;
-		getline(cin, teamName);
-
-		while (teamName == "")
-			getline(cin, teamName);
-
-		if (!cin)
-			throw runtime_error("End of Input received!!\n");
-
+		string teamName= getString(prompt);
+		
 		pos = findPos(teams, Team(teamName));
 		if (pos == -1) {
 			cout << "\nTeam not found: " << teamName << "!! Please try again.....\n";

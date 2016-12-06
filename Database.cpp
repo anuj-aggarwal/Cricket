@@ -121,16 +121,8 @@ void Database::addPlayer()
 	}
 	else {
 		while (true) {
-			cout << "\nEnter the name of player to add:\n";
-			string pName;
-			getline(cin, pName);
-
-			while (pName == "")
-				getline(cin, pName);
-
-			if (!cin)
-				throw runtime_error("End of Input received!!\n");
-
+			string pName = getString("\nEnter the name of player to add:\n");
+			
 			int posPlayer = findPos(teams[posTeam].players, Player(pName));
 			if (posPlayer != -1) {
 				cout << "\n\nPlayer already present!!";
@@ -180,17 +172,8 @@ void Database::modifyPlayer()
 	else {
 		system("cls");
 		displayTeam(teams[posTeam]);
-		string pName;
-		cout << "\n\nEnter the player name:\n";
-		getline(cin, pName);
-
-		while (pName == "")
-			getline(cin, pName);
-
-		if (!cin)
-			throw runtime_error("End of Input received!!\n");
-
-
+		string pName= getString("\n\nEnter the player name:\n");
+		
 		int posPlayer = findPos(teams[posTeam].players, Player(pName));
 
 		if (posPlayer == -1) {
@@ -230,17 +213,8 @@ void Database::deletePlayer()
 
 	system("cls");
 	displayTeam(teams[posTeam]);
-	string pName;
-	cout << "\n\nEnter the player name:\n";
-	getline(cin, pName);
-
-	while (pName == "")
-		getline(cin, pName);
-
-	if (!cin)
-		throw runtime_error("End of Input received!!\n");
-
-
+	string pName= getString("\n\nEnter the player name:\n");
+	
 	int posPlayer = findPos(teams[posTeam].players, Player(pName));
 	if (posPlayer == -1) {
 		cout << "\nPlayer not found!!";
@@ -296,15 +270,8 @@ string Database::getTeamName(const string& prompt)
 		cout << endl << t.name;
 	}
 
-	cout << prompt;
-	string tName;
-	getline(cin, tName);
-	while (tName == "")
-		getline(cin, tName);
-
-	if (!cin)
-		throw runtime_error("End of Input received!!\n");
-
+	string tName= getString(prompt);
+	
 	return tName;
 
 }

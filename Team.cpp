@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include "Input.h"
 
 using std::cout;
 using std::cin;
@@ -50,18 +51,11 @@ void Team::addPlayer(const Player& p)
 Player* Team::getNextBatsman(vector<Player> & batsmanPlayed)
 {
 	while (true) {
-		string batsman;
-		cout << "\nEnter the name of next batsman:\n";
+		
 		displayBatsman();
 
-		getline(cin, batsman);
-
-		while (batsman == "")
-			getline(cin, batsman);
-
-		if (!cin)
-			throw runtime_error("End of Input received!!\n");
-
+		string batsman= getString("\nEnter the name of next batsman:\n");
+		
 		int batsmanPos = findPos(players, Player(batsman));
 		if (batsmanPos == -1) {
 			cout << " \nPlayer not found!!\n";
@@ -83,18 +77,10 @@ Player* Team::getNextBowler()
 {
 	while (true) {
 
-		string bowler;
-		cout << "\nEnter the name of next bowler:\n";
 		displayBowler();
 
-		getline(cin, bowler);
-
-		while (bowler == "")
-			getline(cin, bowler);
-
-		if (!cin)
-			throw runtime_error("End of Input received!!\n");
-
+		string bowler= getString("\nEnter the name of next bowler:\n");
+		
 		int bowlerPos = findPos(players, Player(bowler));
 		if (bowlerPos == -1)
 			cout << "\nPlayer not found!!\n";

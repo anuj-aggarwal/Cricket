@@ -6,3 +6,4 @@ void wait(string ch);
 void wait();
 int getNum(const string&);
 int getPositiveNum(const string&);
+string getString(const string&);
