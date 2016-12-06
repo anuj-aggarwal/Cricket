@@ -90,6 +90,7 @@ Player* Team::getNextBowler()
 		else {
 			oversBowled[players[bowlerPos]]++;
 			Player* ptrBowler = &(players[bowlerPos]);
+			return ptrBowler;
 		}
 
 	}
