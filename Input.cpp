@@ -66,3 +66,13 @@ string getString(const string& prompt)
 		throw runtime_error("End of Input received!!\n");
 
 }
+char getChar(const string& prompt)
+{
+	cout << prompt;
+	char ch;
+	cin >> ch;
+
+	if (!cin) {
+		throw runtime_error("End of Input received!!\n");
+	}
+}

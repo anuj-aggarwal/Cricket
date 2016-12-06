@@ -86,11 +86,7 @@ void Database::menu()
 			break;
 		}
 
-		cout << "\n\n\nDo you want to go to Database Menu(y/n)?\n";
-		cin >> ch;
-
-		if (!cin)
-			throw runtime_error("End of Input received!!\n");
+		ch = getChar("\n\n\nDo you want to go to Database Menu(y/n)?\n");
 
 	} while (ch == 'y' || ch == 'Y');
 }
@@ -106,13 +102,9 @@ void Database::addPlayer()
 	int posTeam = findPos(teams, Team(tName));
 
 	if (posTeam == -1) {
-		char create;
 		cout << "\nTeam not found!!";
-		cout << "\nDo you want to create a new team named " << tName << " (y/n)?\n";
-		cin >> create;
 
-		if (!cin)
-			throw runtime_error("End of Input received!!\n");
+		char create = getChar("\nDo you want to create a new team named " + tName + " (y/n)?\n");
 
 		if (create == 'y' || create == 'Y') {
 			teams.push_back(*(new Team(tName)));
@@ -141,12 +133,8 @@ void Database::addPlayer()
 				teams[posTeam].addPlayer(*(new Player(pName, pTMatches, pTOvers, pTRuns, pTWickets)));
 
 				cout << "\n\nSuccessfully added: " << pName << endl;
-				cout << "\nDo you want to add more players(y/n)?\n";
-				char choice;
-				cin >> choice;
 
-				if (!cin)
-					throw runtime_error("End of Input received!!\n");
+				char choice = getChar("\nDo you want to add more players(y/n)?\n");
 
 				if (!(choice == 'y' || choice == 'Y'))
 					break;

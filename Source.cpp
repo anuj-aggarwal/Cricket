@@ -75,11 +75,8 @@ try {
 			break;
 		}
 
-		cout << "\nDo you want to go to MAIN MENU(y/n)?:\n";
-		cin >> ch;
 
-		if (!cin)
-			throw runtime_error("End of Input received!!\n");
+		ch = getChar("\nDo you want to go to MAIN MENU(y/n)?:\n");
 
 	} while (ch == 'y' || ch == 'Y');
 

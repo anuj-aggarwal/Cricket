@@ -7,3 +7,4 @@ void wait();
 int getNum(const string&);
 int getPositiveNum(const string&);
 string getString(const string&);
+char getChar(const string&);
