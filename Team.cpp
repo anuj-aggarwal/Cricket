@@ -101,24 +101,28 @@ Player* Team::getNextBowler()
 
 void Team::displayBatsman()
 {
-	cout << endl << setw(25) << "Batsman Name" << setw(10) << "Skills" << "\n";
+	cout << "\n**********  Available Batsmen  **********\n";
+	cout << endl << setw(25) << "Batsman Name" << setw(10) << "Skills" << "\n\n";
 	for (const Player& p : players) {
 		if (findPos(out, p) == -1) {
 			cout << setw(25) << p.name << setw(10) << p.getBattingSkills() << '\n';
 		}
 	}
+	cout << "#---------------------------------------#\n";
 	cout << endl;
 }
 
 void Team::displayBowler() 	// IN PROGRESS
 {
-	cout << endl << setw(25) << "Bowler Name" << setw(10) << "Skills" << setw(15) << "Overs Bowled\n";
+	system("cls");
+	cout << "***************  Available Bowlers  ***************\n";
+	cout << endl << setw(25) << "Bowler Name" << setw(10) << "Skills" << setw(15) << "Overs Bowled"<<"\n\n";
 	for (const Player& p : players) {
 		if (canBowl(p)) {
 			cout << setw(25) << p.name << setw(10) << p.getBowlingSkills() << setw(15) << oversBowled[p] << '\n';
 		}
 	}
-	cout << endl;
+	cout << "#-------------------------------------------------#\n\n";
 }
 
 void Team::reset()

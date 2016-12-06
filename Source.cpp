@@ -103,7 +103,7 @@ int displayMenu()
 {
 	system("cls");
 	int choice;
-	cout << "MENU\n";
+	cout << "***** MENU *****\n";
 	cout << "\n1. Database";
 	cout << "\n2. Play";
 	cout << "\n3. Help";

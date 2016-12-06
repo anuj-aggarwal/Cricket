@@ -42,7 +42,7 @@ void Database::menu()
 	do {
 		int choice;
 		system("cls");
-		cout << "\nDATABASE MENU";
+		cout << "***** DATABASE MENU *****\n";
 		cout << "\n1. Add Player";
 		cout << "\n2. Modify Player";
 		cout << "\n3. Delete Player";
@@ -50,7 +50,7 @@ void Database::menu()
 		cout << "\n5. Reset all Players";
 		cout << "\n6. Delete a team";
 		cout << "\n7. Go back to MAIN MENU";
-		choice = getNum("Enter your choice:\n");
+		choice = getNum("\nEnter your choice:\n");
 
 		switch (choice) {
 		case 1:
@@ -71,7 +71,7 @@ void Database::menu()
 
 		case 5:
 			teams.clear();
-			cout << "\n\nDeleted teams successfully!!";
+			cout << "\n\nDeleted all teams successfully!!";
 			break;
 
 		case 6:
@@ -86,7 +86,9 @@ void Database::menu()
 			break;
 		}
 
-		ch = getChar("\n\n\nDo you want to go to Database Menu(y/n)?\n");
+		_sleep(2000);
+		system("cls");
+		ch = getChar("Do you want to go to Database Menu(y/n)?\n");
 
 	} while (ch == 'y' || ch == 'Y');
 }
@@ -95,7 +97,7 @@ void Database::menu()
 void Database::addPlayer()
 {
 	system("cls");
-	cout << "\t\tADDING PLAYERS";
+	cout << "******** ADDING PLAYERS ********";
 
 	string tName = getTeamName("\n\nEnter team of player:\n");
 
@@ -108,12 +110,15 @@ void Database::addPlayer()
 
 		if (create == 'y' || create == 'Y') {
 			teams.push_back(Team(tName));
+			cout << "\n\nSuccessfully added new Team: " << tName;
+			_sleep(2000);
 			addPlayer();
 		}
 	}
 	else {
 		while (true) {
-			string pName = getString("\nEnter the name of player to add:\n");
+			system("cls");
+			string pName = getString("Enter the name of player to add:\n");
 
 			int posPlayer = findPos(teams[posTeam].players, Player(pName));
 			if (posPlayer != -1) {
@@ -139,7 +144,7 @@ void Database::addPlayer()
 void Database::modifyPlayer()
 {
 	system("cls");
-	cout << "\t\tMODIFYING PLAYERS";
+	cout << "******** MODIFYING PLAYERS ********";
 
 	string tName = getTeamName("\n\nEnter team of player:\n");
 
@@ -161,6 +166,7 @@ void Database::modifyPlayer()
 		else {
 
 			teams[posTeam].players[posPlayer] = getPlayer(pName, "\nEnter new details:\n");
+			cout << "\n\nSuccessfully modified Player: " << pName;
 		}
 	}
 
@@ -170,7 +176,7 @@ void Database::modifyPlayer()
 void Database::deletePlayer()
 {
 	system("cls");
-	cout << "\t\tDELETING A PLAYER";
+	cout << "******** DELETING A PLAYER ********";
 
 	string tName = getTeamName("\n\nEnter team of player:\n");
 
@@ -199,7 +205,7 @@ void Database::deletePlayer()
 void Database::deleteTeam()
 {
 	system("cls");
-	cout << "\t\tDELETING A TEAM";
+	cout << "******** DELETING A TEAM ********";
 
 	string tName = getTeamName("\n\nEnter the team name:\n");
 
@@ -220,14 +226,21 @@ void Database::display() const
 	cout << "\t\tALL PLAYERS RECORD\n\n";
 	for (const Team& t : teams) {
 		displayTeam(t);
-		cout << endl;
+		cout << "\n\n\n\n";
 	}
+	system("pause");
 }
 
 
 void Database::displayTeam(const Team& team) const
 {
-	cout << endl << "TEAM: " << team.name << endl;
+	int n = (42 - team.name.length()) / 2;
+	for (int i = 0; i < n; ++i)
+		cout << "*";
+	cout << "  TEAM:    " << team.name << "  ";
+	for (int i = 0; i < n; ++i)
+		cout << "*";
+	cout << endl;
 	cout << endl << setw(15) << "Player Name" << setw(20) << "Batting Skills" << setw(20) << "Bowling Skills";
 	for (const Player& p : team.players) {
 		cout << endl << setw(15) << p.name << setw(20) << p.getBattingSkills() << setw(20) << p.getBowlingSkills();
@@ -235,10 +248,11 @@ void Database::displayTeam(const Team& team) const
 }
 string Database::getTeamName(const string& prompt) const
 {
-	cout << "\n\n\tTEAMS\n";
+	cout << "\n\n*******************\n#      TEAMS      #\n*******************\n";
 	for (const Team &t : teams) {
 		cout << endl << t.name;
 	}
+	cout << "\n\n#*****************#";
 
 	string tName = getString(prompt);
 

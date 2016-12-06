@@ -48,4 +48,5 @@ void Help::displayHelp() const
 		cout << text << "\n\n";
 		system("pause");
 	}
+	system("cls");
 }
