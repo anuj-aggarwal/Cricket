@@ -6,23 +6,23 @@ using namespace std;
 
 Help::Help(const vector<string>& fileNames)
 {
-	ifstream fin;
+	ifstream inFile;
 
-	for (const string& name : fileNames) {
+	for (const string& fileName : fileNames) {
 
-		fin.open(name);
+		inFile.open(fileName);
 
-		if (!fin) {
+		if (!inFile) {
 			isLoaded = false;
 			return;
 		}
 
 		char ch;
 		help.push_back("");
-		while (fin.get(ch))
+		while (inFile.get(ch))
 			help.back() += ch;
 
-		fin.close();
+		inFile.close();
 	}
 
 	isLoaded = true;

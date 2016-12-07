@@ -12,14 +12,14 @@ Player::Player()
 Player::~Player()
 {
 }
-Player::Player(const string& nm)
-	:name{ nm }, totalMatches{ 0 }, totalOversBowled{ 0 }, totalRuns{ 0 }, totalWickets{ 0 }
+Player::Player(const string& name)
+	:name{ name }, totalMatches{ 0 }, totalOversBowled{ 0 }, totalRuns{ 0 }, totalWickets{ 0 }
 {
 	setBowlingSkills();
 	setBattingSkills();
 }
-Player::Player(const string& nm, int matches, int overs, int runs, int wickets)
-	: name{ nm }, totalMatches{ matches }, totalOversBowled{ overs }, totalRuns{ runs }, totalWickets{ wickets }
+Player::Player(const string& name, int matches, int overs, int runs, int wickets)
+	: name{ name }, totalMatches{ matches }, totalOversBowled{ overs }, totalRuns{ runs }, totalWickets{ wickets }
 {
 	setBowlingSkills();
 	setBattingSkills();
@@ -115,11 +115,11 @@ void Player::read(ifstream& ifs)
 
 
 
-bool operator==(const Player& p1, const Player& p2)
+bool operator==(const Player& player1, const Player& player2)
 {
-	return (p1.name == p2.name); // && p1.totalMatches == p2.totalMatches && p1.totalOversBowled == p2.totalOversBowled && p1.totalRuns == p2.totalRuns && p1.totalWickets == p2.totalWickets);
+	return (player1.name == player2.name); // && p1.totalMatches == p2.totalMatches && p1.totalOversBowled == p2.totalOversBowled && p1.totalRuns == p2.totalRuns && p1.totalWickets == p2.totalWickets);
 }
-bool operator!=(const Player& p1, const Player& p2)
+bool operator!=(const Player& player1, const Player& player2)
 {
-	return (p1.name != p2.name);
+	return (player1.name != player2.name);
 }

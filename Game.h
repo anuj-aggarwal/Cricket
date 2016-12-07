@@ -5,8 +5,8 @@
 #include "Team.h"
 
 
-const int noOfWickets = 1;
-const int noOfBalls = 30;
+const int nWickets = 1;
+const int nBalls = 30;
 const int ballsPerOver = 6;
 
 class Game

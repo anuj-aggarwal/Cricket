@@ -27,8 +27,8 @@ public:
 	Player* getNextBatsman(std::vector<Player> &);
 	Player* getNextBowler();
 	void reset();
-	void displayBatsman();
-	void displayBowler();
+	void displayBatsmen();
+	void displayBowlers();
 	void playerOut(const Player&);
 	bool canPlay(int, int) const;
 

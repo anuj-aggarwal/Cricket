@@ -13,15 +13,15 @@ Team::Team()
 {
 }
 
-Team::Team(string nm, vector<Player> newPlayers)
-	: name{ nm }, players{ newPlayers }
+Team::Team(string name, vector<Player> newPlayers)
+	: name{ name }, players{ newPlayers }
 {
-	for (const Player& p : newPlayers) {
-		oversBowled.insert(pair<Player, int>(p, 0));
+	for (const Player& player : newPlayers) {
+		oversBowled.insert(pair<Player, int>(player, 0));
 	}
 }
-Team::Team(string nm)
-	: name{ nm }
+Team::Team(string name)
+	: name{ name }
 {
 }
 
@@ -30,40 +30,40 @@ Team::~Team()
 }
 
 
-bool Team::canBowl(const Player& p)
+bool Team::canBowl(const Player& player)
 {
-	if (oversBowled[p] >= 4)
+	if (oversBowled[player] >= 4)
 		return false;
 	return true;
 }
 
 
-void Team::addPlayer(const Player& p)
+void Team::addPlayer(const Player& player)
 {
-	if (findPos(players, p) != -1)
+	if (findPos(players, player) != -1)
 		return;
-	players.push_back(p);
-	oversBowled.insert(pair<Player, int>(p, 0));
+	players.push_back(player);
+	oversBowled.insert(pair<Player, int>(player, 0));
 }
 
-Player* Team::getNextBatsman(vector<Player> & batsmanPlayed)
+Player* Team::getNextBatsman(vector<Player> & batsmenPlayed)
 {
 	while (true) {
 
-		displayBatsman();
+		displayBatsmen();
 
 		string batsman = getString("\nEnter the name of next batsman:\n");
 
-		int batsmanPos = findPos(players, Player(batsman));
-		if (batsmanPos == -1) {
+		int posBatsman = findPos(players, Player(batsman));
+		if (posBatsman == -1) {
 			cout << " \nPlayer not found!!\n";
 		}
-		else if (findPos(out, players[batsmanPos]) != -1) {
+		else if (findPos(out, players[posBatsman]) != -1) {
 			cout << '\n' << batsman << " already out!!\n";
 		}
 		else {
-			batsmanPlayed.push_back(players[batsmanPos]);
-			Player* ptrBatsman = &(players[batsmanPos]);
+			batsmenPlayed.push_back(players[posBatsman]);
+			Player* ptrBatsman = &(players[posBatsman]);
 			return ptrBatsman;
 
 		}
@@ -75,19 +75,19 @@ Player* Team::getNextBowler()
 {
 	while (true) {
 
-		displayBowler();
+		displayBowlers();
 
 		string bowler = getString("\nEnter the name of next bowler:\n");
 
-		int bowlerPos = findPos(players, Player(bowler));
-		if (bowlerPos == -1)
+		int posBowler = findPos(players, Player(bowler));
+		if (posBowler == -1)
 			cout << "\nPlayer not found!!\n";
-		else if (!canBowl(players[bowlerPos])) {
+		else if (!canBowl(players[posBowler])) {
 			cout << '\n' << bowler << " already bowled maximum overs bowled i.e. " << maxOvers << " overs!!\n";
 		}
 		else {
-			oversBowled[players[bowlerPos]]++;
-			Player* ptrBowler = &(players[bowlerPos]);
+			oversBowled[players[posBowler]]++;
+			Player* ptrBowler = &(players[posBowler]);
 			return ptrBowler;
 		}
 
@@ -97,27 +97,27 @@ Player* Team::getNextBowler()
 }
 
 
-void Team::displayBatsman()
+void Team::displayBatsmen()
 {
 	cout << "\n**********  Available Batsmen  **********\n";
 	cout << endl << setw(25) << "Batsman Name" << setw(10) << "Skills" << "\n\n";
-	for (const Player& p : players) {
-		if (findPos(out, p) == -1) {
-			cout << setw(25) << p.name << setw(10) << p.getBattingSkills() << '\n';
+	for (const Player& player : players) {
+		if (findPos(out, player) == -1) {
+			cout << setw(25) << player.name << setw(10) << player.getBattingSkills() << '\n';
 		}
 	}
 	cout << "#---------------------------------------#\n";
 	cout << endl;
 }
 
-void Team::displayBowler() 	// IN PROGRESS
+void Team::displayBowlers() 	// IN PROGRESS
 {
 	system("cls");
 	cout << "***************  Available Bowlers  ***************\n";
 	cout << endl << setw(25) << "Bowler Name" << setw(10) << "Skills" << setw(15) << "Overs Bowled"<<"\n\n";
-	for (const Player& p : players) {
-		if (canBowl(p)) {
-			cout << setw(25) << p.name << setw(10) << p.getBowlingSkills() << setw(15) << oversBowled[p] << '\n';
+	for (const Player& player : players) {
+		if (canBowl(player)) {
+			cout << setw(25) << player.name << setw(10) << player.getBowlingSkills() << setw(15) << oversBowled[player] << '\n';
 		}
 	}
 	cout << "#-------------------------------------------------#\n\n";
@@ -127,36 +127,36 @@ void Team::reset()
 {
 	out.clear();
 
-	for (const Player& p : players)
-		oversBowled[p] = 0;
+	for (const Player& player : players)
+		oversBowled[player] = 0;
 }
 
-void Team::playerOut(const Player& p)
+void Team::playerOut(const Player& player)
 {
-	if (findPos(out, p) != -1)
+	if (findPos(out, player) != -1)
 		return;
-	out.push_back(p);
+	out.push_back(player);
 }
 
-bool Team::canPlay(int noOfWickets, int noOfOvers) const
+bool Team::canPlay(int nWickets, int nOvers) const
 {
-	return (players.size() >= noOfWickets && (players.size()*maxOvers) >= noOfOvers);
+	return (players.size() >= nWickets && (players.size()*maxOvers) >= nOvers);
 }
 
 void Team::updateBatsmen(const vector<Player> & batsmanPlayed)
 {
-	for (const Player& p : batsmanPlayed) {
-		int batsmanPos = findPos(players, p);
-		if (batsmanPos == -1)
+	for (const Player& player : batsmanPlayed) {
+		int posBatsman = findPos(players, player);
+		if (posBatsman == -1)
 			return;
-		players[batsmanPos].increaseMatches(1);
+		players[posBatsman].increaseMatches(1);
 
 	}
 }
 void Team::updateBowlers()
 {
-	for (Player& p : players) {
-		p.increaseOvers(oversBowled[p]);
+	for (Player& player : players) {
+		player.increaseOvers(oversBowled[player]);
 	}
 }
 
@@ -167,8 +167,8 @@ void Team::write(ofstream& ofs) const
 		throw runtime_error("Error writing to File");
 
 	ofs << name << '\n';
-	for (const Player& p : players) {
-		p.write(ofs);
+	for (const Player& player : players) {
+		player.write(ofs);
 	}
 }
 void Team::read(ifstream& ifs)
@@ -182,9 +182,9 @@ void Team::read(ifstream& ifs)
 		char ch;
 		ifs >> ch;
 		if (ch == '(') {
-			Player p;
-			p.read(ifs);
-			temp.push_back(p);
+			Player player;
+			player.read(ifs);
+			temp.push_back(player);
 			ifs >> ch;
 			if (ch != ')')
 				throw runtime_error("Error reading from File");
@@ -202,11 +202,11 @@ void Team::read(ifstream& ifs)
 
 
 
-bool operator==(const Team& t1, const Team& t2)
+bool operator==(const Team& team1, const Team& team2)
 {
-	return (t1.name == t2.name);
+	return (team1.name == team2.name);
 }
-bool operator!=(const Team& t1, const Team& t2)
+bool operator!=(const Team& team1, const Team& team2)
 {
-	return (t1.name != t2.name);
+	return (team1.name != team2.name);
 }

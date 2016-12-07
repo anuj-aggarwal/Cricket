@@ -8,8 +8,8 @@
 
 using namespace std;
 
-Game::Game(vector<Team>& allTeams)
-	:teams{ allTeams }, leftWickets{ 0 }, leftBalls{ 0 }
+Game::Game(vector<Team>& teams)
+	:teams{ teams }, leftWickets{ 0 }, leftBalls{ 0 }
 {
 }
 
@@ -21,38 +21,38 @@ Game::~Game()
 
 void Game::init()
 {
-	leftWickets = noOfWickets;
-	leftBalls = noOfBalls;
+	leftWickets = nWickets;
+	leftBalls = nBalls;
 
 
 	// get random value acc. to current system time
-	time_t time1;
-	time(&time1);
-	srand((unsigned int)time1);
+	time_t currTime;
+	time(&currTime);
+	srand((unsigned int)currTime);
 }
 
 
-bool Game::tossChoice(const string& name)
+bool Game::tossChoice(const string& tName)
 {
-	cout << endl << name << " Won the Toss!!\n\n";
+	cout << endl << tName << " Won the Toss!!\n\n";
 
 	_sleep(2000);
 
-	int input = getNum(name + ": You want Batting or Bowling(1/2)?\n");
+	int input = getNum(tName + ": You want Batting or Bowling(1/2)?\n");
 	while (input != 1 && input != 2) {
 		cout << "\nSorry, wrong input!! Please try again.....\n";
-		input = getNum(name + ": You want Batting or Bowling(1/2)?\n");
+		input = getNum(tName + ": You want Batting or Bowling(1/2)?\n");
 	}
 
 	if (input == 1) {
-		cout << "\n\n" << name << " won the toss and chose to BAT first.....";
+		cout << "\n\n" << tName << " won the toss and chose to BAT first.....";
 		_sleep(2000);
 		cout << "\n\n\nStarting the game.....";
 		_sleep(2000);
 		return true;
 	}
 	else {
-		cout << "\n\n" << name << " won the toss and chose to BOWL first.....";
+		cout << "\n\n" << tName << " won the toss and chose to BOWL first.....";
 		_sleep(2000);
 		cout << "\n\n\nStarting the game.....";
 		_sleep(2000);
@@ -60,7 +60,7 @@ bool Game::tossChoice(const string& name)
 	}
 }
 
-bool Game::toss(const string& name1, const string& name2)
+bool Game::toss(const string& tName1, const string& tName2)
 {
 	system("cls");
 	cout << "**********  TOSS  **********";
@@ -71,7 +71,7 @@ bool Game::toss(const string& name1, const string& name2)
 	if (outcome == 0) {
 		cout << "\n\nHEADS!!\n";
 		_sleep(1000);
-		bool choice = tossChoice(name1);
+		bool choice = tossChoice(tName1);
 		if (choice)
 			return true;
 		return false;
@@ -79,7 +79,7 @@ bool Game::toss(const string& name1, const string& name2)
 	else {
 		cout << "\n\nTAILS!!\n";
 		_sleep(1000);
-		bool choice = tossChoice(name2);
+		bool choice = tossChoice(tName2);
 		if (choice)
 			return false;
 		return true;
@@ -105,13 +105,13 @@ int Game::innings(Team& battingTeam, Team& bowlingTeam)
 	cout << "**********  Over: 1  **********\n";
 	while (leftWickets > 0 && leftBalls > 0) {
 
-		if (leftBalls != noOfBalls && leftBalls%ballsPerOver == 0) {
+		if (leftBalls != nBalls && leftBalls%ballsPerOver == 0) {
 			_sleep(1000);
 			cout << "\nEnd of Over!!\nRuns till now: " << totalRuns << endl;
 			_sleep(2000);
 			bowler = bowlingTeam.getNextBowler();
 			system("cls");
-			cout << "**********  Over: " << (noOfBalls - leftBalls) / ballsPerOver + 1 << "  **********\n";
+			cout << "**********  Over: " << (nBalls - leftBalls) / ballsPerOver + 1 << "  **********\n";
 		}
 
 		Result result;
@@ -120,7 +120,7 @@ int Game::innings(Team& battingTeam, Team& bowlingTeam)
 		leftBalls--;
 
 
-		cout << "\nBowl " << noOfBalls - leftBalls << ": ";
+		cout << "\nBowl " << nBalls - leftBalls << ": ";
 		_sleep(2000);
 		switch (result) {
 
@@ -194,41 +194,42 @@ int Game::innings(Team& battingTeam, Team& bowlingTeam)
 }
 
 
-int Game::match(Team& t1, Team& t2)
+int Game::match(Team& team1, Team& team2)
 {
 	system("cls");
 	cout << "***************  INNINGS 1:  ***************\n";
-	int runst1 = innings(t1, t2);
+	int runst1 = innings(team1, team2);
 	_sleep(1000);
 	cout << "\n#----------- END OF INNINGS 1 -----------#\n";
 	_sleep(1000);
 	cout << "\nRuns made by first team: " << runst1;
 
-	_sleep(2000);
+	_sleep(3000);
+
 	system("cls");
 	cout << "***************  INNINGS 2:  ***************\n";
-	int runst2 = innings(t2, t1);
+	int runst2 = innings(team2, team1);
 	_sleep(1000);
 	cout << "\n#----------- END OF INNINGS 2 -----------#\n";
 	_sleep(1000);
 	cout << "\nRuns made by second team: " << runst2;
 
-	_sleep(2000);
+	_sleep(3000);
 
 	system("cls");
 
 	cout << "************  RESULT  ************\n";
 	_sleep(2000);
 	if (runst1 > runst2) {
-		cout << "\n" << t1.name << " Wins by " << runst1 - runst2 << " runs!!\n";
+		cout << "\n" << team1.name << " Wins by " << runst1 - runst2 << " runs!!\n";
 		return 1;
 	}
 	else if (runst1 < runst2) {
-		cout << "\n" << t2.name << " Wins by " << runst2 - runst1 << " runs!!\n";
+		cout << "\n" << team2.name << " Wins by " << runst2 - runst1 << " runs!!\n";
 		return -1;
 	}
 	else {
-		cout << "\nDRAW between " << t1.name << " and " << t2.name;
+		cout << "\nDRAW between " << team1.name << " and " << team2.name;
 		return 0;
 	}
 	cout << "\n\n";
@@ -245,30 +246,30 @@ void Game::play()
 	system("cls");
 	cout << "***************  PLAY  ***************";
 	cout << "\n\n*******************\n#      TEAMS      #\n*******************\n";
-	for (const Team &t : teams) {
-		cout << endl << t.name;
+	for (const Team &team : teams) {
+		cout << endl << team.name;
 	}
 	cout << "\n\n#-----------------#\n\n";
 
 
 
-	int pos1 = posPlayingTeam("\n\nEnter name of first team:\n");
+	int posTeam1 = posPlayingTeam("\n\nEnter name of first team:\n");
 
-	int pos2 = posPlayingTeam("\n\nEnter name of second team:\n");
+	int posTeam2 = posPlayingTeam("\n\nEnter name of second team:\n");
 
-	while (pos2 == pos1) {
-		cout << "\nTeam: " << teams[pos2].name << " already playing!! Please try again.....\n";
-		pos2 = posPlayingTeam("\n\nEnter name of second team:\n");
+	while (posTeam2 == posTeam1) {
+		cout << "\nTeam: " << teams[posTeam2].name << " already playing!! Please try again.....\n";
+		posTeam2 = posPlayingTeam("\n\nEnter name of second team:\n");
 	}
 
 
 	init();
 
-	if (toss(teams[pos1].name, teams[pos2].name)) {
-		match(teams[pos1], teams[pos2]);
+	if (toss(teams[posTeam1].name, teams[posTeam2].name)) {
+		match(teams[posTeam1], teams[posTeam2]);
 	}
 	else
-		match(teams[pos2], teams[pos1]);
+		match(teams[posTeam2], teams[posTeam1]);
 }
 
 
@@ -276,8 +277,8 @@ bool Game::areTeamsEligible()
 {
 	int eligibleTeams = 0;
 
-	for (const Team& t : teams) {
-		if (t.canPlay(noOfWickets, ceil(static_cast<double>(noOfBalls) / ballsPerOver)))
+	for (const Team& team : teams) {
+		if (team.canPlay(nWickets, ceil(static_cast<double>(nBalls) / ballsPerOver)))
 			++eligibleTeams;
 	}
 
@@ -292,24 +293,24 @@ bool Game::areTeamsEligible()
 
 int Game::posPlayingTeam(const string& prompt)
 {
-	int pos = -1;
+	int posTeam = -1;
 
-	while (pos == -1) {
+	while (posTeam == -1) {
 
 		string teamName = getString(prompt);
 
-		pos = findPos(teams, Team(teamName));
-		if (pos == -1) {
+		posTeam = findPos(teams, Team(teamName));
+		if (posTeam == -1) {
 			cout << "\nTeam not found: " << teamName << "!! Please try again.....\n";
 		}
-		else if (!teams[pos].canPlay(noOfWickets, ceil(static_cast<double>(noOfBalls) / ballsPerOver))) {
-			cout << endl << teams[pos].name << " has only " << teams[pos].players.size() << " players!!";
-			int bowlersReq = ceil(static_cast<double>(noOfBalls) / ballsPerOver / 4);
-			cout << "\nMinimum players required to play : " << (noOfWickets > bowlersReq ? noOfWickets : bowlersReq) << "\n\n";
-			pos = -1;
+		else if (!teams[posTeam].canPlay(nWickets, ceil(static_cast<double>(nBalls) / ballsPerOver))) {
+			cout << endl << teams[posTeam].name << " has only " << teams[posTeam].players.size() << " players!!";
+			int bowlersReq = ceil(static_cast<double>(nBalls) / ballsPerOver / 4);
+			cout << "\nMinimum players required to play : " << (nWickets > bowlersReq ? nWickets : bowlersReq) << "\n\n";
+			posTeam = -1;
 		}
 
 	}
 
-	return pos;
+	return posTeam;
 }

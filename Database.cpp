@@ -7,18 +7,17 @@
 using namespace std;
 
 
-Database::Database(const string& name)
+Database::Database(const string& fileName)
+	:fileName{fileName}
 {
 	// make a file to store all data if it not already exists
-	ifstream fin(fileName);
-	if (!fin) {
-		ofstream fout(fileName);
-		fout.close();
+	ifstream inFile(fileName);
+	if (!inFile) {
+		ofstream outFile(fileName);
+		outFile.close();
 	}
 	else
-		fin.close();
-
-	fileName = name;
+		inFile.close();
 
 	read();
 }
@@ -37,7 +36,7 @@ vector<Team>& Database::getTeams()
 
 void Database::menu()
 {
-	char ch = 'n';
+	char input = 'n';
 
 	do {
 		int choice;
@@ -88,9 +87,9 @@ void Database::menu()
 
 		_sleep(2000);
 		system("cls");
-		ch = getChar("Do you want to go to Database Menu(y/n)?\n");
+		input = getChar("Do you want to go to Database Menu(y/n)?\n");
 
-	} while (ch == 'y' || ch == 'Y');
+	} while (input == 'y' || input == 'Y');
 }
 
 
@@ -224,8 +223,8 @@ void Database::display() const
 	system("cls");
 
 	cout << "*****************  ALL PLAYERS RECORD  *****************\n\n";
-	for (const Team& t : teams) {
-		displayTeam(t);
+	for (const Team& team : teams) {
+		displayTeam(team);
 		cout << "\n\n\n\n";
 	}
 	system("pause");
@@ -234,14 +233,16 @@ void Database::display() const
 
 void Database::displayTeam(const Team& team) const
 {
-	int n = (42 - team.name.length()) / 2;
-	for (int i = 0; i < n; ++i)
+	int nStars = (42 - team.name.length()) / 2;
+	for (int i = 0; i < nStars; ++i)
 		cout << "*";
+
 	cout << "  TEAM:    " << team.name << "  ";
-	for (int i = 0; i < n; ++i)
+
+	for (int i = 0; i < nStars; ++i)
 		cout << "*";
-	cout << endl;
-	cout << endl << setw(15) << "Player Name" << setw(20) << "Batting Skills" << setw(20) << "Bowling Skills";
+
+	cout << "\n\n" << setw(15) << "Player Name" << setw(20) << "Batting Skills" << setw(20) << "Bowling Skills";
 	for (const Player& p : team.players) {
 		cout << endl << setw(15) << p.name << setw(20) << p.getBattingSkills() << setw(20) << p.getBowlingSkills();
 	}
@@ -251,8 +252,8 @@ void Database::displayTeam(const Team& team) const
 string Database::getTeamName(const string& prompt) const
 {
 	cout << "\n\n*******************\n#      TEAMS      #\n*******************\n";
-	for (const Team &t : teams) {
-		cout << endl << t.name;
+	for (const Team &team : teams) {
+		cout << endl << team.name;
 	}
 	cout << "\n\n#-----------------#";
 
@@ -261,7 +262,7 @@ string Database::getTeamName(const string& prompt) const
 	return tName;
 
 }
-Player Database::getPlayer(const string& name, const string& prompt) const
+Player Database::getPlayer(const string& pName, const string& prompt) const
 {
 	cout << prompt;
 
@@ -274,43 +275,41 @@ Player Database::getPlayer(const string& name, const string& prompt) const
 	int pTOvers;
 	pTOvers = getPositiveNum("Enter total overs bowled by player:\n");
 
-	return Player(name, pTMatches, pTOvers, pTRuns, pTWickets);
+	return Player(pName, pTMatches, pTOvers, pTRuns, pTWickets);
 }
 
 
 void Database::write() const
 {
-	ofstream fout(fileName, ios::out);
-	if (!fout) {
-		cout << "File not opened: " << fileName << endl;
-		exit(1);
+	ofstream outFile(fileName);
+	if (!outFile) {
+		throw runtime_error("File not opened: " + fileName +"\n");
 	}
 
 	for (const Team& team : teams) {
-		team.write(fout);
+		team.write(outFile);
 	}
 
-	fout.close();
+	outFile.close();
 }
 void Database::read()
 {
-	ifstream fin(fileName);
-	if (!fin) {
-		cout << "Unable to open file: " << fileName << endl;
-		exit(1);
+	ifstream inFile(fileName);
+	if (!inFile) {
+		throw runtime_error("Unable to open file: " + fileName + "\n");
 	}
 
-	while (fin) {
-		Team t;
-		t.read(fin);
-		teams.push_back(t);
+	while (inFile) {
+		Team team;
+		team.read(inFile);
+		teams.push_back(team);
 	}
 	/*
 	int i = 0;
-	while (fin.read((char*)&teams[i], sizeof(teams[i]))) {
+	while (inFile.read((char*)&teams[i], sizeof(teams[i]))) {
 	i++;
 	}*/
 
-	fin.close();
+	inFile.close();
 
 }

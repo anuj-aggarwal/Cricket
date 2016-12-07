@@ -5,23 +5,23 @@
 using namespace std;
 
 
-Credits::Credits(const string& name)
+Credits::Credits(const string& fileName)
 {
-	ifstream fin;
+	ifstream inFile;
 
-	fin.open(name);
+	inFile.open(fileName);
 
-	if (!fin) {
+	if (!inFile) {
 		isLoaded = false;
 		return;
 	}
 
 	char ch;
 	credits = "";
-	while (fin.get(ch))
+	while (inFile.get(ch))
 		credits += ch;
 
-	fin.close();
+	inFile.close();
 
 	isLoaded = true;
 }
