@@ -37,12 +37,9 @@ void Credits::displayCredits()
 	if (!isLoaded) {
 		system("cls");
 		cout << "Unable to load Credits!!\nPlease fix the files and try again later.....\n\n\n";
-		system("pause");
 		return;
 	}
 
 	system("cls");
 	cout << credits << "\n\n";
-	system("pause");
-	system("cls");
 }

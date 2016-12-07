@@ -223,7 +223,7 @@ void Database::display() const
 {
 	system("cls");
 
-	cout << "\t\tALL PLAYERS RECORD\n\n";
+	cout << "*****************  ALL PLAYERS RECORD  *****************\n\n";
 	for (const Team& t : teams) {
 		displayTeam(t);
 		cout << "\n\n\n\n";
@@ -245,6 +245,8 @@ void Database::displayTeam(const Team& team) const
 	for (const Player& p : team.players) {
 		cout << endl << setw(15) << p.name << setw(20) << p.getBattingSkills() << setw(20) << p.getBowlingSkills();
 	}
+
+	cout << "\n#-----------------------------------------------------#";
 }
 string Database::getTeamName(const string& prompt) const
 {
@@ -252,7 +254,7 @@ string Database::getTeamName(const string& prompt) const
 	for (const Team &t : teams) {
 		cout << endl << t.name;
 	}
-	cout << "\n\n#*****************#";
+	cout << "\n\n#-----------------#";
 
 	string tName = getString(prompt);
 
