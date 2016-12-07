@@ -34,7 +34,7 @@ Credits::~Credits()
 }
 
 
-// Public Member Functions
+// PUBLIC MEMBER FUNCTIONS
 
 void Credits::displayCredits()
 {

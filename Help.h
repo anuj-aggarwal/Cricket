@@ -12,14 +12,14 @@ public:
 														// and read all data into different strings of help vector
 	~Help();
 
-	// Member Functions
+	// MEMBER FUNCTIONS
 
 	void displayHelp() const;	// Display all strings of help, separated by a system pause
 
 
 private:
 
-	// Data members
+	// DATA MEMBERS
 	std::vector<std::string> help;	// Vector to store all the contents of diferent files in different strings
 									// Saves overhead of reading from files multiple times
 

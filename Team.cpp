@@ -30,6 +30,7 @@ Team::~Team()	// Destructor
 }
 
 
+// PUBLIC MEMBER FUNCTIONS
 void Team::addPlayer(const Player& player)
 {
 	// Assumes Player is not already present
@@ -183,7 +184,7 @@ void Team::read(ifstream& ifs)
 
 
 
-
+// PRIVATE MEMBER FUNCTIONS
 void Team::displayBatsmen()
 {
 	cout << "\n**********  Available Batsmen  **********\n";
@@ -225,7 +226,7 @@ bool Team::canBowl(const Player& player)
 
 
 
-// Operator Overloads
+// OPERATOR OVERLOADS
 bool operator==(const Team& team1, const Team& team2)
 {
 	return (team1.name == team2.name);	// Equality based on name only

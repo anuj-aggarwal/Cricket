@@ -14,18 +14,18 @@ public:
 	Ball(const Player& batsman, const Player& bowler);	// Constructor to take batsman and bowler and call setResult()
 	~Ball();
 
-	// Member Functions
+	// MEMBER FUNCTIONS
 	Result getResult() const;	// Getter/ Accessor to get the Result
 
 
 private:
-	// Data Members
+	// DATA MEMBERS
 	Player batsman;
 	Player bowler;
 	Result result;	// Stores the result of the Ball
 
 
-	// Member Functions
+	// MEMBER FUNCTIONS
 	void setResult();	// Sets the result according to the skills of batsman and bowler
 
 };

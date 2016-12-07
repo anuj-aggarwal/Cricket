@@ -13,10 +13,10 @@ public:
 
 	~Player();
 	
-	// Data Members
+	// DATA MEMBERS
 	std::string name;
 
-	// Member Functions
+	// MEMBER FUNCTIONS
 
 	// Getters/ Accessors
 	double getBattingSkills() const;
@@ -35,13 +35,13 @@ public:
 	void read(std::ifstream& ifs);		// Reads the stats of the Player from the file buffer acc. to a specified format 
 										// Throws runtime_error() if File Buffer not in good state
 
-	// Operator Overloads
+	// OPERATOR OVERLOADS
 	friend bool operator==(const Player& player1, const Player& player2);
 	friend bool operator!=(const Player& player1, const Player& player2);
 
 
 private:
-	// Data Members
+	// DATA MEMBERS
 	double battingSkills;	// Value set by setBattingSkills()
 	double bowlingSkills;	// Value set by setBowlingSkills()
 
@@ -50,7 +50,7 @@ private:
 	int totalMatches;
 	int totalOversBowled;
 
-	// Member Functions
+	// MEMBER FUNCTIONS
 	void setBowlingSkills();	// Sets the batting Skills according to total Runs scored and total Matches played by the Batsman
 	void setBattingSkills();	// Sets the bowling Skills according to total Wickets taken and total Overs bowled by the Bowler
 
@@ -58,8 +58,8 @@ private:
 };
 
 
-// Helper functions
-// Operator Overloads
+
+// OPERATOR OVERLOADS
 bool operator==(const Player& player1, const Player& player2);	// Equates two Players by their names only
 bool operator!=(const Player& player1, const Player& player2);	// Provides negation of equality operator
 

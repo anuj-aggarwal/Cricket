@@ -37,7 +37,7 @@ Help::~Help()
 }
 
 
-// Public Member Functions
+// PUBLIC MEMBER FUNCTIONS
 
 void Help::displayHelp() const
 {

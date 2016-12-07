@@ -23,7 +23,7 @@ public:
 
 	~Team();	// Destructor
 
-	// Member Functions
+	// MEMBER FUNCTIONS
 	void addPlayer(const Player& player);	// Add the given Player to players
 	Player* getNextBatsman(std::vector<Player>& batsmenPlayed);	// Calls displayBatsmen() and asks for batsman name from user
 																// Finds the batsman in players
@@ -47,29 +47,29 @@ public:
 	void read(std::ifstream& ifs);	// Reads name of team and all Players from the File Buffer in a specified format
 
 
-	// Operator Overloads
+	// OPERATOR OVERLOADS
 	friend bool operator==(const Team& team1, const Team& team2);
 	friend bool operator!=(const Team& team1, const Team& team2);
 
 
-	// Data Members
+	// DATA MEMBERS
 	std::string name;
 	std::vector<Player> players;
 
 
 private:
-	// Data Members
+	// DATA MEMBERS
 	std::vector<Player> out;
 	std::unordered_map<Player, int> oversBowled;
 
-	// Member Functions
+	// MEMBER FUNCTIONS
 	void displayBatsmen();	// Display all Players who can Bat next
 	void displayBowlers();	// Display all Players who can Bowl next
 	bool canBowl(const Player& player);	// Checks if a given Player is eligible to bowl or not, i.e. if he has already bowled maxOvers or not
 };
 
 
-// Operator Overloads
+// OPERATOR OVERLOADS
 bool operator==(const Team& team1, const Team& team2);	// Equality Based on Team Name only
 bool operator!=(const Team& team1, const Team& team2);	// Inequality, acts as a negation to Equality Operator
 

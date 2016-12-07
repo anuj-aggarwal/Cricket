@@ -29,7 +29,7 @@ Player::~Player()	// Destructor
 }
 
 
-// Public Member Functions
+// PUBLIC MEMBER FUNCTIONS
 
 // Getters/ Accessors
 double Player::getBattingSkills() const
@@ -95,7 +95,7 @@ void Player::read(ifstream& ifs)
 }
 
 
-// Private Member Functions
+// PRIVATE MEMBER FUNCTIONS
 void Player::setBattingSkills()
 {
 	if (totalMatches == 0) {
@@ -124,7 +124,7 @@ void Player::setBowlingSkills()
 
 
 
-// Operator Overloads for Player
+// OPERATOR OVERLOADS
 bool operator==(const Player& player1, const Player& player2)
 {
 	return (player1.name == player2.name);	// Equality based on only the name of Players

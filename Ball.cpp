@@ -19,13 +19,13 @@ Ball::~Ball()
 }
 
 
-// Public Member Functions
+// PUBLIC MEMBER FUNCTIONS
 Result Ball::getResult() const
 {
 	return result;
 }
 
-// Private Member Functions
+// PRIVATE MEMBER FUNCTIONS
 void Ball::setResult()
 {
 	// Calculates difference of the two skills, based on which percentages are calculated

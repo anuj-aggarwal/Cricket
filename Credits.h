@@ -11,13 +11,13 @@ public:
 	~Credits();
 
 
-	// Member Functions
+	// MEMBER FUNCTIONS
 
 	void displayCredits();	// Displays all the credits when called, followed by a system pause
 							// Displays error message if unable to read from the file
 
 private:
-	// Data Members
+	// DATA MEMBERS
 
 	std::string credits;	// Stores the contents of the file to prevent reading from file multiple times
 
