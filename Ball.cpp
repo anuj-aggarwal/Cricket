@@ -1,41 +1,45 @@
 #include "Ball.h"
-#include <cmath>
-#include <random>
+
+#include <cmath>	// For pow()
+#include <random>	// For rand()
 
 using namespace std;
 
 const double e = 2.71828;
 
-Ball::~Ball()
-{
-}
 
 Ball::Ball(const Player& batsman, const Player& bowler)
-	:batsman{ batsman }, bowler{ bowler }
+	:batsman{ batsman }, bowler{ bowler }		// Sets own batsman and bowler to batsman and bowler passed 
 {
 	setResult();
 }
 
+Ball::~Ball()
+{
+}
 
 
+// Public Member Functions
+Result Ball::getResult() const
+{
+	return result;
+}
+
+// Private Member Functions
 void Ball::setResult()
 {
-	//// get random value acc. to current system time
-	//time_t t;
-	//time(&t);
-	//srand((unsigned int)t);
-	//
-
-
+	// Calculates difference of the two skills, based on which percentages are calculated
 	double batsmanSkills = batsman.getBattingSkills();
 	double bowlerSkills = bowler.getBowlingSkills();
 	double diffSkills = batsmanSkills - bowlerSkills;
+
 
 	double outperc = 7500 / pow((diffSkills + 20), 2.25);
 
 	double out = (double)95 / 100 * outperc;
 	double runOut = (double)5 / 100 * outperc;
 	double notOut = 100 - outperc;
+
 
 	double perc = (double)1000000 / (long long)pow(e, (12 - (0.25)*diffSkills));
 
@@ -47,8 +51,9 @@ void Ball::setResult()
 	double zero = 100 - out - runOut - six - four - three - two - one;
 
 
-
-	int randnum = rand() % 100;
+	int randnum = rand() % 100;	// Generate a random number between 0 and 99(inclusive)
+	
+	// Sets the result acc. to the random number lying in different ranges of percentages
 	if (randnum < zero)
 		result = Result::ZERO;
 	else if (randnum < zero + one)
@@ -65,9 +70,4 @@ void Ball::setResult()
 		result = Result::OUT;
 	else
 		result = Result::RUNOUT;
-}
-
-Result Ball::getResult() const
-{
-	return result;
 }
