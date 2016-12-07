@@ -3,25 +3,26 @@
 
 using namespace std;
 
-void wait(string ch)
-{
-	cin.clear();
-	cout << "\nPress " << ch << " to continue: ";
-	string c;
-	cin >> c;
-	while (c != ch) {
-		cout << "\nPress " << ch << " to continue: ";
-		cin >> c;
-	}
-}
-void wait()
-{
-	cin.clear();
-	cout << "\nPress any key to continue: ";
-	string ch;
-	cin >> ch;
+//void wait(string ch)
+//{
+//	cin.clear();
+//	cout << "\nPress " << ch << " to continue: ";
+//	string c;
+//	cin >> c;
+//	while (c != ch) {
+//		cout << "\nPress " << ch << " to continue: ";
+//		cin >> c;
+//	}
+//}
 
-}
+//void wait()
+//{
+//	cin.clear();
+//	cout << "\nPress any key to continue: ";
+//	string ch;
+//	cin >> ch;
+//
+//}
 int getNum(const string& prompt)
 {
 	cout << endl << prompt;

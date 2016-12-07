@@ -54,7 +54,8 @@ try {
 			break;
 
 		case 5:
-			cout << "\nEND OF PROGRAM\n";
+			cout << "\n****** THE END ******\n\n\n";
+			system("pause");
 			return 0;
 
 		default:
@@ -80,17 +81,20 @@ try {
 
 	///*cout << innings(t, t1);*/
 
-	wait();
+	// wait();
+	system("pause");
 	return 0;
 }
 catch (exception& e) {
 	cerr << endl << e.what() << endl;
-	wait("~");
+	// wait("~");
+	system("pause");
 	return 1;
 }
 catch (...) {
 	cerr << "OOps, Unknown error!!\n";
-	wait("~~");
+	// wait("~~");
+	system("pause");
 	return 2;
 }
 
@@ -104,7 +108,7 @@ int displayMenu()
 {
 	system("cls");
 	int choice;
-	cout << "***** MENU *****\n";
+	cout << "******* MENU *******\n";
 	cout << "\n1. Database";
 	cout << "\n2. Play";
 	cout << "\n3. Help";
