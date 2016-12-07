@@ -6,7 +6,7 @@
 class Help
 {
 public:
-	Help(const std::vector<std::string>&);
+	Help(const std::vector<std::string>& fileNames);
 	~Help();
 
 	void displayHelp() const;

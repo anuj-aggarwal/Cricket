@@ -8,7 +8,7 @@
 class Database
 {
 public:
-	Database(const std::string&);
+	Database(const std::string& fileName);
 	~Database();
 
 	std::vector<Team>& getTeams();
@@ -26,9 +26,9 @@ private:
 	void deleteTeam();
 	void display() const;
 
-	void displayTeam(const Team&) const;
-	std::string getTeamName(const std::string&) const;
-	Player getPlayer(const std::string&, const std::string&) const;
+	void displayTeam(const Team& team) const;
+	std::string getTeamName(const std::string& prompt) const;
+	Player getPlayer(const std::string& pName, const std::string& prompt) const;
 
 	void write() const;
 	void read();

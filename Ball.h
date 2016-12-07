@@ -5,7 +5,7 @@
 class Ball
 {
 public:
-	Ball(const Player&, const Player&);
+	Ball(const Player& batsman, const Player& bowler);
 	~Ball();
 
 	Result getResult() const;

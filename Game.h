@@ -12,7 +12,7 @@ const int ballsPerOver = 6;
 class Game
 {
 public:
-	Game(std::vector<Team>&);
+	Game(std::vector<Team>& teams);
 	~Game();
 
 	void play();
@@ -23,12 +23,12 @@ private:
 	int leftBalls;
 
 	void init();
-	bool tossChoice(const std::string&);
-	bool toss(const std::string&, const std::string&);
-	int innings(Team&, Team&);
-	int match(Team&, Team&);
+	bool tossChoice(const std::string& tName);
+	bool toss(const std::string& tName1, const std::string& tName2);
+	int innings(Team& battingTeam, Team& bowlingTeam);
+	int match(Team& team1, Team& team2);
 
 	bool areTeamsEligible();
-	int posPlayingTeam(const std::string&);
+	int posPlayingTeam(const std::string& prompt);
 };
 

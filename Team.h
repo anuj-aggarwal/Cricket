@@ -14,8 +14,8 @@ class Team
 
 public:
 	Team();
-	Team(std::string, std::vector<Player>);
-	Team(std::string);
+	Team(std::string name, std::vector<Player> newPlayers);
+	Team(std::string name);
 	~Team();
 
 	std::string name;
@@ -23,36 +23,38 @@ public:
 
 
 
-	void addPlayer(const Player&);
-	Player* getNextBatsman(std::vector<Player> &);
+	void addPlayer(const Player& player);
+	Player* getNextBatsman(std::vector<Player>& batsmenPlayed);
 	Player* getNextBowler();
 	void reset();
 	void displayBatsmen();
 	void displayBowlers();
-	void playerOut(const Player&);
-	bool canPlay(int, int) const;
+	void playerOut(const Player& player);
+	bool canPlay(int nWickets, int nOvers) const;
 
-	void updateBatsmen(const std::vector<Player> &);
+	void updateBatsmen(const std::vector<Player>& batsmenPlayed);
 	void updateBowlers();
 
-	void write(std::ofstream&) const;
-	void read(std::ifstream&);
+	void write(std::ofstream& ofs) const;
+	void read(std::ifstream& ifs);
 
 
-	friend bool operator==(const Team&, const Team&);
-	friend bool operator!=(const Team&, const Team&);
+	friend bool operator==(const Team& team1, const Team& team2);
+	friend bool operator!=(const Team& team1, const Team& team2);
 
 private:
 
 	std::vector<Player> out;
 	std::unordered_map<Player, int> oversBowled;
 
-	bool canBowl(const Player&);
+	bool canBowl(const Player& player);
 };
 
 
-bool operator==(const Team&, const Team&);
-bool operator!=(const Team&, const Team&);
+bool operator==(const Team& team1, const Team& team2);
+bool operator!=(const Team& team1, const Team& team2);
+
+
 
 template<class T>
 int findPos(std::vector<T>& elements, const T& element)

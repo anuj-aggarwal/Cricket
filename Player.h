@@ -7,21 +7,21 @@ class Player
 public:
 	Player();
 	~Player();
-	Player(const std::string&);
-	Player(const std::string&, int, int, int, int);
+	Player(const std::string& name);
+	Player(const std::string& name, int matches, int overs, int runs, int wickets);
 
 	std::string name;
 
 	double getBattingSkills() const;
 	double getBowlingSkills() const;
 
-	void increaseRuns(int);
-	void increaseWickets(int);
-	void increaseMatches(int);
-	void increaseOvers(int);
+	void increaseMatches(int matches);
+	void increaseOvers(int overs);
+	void increaseRuns(int runs);
+	void increaseWickets(int wickets);
 
-	void write(std::ofstream&) const;
-	void read(std::ifstream&);
+	void write(std::ofstream& ofs) const;
+	void read(std::ifstream& ifs);
 
 
 private:
@@ -35,13 +35,13 @@ private:
 	void setBowlingSkills();
 	void setBattingSkills();
 
-	friend bool operator==(const Player&, const Player&);
-	friend bool operator!=(const Player&, const Player&);
+	friend bool operator==(const Player& player1, const Player& player2);
+	friend bool operator!=(const Player& player1, const Player& player2);
 
 };
 
-bool operator==(const Player&, const Player&);
-bool operator!=(const Player&, const Player&);
+bool operator==(const Player& player1, const Player& player2);
+bool operator!=(const Player& player1, const Player& player2);
 
 namespace std {
 	template <> struct hash<Player>

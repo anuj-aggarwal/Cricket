@@ -5,7 +5,7 @@
 class Credits
 {
 public:
-	Credits(const std::string&);
+	Credits(const std::string& fileName);
 	~Credits();
 
 	void displayCredits();

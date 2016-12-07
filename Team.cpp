@@ -143,9 +143,9 @@ bool Team::canPlay(int nWickets, int nOvers) const
 	return (players.size() >= nWickets && (players.size()*maxOvers) >= nOvers);
 }
 
-void Team::updateBatsmen(const vector<Player> & batsmanPlayed)
+void Team::updateBatsmen(const vector<Player> & batsmenPlayed)
 {
-	for (const Player& player : batsmanPlayed) {
+	for (const Player& player : batsmenPlayed) {
 		int posBatsman = findPos(players, player);
 		if (posBatsman == -1)
 			return;

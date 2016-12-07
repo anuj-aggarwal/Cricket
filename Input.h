@@ -4,7 +4,7 @@
 
 // void wait(std::string ch);
 // void wait();
-int getNum(const std::string&);
-int getPositiveNum(const std::string&);
-std::string getString(const std::string&);
-char getChar(const std::string&);
+int getNum(const std::string& prompt);
+int getPositiveNum(const std::string& prompt);
+std::string getString(const std::string& prompt);
+char getChar(const std::string& prompt);
