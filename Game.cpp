@@ -116,9 +116,6 @@ int Game::innings(Team& battingTeam, Team& bowlingTeam)
 	init();	// Initialize the Game Parameters
 
 	int totalRuns = 0;
-	int totalFours = 0;
-	int totalSixes = 0;
-	int totalWickets = 0;
 
 	vector<Player> batsmanPlayed;	// Stores all the batsmen who did Batting in the Innings
 
@@ -180,7 +177,6 @@ int Game::innings(Team& battingTeam, Team& bowlingTeam)
 			cout << "Four.\n";
 			totalRuns += 4;
 			(*batsman).increaseRuns(4);	// Increase total Runs Scored by Batsman
-			totalFours++;
 			break;
 
 		// No 5 runs for this version of the Game Simulator
@@ -188,7 +184,6 @@ int Game::innings(Team& battingTeam, Team& bowlingTeam)
 			cout << "Six!!\n";
 			totalRuns += 6;
 			(*batsman).increaseRuns(6);	// Increase total Runs Scored by Batsman
-			totalSixes++;
 			break;
 
 		case Result::OUT:
