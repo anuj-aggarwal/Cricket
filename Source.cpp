@@ -12,29 +12,15 @@
 
 using namespace std;
 
+
 // GLOBAL VARIABLES
 
-// Names of Files containing all the Program Data
 // Location that stores the Game Data
 const string fileName = "../Cricket/Details.txt";
 // Location of files containing different displays of HELP
 const vector<string> helpFileNames = { "../Cricket/Help/Help.txt", "../Cricket/Help/DatabaseHelp.txt", "../Cricket/Help/RulesHelp.txt", "../Cricket/Help/GamePlayHelp.txt" };
 // Location of file containing Credits
 const string creditsFileName = "../Cricket/Credits.txt";
-
-
-// Create a Database for storing all data
-Database database(fileName);
-
-// Creating a local Database in teams
-vector<Team>& teams = database.getTeams();
-
-// Create a new Game
-Game game(teams);
-
-// Load Help and Credits from the specified Files
-Help help(helpFileNames);
-Credits credits(creditsFileName);
 
 
 // FUNCTION DEFINITIONS
@@ -47,8 +33,24 @@ int displayMenu();	// Displays the Main Menu and asks the User's choice
 // Program starts from here
 int main()
 try {
-	char ch;
 
+	// Create a Database for storing all data
+	Database database(fileName);
+
+	// Creating a local Database in teams
+	vector<Team>& teams = database.getTeams();
+
+	// Create a new Game
+	Game game(teams);
+
+	// Load Help and Credits from the specified Files
+	Help help(helpFileNames);
+	Credits credits(creditsFileName);
+
+
+	// MAIN MENU Display and Calling functions
+
+	char ch;
 	do {
 		int choice;
 		choice = displayMenu();
@@ -120,7 +122,7 @@ int displayMenu()
 	cout << "\n3. Help";
 	cout << "\n4. Credits";
 	cout << "\n5. Exit";
-	
+
 	// Get User's Choice
 	int choice = getNum("\nEnter the choice:\n");
 	return choice;

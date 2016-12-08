@@ -11,7 +11,7 @@ using namespace std;
 
 
 Database::Database(const string& fileName)	// Constructor to initialize fileName, check for its existence and call read()
-	:fileName{fileName}
+	:fileName{ fileName }
 {
 	// Check for the existence of the file
 	ifstream inFile(fileName);
@@ -206,7 +206,7 @@ void Database::modifyPlayer()
 		else {
 			// We got a valid Player of a valid Team
 			teams[posTeam].players[posPlayer] = getPlayer(pName, "\nEnter new details:\n");
-														// Gets details from User and returns a Player
+			// Gets details from User and returns a Player
 			cout << "\n\nSuccessfully modified Player: " << pName;
 		}
 	}
@@ -325,7 +325,7 @@ void Database::write() const
 {
 	ofstream outFile(fileName);
 	if (!outFile) {
-		throw runtime_error("File not opened: " + fileName +"\n");
+		throw runtime_error("File not opened: " + fileName + "\n");
 	}
 
 	for (const Team& team : teams) {	// For each team

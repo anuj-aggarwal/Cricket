@@ -52,7 +52,7 @@ void Ball::setResult()
 
 
 	int randnum = rand() % 100;	// Generate a random number between 0 and 99(inclusive)
-	
+
 	// Sets the result acc. to the random number lying in different ranges of percentages
 	if (randnum < zero)
 		result = Result::ZERO;

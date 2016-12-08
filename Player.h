@@ -12,7 +12,7 @@ public:
 	Player(const std::string& name, int matches, int overs, int runs, int wickets);	// Creates a Player with given stats
 
 	~Player();
-	
+
 	// DATA MEMBERS
 	std::string name;
 
@@ -23,7 +23,7 @@ public:
 	double getBowlingSkills() const;
 
 	// Mutators
-	void increaseMatches(int matches);	
+	void increaseMatches(int matches);
 	void increaseOvers(int overs);
 	void increaseRuns(int runs);
 	void increaseWickets(int wickets);

@@ -7,7 +7,7 @@ using namespace std;
 int getNum(const string& prompt)
 {
 	cout << endl << prompt;
-	
+
 	int n;
 	cin >> n;
 
@@ -15,14 +15,14 @@ int getNum(const string& prompt)
 
 		if (cin.eof())
 			throw runtime_error("End of Input received!!\n");
-		
+
 		cin.clear();	// Set state of cin to good
 
 		string ch;
 		cout << "\nOOps, a number is required!!Please try again.....\n";
 
 		getline(cin, ch);	// Clear the already present characters untill '\n' is reached
-		
+
 		// Try to read a number again
 		cout << endl << prompt;
 		cin >> n;
@@ -38,7 +38,7 @@ int getPositiveNum(const string& prompt)
 
 	while (n < 0) {
 		cout << "\nSorry, positive number expected(>=0)!!Please try again.....\n";
-		
+
 		n = getNum(prompt);
 	}
 	return n;

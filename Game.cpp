@@ -150,7 +150,7 @@ int Game::innings(Team& battingTeam, Team& bowlingTeam)
 		_sleep(2000);
 
 		switch (result) {
-					// Do the appropriate according to possible values of Result
+			// Do the appropriate according to possible values of Result
 		case Result::ZERO:
 			cout << "Zero runs.\n";
 			break;
@@ -179,7 +179,7 @@ int Game::innings(Team& battingTeam, Team& bowlingTeam)
 			(*batsman).increaseRuns(4);	// Increase total Runs Scored by Batsman
 			break;
 
-		// No 5 runs for this version of the Game Simulator
+			// No 5 runs for this version of the Game Simulator
 		case Result::SIX:
 			cout << "Six!!\n";
 			totalRuns += 6;
@@ -189,7 +189,7 @@ int Game::innings(Team& battingTeam, Team& bowlingTeam)
 		case Result::OUT:
 			cout << "Out!!\n";
 			battingTeam.playerOut((*batsman));	// Declare the batsman to be out to the Batting Team
-			
+
 			leftWickets--;
 			if (leftWickets > 0)	// Get next Batsman only if Wickets are left, else, Game Over
 				batsman = battingTeam.getNextBatsman(batsmanPlayed);
@@ -204,7 +204,7 @@ int Game::innings(Team& battingTeam, Team& bowlingTeam)
 			leftWickets--;
 			if (leftWickets > 0)	// Get next Batsman only if Wickets are left, else, Game Over
 				batsman = battingTeam.getNextBatsman(batsmanPlayed);
-			
+
 			(*bowler).increaseWickets(1);	// Increase total Wickets taken by Bowler
 			break;
 
@@ -262,7 +262,7 @@ bool Game::toss(const string& tName1, const string& tName2)
 		cout << "\n\nHEADS!!\n";
 		_sleep(1000);
 		bool choice = tossChoice(tName1);	// Get the Choice of Team which Won the Toss
-		
+
 		if (choice)	// Team 1 Chose to Bat first
 			return true;
 		return false;	// Team 2 gets first Batting
@@ -271,7 +271,7 @@ bool Game::toss(const string& tName1, const string& tName2)
 		cout << "\n\nTAILS!!\n";
 		_sleep(1000);
 		bool choice = tossChoice(tName2);	// Get the Choice of Team which Won the Toss
-		
+
 		if (choice)	// Team 2 chose to Bat first
 			return false;
 		return true;	// Team 1 gets the first Batting
@@ -285,7 +285,7 @@ bool Game::tossChoice(const string& tName)
 
 
 	int input = getNum(tName + ": You want Batting or Bowling(1/2)?\n");	// Get User's choice: a number
-	
+
 	while (input != 1 && input != 2) {	// User entered wrong Input
 		cout << "\nSorry, wrong input!! Please try again.....\n";
 		input = getNum(tName + ": You want Batting or Bowling(1/2)?\n");

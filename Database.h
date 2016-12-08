@@ -50,7 +50,7 @@ private:
 
 	std::string getTeamName(const std::string& prompt) const;	// Gets the Team Name from the user, untill user enters a valid Team
 																// Displays the names of all teams present
-	
+
 	Player getPlayer(const std::string& pName, const std::string& prompt) const;	// Gets the Details of a player from User
 																	// Checks for the Details to be positive or not using getPositiveNum()
 																	// Returns a Player with name same as pName and Details given by User

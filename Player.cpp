@@ -12,7 +12,7 @@ Player::Player()	// Default Constructor
 	setBattingSkills();
 }
 Player::Player(const string& name)	// Parametrized Constructor
-	:name{ name }, totalMatches{ 0 }, totalOversBowled{ 0 }, totalRuns{ 0 }, totalWickets{ 0 }
+	: name{ name }, totalMatches{ 0 }, totalOversBowled{ 0 }, totalRuns{ 0 }, totalWickets{ 0 }
 {
 	setBowlingSkills();
 	setBattingSkills();
@@ -76,7 +76,7 @@ void Player::read(ifstream& ifs)
 {
 	if (!ifs)
 		throw runtime_error("Error reading from File");
-	
+
 	getline(ifs, name);	// Read the name
 	while (name == "")	// Read again if getline terminated because of unread '\n'
 		getline(ifs, name);
