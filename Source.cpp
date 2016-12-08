@@ -1,32 +1,50 @@
-#include <iostream>
-#include <string>	// NOT REQUIRED
-#include <vector>	// NOT REQUIRED
+#include <iostream>	// For cout
+#include <string>	// Just for completion of Documentation, Not required, already included in Team.h
+#include <vector>	// Just for completion of Documentation, Not required, already included in Team.h
 
-#include "Team.h"	// NOT REQUIRED
-#include "Input.h"
+#include "Game.h"
 #include "Database.h"
+#include "Team.h"	// Just for completion of Documentation, Not required, already included in Database.h
 #include "Help.h"
 #include "Credits.h"
-#include "Game.h"
+#include "Input.h"
+
 
 using namespace std;
 
+// GLOBAL VARIABLES
 
-int displayMenu();
-
-
+// Names of Files containing all the Program Data
+// Location that stores the Game Data
 const string fileName = "../Cricket/Details.txt";
+// Location of files containing different displays of HELP
 const vector<string> helpFileNames = { "../Cricket/Help/Help.txt", "../Cricket/Help/DatabaseHelp.txt", "../Cricket/Help/RulesHelp.txt", "../Cricket/Help/GamePlayHelp.txt" };
+// Location of file containing Credits
 const string creditsFileName = "../Cricket/Credits.txt";
 
+
+// Create a Database for storing all data
 Database database(fileName);
+
+// Creating a local Database in teams
 vector<Team>& teams = database.getTeams();
 
+// Create a new Game
 Game game(teams);
 
+// Load Help and Credits from the specified Files
 Help help(helpFileNames);
 Credits credits(creditsFileName);
 
+
+// FUNCTION DEFINITIONS
+int displayMenu();	// Displays the Main Menu and asks the User's choice
+					// Calls getNum() to ensure a number as input
+
+
+
+// MAIN
+// Program starts from here
 int main()
 try {
 	char ch;
@@ -38,78 +56,72 @@ try {
 		switch (choice) {
 
 		case 1:
-			database.menu();
-			break;
-
-		case 2:
+			// PLAY
 			game.play();
 			break;
 
+		case 2:
+			// DATABASE
+			database.menu();
+			break;
+
 		case 3:
+			// HELP
 			help.displayHelp();
 			break;
 
 		case 4:
+			// CREDITS
 			credits.displayCredits();
 			break;
 
 		case 5:
+			// EXIT
 			cout << "\n****** THE END ******\n\n\n";
 			system("pause");
 			return 0;
 
 		default:
+			// Invalid Input
 			cout << "Wrong choice!!\n";
 			break;
 		}
 
-
+		// Ask if User wants to run the program again
 		ch = getChar("\nDo you want to go to MAIN MENU(y/n)?:\n");
 
 	} while (ch == 'y' || ch == 'Y');
 
 
-	//Team t("FIRST", vector<Player>{ Player("a", 5,5, 0, 0), Player("b", 5,5, 100, 3) }, Work::BAT);
-	//Team t1("SECOND", { Player("c",5, 5, 0, 0), Player("d", 5, 5,100, 3) }, Work::BOWL);
-
-	//vector<Team> teams = { t, t1 };
-	//write("Details.dat", teams);
-
-	//vector<Team> readTeams;
-	//read("Details.dat", readTeams);
-	//cout << innings(readTeams[0], readTeams[1]);
-
-	///*cout << innings(t, t1);*/
-
-	// wait();
 	system("pause");
 	return 0;
 }
 catch (exception& e) {
 	cerr << endl << e.what() << endl;
-	// wait("~");
 	system("pause");
 	return 1;
 }
 catch (...) {
 	cerr << "OOps, Unknown error!!\n";
-	// wait("~~");
 	system("pause");
 	return 2;
 }
 
 
+// FUNCTION DEFINITIONS
 
 int displayMenu()
 {
+	// Display Main Menu
 	system("cls");
-	int choice;
 	cout << "******* MENU *******\n";
-	cout << "\n1. Database";
-	cout << "\n2. Play";
+	cout << "\n1. Play";
+	cout << "\n2. Database";
 	cout << "\n3. Help";
 	cout << "\n4. Credits";
 	cout << "\n5. Exit";
-	choice = getNum("\nEnter the choice:\n");
+	
+	// Get User's Choice
+	int choice = getNum("\nEnter the choice:\n");
 	return choice;
 }
