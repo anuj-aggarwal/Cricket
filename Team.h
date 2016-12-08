@@ -44,7 +44,9 @@ public:
 	void updateBowlers();	// Increases total Overs of all Bowlers who bowled by no. of Overs Bowled
 
 	void write(std::ofstream& ofs) const;	// Adds Team name and all Players to the file Buffer in a specified format
+											// Throws runtime_error() if File Buffer is not in good state
 	void read(std::ifstream& ifs);	// Reads name of team and all Players from the File Buffer in a specified format
+									// Throws runtime_error() if file buffer is not in good state, or wrong format
 
 
 	// OPERATOR OVERLOADS
