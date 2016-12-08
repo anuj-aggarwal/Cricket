@@ -348,10 +348,6 @@ void Database::read()
 		teams.push_back(team);	// Add the read team to teams
 	}
 
-	if (!inFile) {
-		throw runtime_error("Error reading from file: " + fileName + "\n");
-	}
-
 	inFile.close();
 
 }
